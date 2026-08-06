@@ -1,0 +1,121 @@
+---
+const categories = [
+  { name: 'キッチン', note: '準備中｜情報整理のみ', mark: '01' },
+  { name: '収納', note: '準備中｜情報整理のみ', mark: '02' },
+  { name: '清掃', note: '準備中｜情報整理のみ', mark: '03' },
+  { name: 'PC周辺', note: '準備中｜情報整理のみ', mark: '04' },
+  { name: '防災', note: '準備中｜情報整理のみ', mark: '05' },
+  { name: '文房具', note: '準備中｜情報整理のみ', mark: '06' },
+  { name: '園芸', note: '準備中｜情報整理のみ', mark: '07' },
+  { name: 'ペット', note: '準備中｜情報整理のみ', mark: '08' }
+];
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="暮らしの道具を考えるための、準備中の一般商品ガイドです。" />
+    <title>くらしの選び方ノート｜準備中の一般商品ガイド</title>
+    <style>
+      :root { --paper:#fffdf8; --ink:#27352d; --muted:#627068; --line:#dbe2d8; --sage:#dfeadd; --sage-deep:#547258; --peach:#f7e6d3; --warm:#f6f3ed; --link:#315f3b; }
+      * { box-sizing:border-box; }
+      html { scroll-behavior:smooth; }
+      body { margin:0; color:var(--ink); background:var(--paper); font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif; line-height:1.7; }
+      a { color:inherit; text-underline-offset:3px; }
+      a:focus-visible { outline:3px solid #d9793b; outline-offset:4px; border-radius:3px; }
+      .wrap { width:min(1120px, calc(100% - 40px)); margin:auto; }
+      .site-header { border-bottom:1px solid var(--line); background:rgba(255,253,248,.93); }
+      .nav { min-height:76px; display:flex; gap:24px; align-items:center; justify-content:space-between; }
+      .brand { font-size:15px; font-weight:800; letter-spacing:.08em; text-decoration:none; white-space:nowrap; }
+      .brand span { color:var(--sage-deep); }
+      .nav-links { display:flex; flex-wrap:wrap; justify-content:end; gap:18px; font-size:14px; font-weight:700; }
+      .nav-links a { text-decoration:none; border-bottom:1px solid transparent; }
+      .nav-links a:hover { border-color:currentColor; }
+      .hero { padding:72px 0 80px; overflow:hidden; }
+      .hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:64px; align-items:center; }
+      .eyebrow { display:inline-flex; padding:5px 10px; border:1px solid #b9cdb7; border-radius:999px; color:#365c3d; font-size:12px; font-weight:800; letter-spacing:.08em; }
+      h1 { max-width:700px; margin:20px 0 20px; font-family:ui-serif,Georgia,"Hiragino Mincho ProN",serif; font-size:clamp(42px,6vw,70px); line-height:1.13; letter-spacing:-.055em; }
+      .lead { max-width:600px; margin:0; color:#4f5d55; font-size:18px; }
+      .notice { display:flex; gap:12px; align-items:flex-start; margin-top:28px; padding:17px 18px; border:1px solid #e4cbae; background:#fff7ec; font-size:14px; }
+      .notice strong { color:#9a551e; white-space:nowrap; }
+      .illustration { display:block; width:100%; max-width:480px; margin:auto; }
+      .section { padding:84px 0; }
+      .section-tint { background:var(--warm); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+      .section-head { display:grid; grid-template-columns:1fr minmax(280px, 410px); gap:28px; margin-bottom:34px; align-items:end; }
+      h2 { margin:0; font-family:ui-serif,Georgia,"Hiragino Mincho ProN",serif; font-size:clamp(29px,4vw,44px); letter-spacing:-.04em; line-height:1.22; }
+      .section-head p { margin:0; color:var(--muted); font-size:15px; }
+      .category-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); background:var(--line); gap:1px; }
+      .category { min-height:192px; padding:22px; display:flex; flex-direction:column; justify-content:space-between; background:var(--paper); text-decoration:none; transition:background .18s ease, transform .18s ease; }
+      .category:hover { background:#f0f6ee; transform:translateY(-2px); }
+      .category-mark { color:#94a395; font-size:12px; font-weight:800; letter-spacing:.1em; }
+      .category h3 { margin:30px 0 7px; font-size:22px; letter-spacing:.02em; }
+      .category p { margin:0; color:var(--sage-deep); font-size:12px; font-weight:800; }
+      .disclosure { display:grid; grid-template-columns:160px 1fr; gap:28px; padding:28px 0; border-top:1px solid var(--line); }
+      .disclosure h2 { font-family:inherit; font-size:14px; letter-spacing:.04em; }
+      .disclosure p { max-width:760px; margin:0; color:#536057; font-size:14px; }
+      .policy { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+      .policy-card { padding:30px; background:var(--paper); border:1px solid var(--line); }
+      .policy-card h3 { margin:0 0 12px; font-size:18px; }
+      .policy-card p { margin:0; color:var(--muted); font-size:14px; }
+      .policy-card ul { padding-left:1.2em; margin:14px 0 0; color:var(--muted); font-size:14px; }
+      .footer { padding:30px 0 42px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+      .footer-inner { display:flex; gap:14px; justify-content:space-between; align-items:center; }
+      @media (max-width: 820px) { .hero { padding:52px 0 58px; } .hero-grid, .section-head { grid-template-columns:1fr; gap:24px; } .illustration { max-width:390px; } .category-grid { grid-template-columns:repeat(2,1fr); } .section { padding:58px 0; } .policy { grid-template-columns:1fr; } .disclosure { grid-template-columns:1fr; gap:10px; } }
+      @media (max-width: 520px) { .wrap { width:min(100% - 28px,1120px); } .nav { padding:14px 0; align-items:flex-start; flex-direction:column; gap:9px; } .nav-links { justify-content:start; gap:12px 16px; } .category { min-height:164px; padding:17px; } .category h3 { margin-top:20px; font-size:19px; } .notice { font-size:13px; } .footer-inner { align-items:flex-start; flex-direction:column; } }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .category { transition:none; } }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="brand" href="#top">くらしの<span>選び方</span>ノート</a>
+        <nav class="nav-links" aria-label="主要メニュー">
+          <a href="#categories">カテゴリ</a>
+          <a href="#disclosure">広告表記</a>
+          <a href="#policy">編集方針</a>
+        </nav>
+      </div>
+    </header>
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">GENERAL PRODUCT GUIDE / PREPARING</p>
+            <h1>選ぶ前に、<br />考えることを整える。</h1>
+            <p class="lead">くらしの道具を検討するときの視点を、静かに整理するための一般商品ガイドです。現在は情報設計と掲載基準を準備しています。</p>
+            <aside class="notice" aria-label="現在の掲載方針"><strong>現在の掲載範囲</strong><span>各カテゴリは準備・情報提供のみです。特定商品の紹介、比較、評価、価格案内は行っていません。</span></aside>
+          </div>
+          <img class="illustration" src="/images/guide-illustration.svg" alt="ノートとチェックマークを描いた案内イラスト" width="640" height="440" />
+        </div>
+      </section>
+
+      <section class="section section-tint" id="categories" aria-labelledby="categories-title">
+        <div class="wrap">
+          <div class="section-head"><h2 id="categories-title">これから整えるカテゴリ</h2><p>以下はすべて、選び方の観点を準備している段階です。個別商品の推奨・比較ページではありません。</p></div>
+          <div class="category-grid">
+            {categories.map((category) => <a class="category" href="#policy" aria-label={`${category.name}：${category.note}`}><span class="category-mark">{category.mark} / GUIDE AREA</span><div><h3>{category.name}</h3><p>{category.note}</p></div></a>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="disclosure" aria-labelledby="disclosure-title">
+        <div class="wrap disclosure"><h2 id="disclosure-title">広告・アフィリエイト表記</h2><p>当サイトは将来的に広告または成果報酬型のリンクを掲載する可能性があります。掲載する場合は、該当するページ・リンクの近くで、広告・アフィリエイトを含むことを分かりやすく明示します。現在、このサイトには広告リンク、Amazonリンク、購入リンク、価格情報はありません。</p></div>
+      </section>
+
+      <section class="section section-tint" id="policy" aria-labelledby="policy-title">
+        <div class="wrap">
+          <div class="section-head"><h2 id="policy-title">編集方針</h2><p>読者が判断の土台をつくれるように、出典・検証・表現の基準を明確にします。</p></div>
+          <div class="policy">
+            <article class="policy-card"><h3>転載・模倣をしません</h3><p>第三者のレビュー、評価、比較記事、購入者の感想を無断でコピー・転載しません。引用が必要な場合は、著作権と出典表示のルールを確認し、必要な範囲に限定します。</p></article>
+            <article class="policy-card"><h3>裏づけのない表現をしません</h3><p>実測していない性能、確認できない仕様、価格・在庫、利用結果を事実のように記載しません。不確かな内容は掲載せず、更新が必要な情報は確認方法も含めて扱います。</p></article>
+            <article class="policy-card"><h3>準備段階の情報として示します</h3><p>現在のカテゴリは、検討時の項目や注意点を整理するための枠組みです。商品を選ぶための断定的な結論や、購入を促す表現は掲載しません。</p></article>
+            <article class="policy-card"><h3>掲載基準を公開します</h3><ul><li>根拠の確認できる情報を優先します。</li><li>広告の有無を分かりやすく示します。</li><li>誤りを見つけた場合は、内容を見直します。</li></ul></article>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"><div class="wrap footer-inner"><span>くらしの選び方ノート — 一般商品ガイド（準備中）</span><span>© {new Date().getFullYear()} product-guide-media</span></div></footer>
+  </body>
+</html>

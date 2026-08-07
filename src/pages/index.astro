@@ -1,13 +1,18 @@
 ---
 const categories = [
-  { name: 'キッチン', note: '準備中｜情報整理のみ', mark: '01' },
-  { name: '収納', note: '準備中｜情報整理のみ', mark: '02' },
-  { name: '清掃', note: '準備中｜情報整理のみ', mark: '03' },
-  { name: 'PC周辺', note: '準備中｜情報整理のみ', mark: '04' },
-  { name: '防災', note: '準備中｜情報整理のみ', mark: '05' },
-  { name: '文房具', note: '準備中｜情報整理のみ', mark: '06' },
-  { name: '園芸', note: '準備中｜情報整理のみ', mark: '07' },
-  { name: 'ペット', note: '準備中｜情報整理のみ', mark: '08' }
+  { name: 'キッチン', note: '準備中｜情報整理のみ', mark: '01', href: '#policy' },
+  { name: '収納', note: 'ガイド公開中', mark: '02', href: '/articles/storage-box-sizing/' },
+  { name: '清掃', note: '準備中｜情報整理のみ', mark: '03', href: '#policy' },
+  { name: 'PC周辺', note: 'ガイド公開中', mark: '04', href: '/articles/keyboard-selection-axis/' },
+  { name: '防災', note: 'ガイド公開中', mark: '05', href: '/articles/bousai-supplies-checklist/' },
+  { name: '文房具', note: '準備中｜情報整理のみ', mark: '06', href: '#policy' },
+  { name: '園芸', note: '準備中｜情報整理のみ', mark: '07', href: '#policy' },
+  { name: 'ペット', note: '準備中｜情報整理のみ', mark: '08', href: '#policy' }
+];
+const articles = [
+  { category: '防災用品', title: '防災用品をそろえる前に確認する5項目', description: '家庭や住まいに合わせて必要条件を整理する、購入前のチェックリストです。', href: '/articles/bousai-supplies-checklist/' },
+  { category: '収納用品', title: '収納ボックスは買う前の採寸で決まる', description: '内寸・外寸・動線・手入れの4つの評価軸をまとめました。', href: '/articles/storage-box-sizing/' },
+  { category: 'PC周辺機器', title: 'キーボード選びの評価軸', description: '配列・接続・設置環境を分けて確認するためのガイドです。', href: '/articles/keyboard-selection-axis/' }
 ];
 ---
 
@@ -53,6 +58,12 @@ const categories = [
       .category-mark { color:#94a395; font-size:12px; font-weight:800; letter-spacing:.1em; }
       .category h3 { margin:30px 0 7px; font-size:22px; letter-spacing:.02em; }
       .category p { margin:0; color:var(--sage-deep); font-size:12px; font-weight:800; }
+      .article-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+      .article-card { display:flex; min-height:220px; flex-direction:column; justify-content:space-between; padding:24px; border:1px solid var(--line); background:var(--paper); text-decoration:none; }
+      .article-card:hover { background:#f0f6ee; }
+      .article-category { margin:0; color:var(--sage-deep); font-size:12px; font-weight:800; letter-spacing:.08em; }
+      .article-card h3 { margin:16px 0 12px; font-size:20px; line-height:1.45; }
+      .article-card p { color:var(--muted); font-size:14px; }
       .disclosure { display:grid; grid-template-columns:160px 1fr; gap:28px; padding:28px 0; border-top:1px solid var(--line); }
       .disclosure h2 { font-family:inherit; font-size:14px; letter-spacing:.04em; }
       .disclosure p { max-width:760px; margin:0; color:#536057; font-size:14px; }
@@ -63,7 +74,7 @@ const categories = [
       .policy-card ul { padding-left:1.2em; margin:14px 0 0; color:var(--muted); font-size:14px; }
       .footer { padding:30px 0 42px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
       .footer-inner { display:flex; gap:14px; justify-content:space-between; align-items:center; }
-      @media (max-width: 820px) { .hero { padding:52px 0 58px; } .hero-grid, .section-head { grid-template-columns:1fr; gap:24px; } .illustration { max-width:390px; } .category-grid { grid-template-columns:repeat(2,1fr); } .section { padding:58px 0; } .policy { grid-template-columns:1fr; } .disclosure { grid-template-columns:1fr; gap:10px; } }
+      @media (max-width: 820px) { .hero { padding:52px 0 58px; } .hero-grid, .section-head { grid-template-columns:1fr; gap:24px; } .illustration { max-width:390px; } .category-grid { grid-template-columns:repeat(2,1fr); } .article-grid { grid-template-columns:1fr; } .section { padding:58px 0; } .policy { grid-template-columns:1fr; } .disclosure { grid-template-columns:1fr; gap:10px; } }
       @media (max-width: 520px) { .wrap { width:min(100% - 28px,1120px); } .nav { padding:14px 0; align-items:flex-start; flex-direction:column; gap:9px; } .nav-links { justify-content:start; gap:12px 16px; } .category { min-height:164px; padding:17px; } .category h3 { margin-top:20px; font-size:19px; } .notice { font-size:13px; } .footer-inner { align-items:flex-start; flex-direction:column; } }
       @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .category { transition:none; } }
     </style>
@@ -73,6 +84,7 @@ const categories = [
       <div class="wrap nav">
         <a class="brand" href="#top"><span>えらび</span>ノート</a>
         <nav class="nav-links" aria-label="主要メニュー">
+          <a href="#articles">記事</a>
           <a href="#categories">カテゴリ</a>
           <a href="#disclosure">広告表記</a>
           <a href="/policies/">運営・ポリシー</a>
@@ -86,8 +98,8 @@ const categories = [
           <div>
             <p class="eyebrow">GENERAL PRODUCT GUIDE / PREPARING</p>
             <h1>選ぶ前に、<br />考えることを整える。</h1>
-            <p class="lead">くらしの道具を検討するときの視点を、静かに整理するための一般商品ガイドです。現在は情報設計と掲載基準を準備しています。</p>
-            <aside class="notice" aria-label="現在の掲載方針"><strong>現在の掲載範囲</strong><span>各カテゴリは準備・情報提供のみです。特定商品の紹介、比較、評価、価格案内は行っていません。</span></aside>
+            <p class="lead">くらしの道具を検討するときの視点を、静かに整理するための一般商品ガイドです。特定商品の優劣ではなく、購入前の確認項目と比較の進め方を掲載しています。</p>
+            <aside class="notice" aria-label="現在の掲載方針"><strong>現在の掲載範囲</strong><span>評価軸や確認方法を中心に掲載しています。特定商品の紹介、価格案内、根拠のないランキングは行いません。</span></aside>
           </div>
           <img class="illustration" src="/images/guide-illustration.svg" alt="ノートとチェックマークを描いた案内イラスト" width="640" height="440" />
         </div>
@@ -97,7 +109,16 @@ const categories = [
         <div class="wrap">
           <div class="section-head"><h2 id="categories-title">これから整えるカテゴリ</h2><p>以下はすべて、選び方の観点を準備している段階です。個別商品の推奨・比較ページではありません。</p></div>
           <div class="category-grid">
-            {categories.map((category) => <a class="category" href="#policy" aria-label={`${category.name}：${category.note}`}><span class="category-mark">{category.mark} / GUIDE AREA</span><div><h3>{category.name}</h3><p>{category.note}</p></div></a>)}
+            {categories.map((category) => <a class="category" href={category.href} aria-label={`${category.name}：${category.note}`}><span class="category-mark">{category.mark} / GUIDE AREA</span><div><h3>{category.name}</h3><p>{category.note}</p></div></a>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="articles" aria-labelledby="articles-title">
+        <div class="wrap">
+          <div class="section-head"><h2 id="articles-title">公開中のガイド</h2><p>個別商品の推奨ではなく、比較前に確認したい評価軸を整理した記事です。</p></div>
+          <div class="article-grid">
+            {articles.map((article) => <a class="article-card" href={article.href}><div><p class="article-category">{article.category}</p><h3>{article.title}</h3><p>{article.description}</p></div><span>記事を読む →</span></a>)}
           </div>
         </div>
       </section>

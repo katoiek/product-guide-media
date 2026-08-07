@@ -1,21 +1,32 @@
 ---
 const categories = [
-  { name: 'キッチン', note: '比較記事を準備中', mark: '01', href: '#articles' },
-  { name: '収納', note: 'ガイド公開中', mark: '02', href: '/articles/storage-box-sizing/' },
-  { name: '清掃', note: '比較記事を準備中', mark: '03', href: '#articles' },
-  { name: 'PC周辺', note: 'ガイド公開中', mark: '04', href: '/articles/keyboard-selection-axis/' },
-  { name: '防災', note: 'ガイド公開中', mark: '05', href: '/articles/bousai-supplies-checklist/' },
-  { name: '文房具', note: '比較記事を準備中', mark: '06', href: '#articles' },
-  { name: '園芸', note: '比較記事を準備中', mark: '07', href: '#articles' },
-  { name: 'ペット', note: '比較記事を準備中', mark: '08', href: '#articles' }
+  { name: 'キッチン', slug: 'kitchen', mark: '01', desc: '洗剤・スポンジ・保存用品など、毎日使うものから。', href: '#coming' },
+  { name: '収納', slug: 'storage', mark: '02', desc: 'サイズ、置き場所、出し入れのしやすさで選ぶ。', href: '/articles/storage-box-sizing/' },
+  { name: '清掃', slug: 'cleaning', mark: '03', desc: '消耗品の使い分けと、続けやすい選び方。', href: '#coming' },
+  { name: 'PC周辺', slug: 'pc', mark: '04', desc: 'デスク環境や接続方法から候補を絞る。', href: '/articles/keyboard-selection-axis/' },
+  { name: '防災', slug: 'disaster', mark: '05', desc: '家庭の状況に合わせて、必要なものを考える。', href: '/articles/bousai-supplies-checklist/' },
+  { name: '文房具', slug: 'stationery', mark: '06', desc: '書く・切る・整理する道具を比べる。', href: '#coming' },
+  { name: '園芸', slug: 'garden', mark: '07', desc: '手入れと置き場所に合う道具を探す。', href: '#coming' },
+  { name: 'ペット', slug: 'pet', mark: '08', desc: '消耗品の交換頻度と使い勝手を比べる。', href: '#coming' },
 ];
-const articles = [
-  { category: '防災用品', title: '防災用品をそろえる前に確認する5項目', description: '家庭や住まいに合わせて必要条件を整理する、購入前のチェックリストです。', href: '/articles/bousai-supplies-checklist/' },
-  { category: '収納用品', title: '収納ボックスは買う前の採寸で決まる', description: '内寸・外寸・動線・手入れの4つの評価軸をまとめました。', href: '/articles/storage-box-sizing/' },
-  { category: 'PC周辺機器', title: 'キーボード選びの評価軸', description: '配列・接続・設置環境を分けて確認するためのガイドです。', href: '/articles/keyboard-selection-axis/' }
-];
----
 
+const articles = [
+  { category: '防災用品', icon: 'disaster', title: '防災用品をそろえる前に確認する5項目', description: '家族構成と住まいに合わせて、優先順位を整理するチェックリスト。', href: '/articles/bousai-supplies-checklist/', tone: 'orange' },
+  { category: '収納用品', icon: 'storage', title: '収納ボックスは買う前の採寸で決まる', description: '内寸・外寸・動線・手入れを先に確認して、置き場所から候補を絞る。', href: '/articles/storage-box-sizing/', tone: 'green' },
+  { category: 'PC周辺機器', icon: 'pc', title: 'キーボード選びの評価軸', description: '配列・接続・設置環境を分けて考える、デスクまわりの比較ガイド。', href: '/articles/keyboard-selection-axis/', tone: 'blue' },
+];
+
+const icon = (name: string) => ({
+  kitchen: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M11 7v14m6-14v14M8 7h12v12a6 6 0 0 1-12 0V7Zm22 0v34m0-27h8v27"/><path d="M31 41h8"/></svg>',
+  storage: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 16h34v25H7zM5 10h38v7H5zM24 16v25"/><path d="M19 26h10"/></svg>',
+  cleaning: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="m28 7 13 13-6 6L22 13zM8 39l14-14 7 7-14 14H8z"/><path d="M12 31h9M31 13l5-5"/></svg>',
+  pc: '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="11" width="38" height="25" rx="3"/><path d="M10 17h4m4 0h4m4 0h4m4 0h4M10 24h4m4 0h4m4 0h4m4 0h4M10 31h12m4 0h12"/></svg>',
+  disaster: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 6 40h36L24 6Z"/><path d="M24 18v10m0 5v1"/></svg>',
+  stationery: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="m10 36 3-10L31 8l9 9-18 18-10 3Z"/><path d="m27 12 9 9M9 41h30"/></svg>',
+  garden: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 41V23M24 29c-10 0-13-8-13-15 10 0 13 8 13 15Zm1 5c0-10 8-14 15-14 0 10-7 14-15 14Z"/></svg>',
+  pet: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 39c-8 0-13-4-13-9 0-4 3-7 7-7 2 0 4 1 6 3 2-2 4-3 6-3 4 0 7 3 7 7 0 5-5 9-13 9Z"/><ellipse cx="13" cy="16" rx="4" ry="6" transform="rotate(-25 13 16)"/><ellipse cx="35" cy="16" rx="4" ry="6" transform="rotate(25 35 16)"/></svg>'
+}[name] || '');
+---
 <!doctype html>
 <html lang="ja">
   <head>
@@ -24,109 +35,24 @@ const articles = [
     <meta name="description" content="日用品や暮らしの道具を、比較表と選び方で整理する一般商品ガイドです。" />
     <link rel="canonical" href="https://erabi-note.jp/" />
     <title>えらびノート｜日用品の比較・選び方ガイド</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-      :root { --paper:#fffdf8; --ink:#27352d; --muted:#627068; --line:#dbe2d8; --sage:#dfeadd; --sage-deep:#547258; --peach:#f7e6d3; --warm:#f6f3ed; --link:#315f3b; }
-      * { box-sizing:border-box; }
-      html { scroll-behavior:smooth; }
-      body { margin:0; color:var(--ink); background:var(--paper); font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif; line-height:1.7; }
-      a { color:inherit; text-underline-offset:3px; }
-      a:focus-visible { outline:3px solid #d9793b; outline-offset:4px; border-radius:3px; }
-      .wrap { width:min(1120px, calc(100% - 40px)); margin:auto; }
-      .site-header { border-bottom:1px solid var(--line); background:rgba(255,253,248,.93); }
-      .nav { min-height:76px; display:flex; gap:24px; align-items:center; justify-content:space-between; }
-      .brand { font-size:15px; font-weight:800; letter-spacing:.08em; text-decoration:none; white-space:nowrap; }
-      .brand span { color:var(--sage-deep); }
-      .nav-links { display:flex; flex-wrap:wrap; justify-content:end; gap:18px; font-size:14px; font-weight:700; }
-      .nav-links a { text-decoration:none; border-bottom:1px solid transparent; }
-      .nav-links a:hover { border-color:currentColor; }
-      .hero { padding:72px 0 80px; overflow:hidden; }
-      .hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:64px; align-items:center; }
-      .eyebrow { display:inline-flex; padding:5px 10px; border:1px solid #b9cdb7; border-radius:999px; color:#365c3d; font-size:12px; font-weight:800; letter-spacing:.08em; }
-      h1 { max-width:700px; margin:20px 0 20px; font-family:ui-serif,Georgia,"Hiragino Mincho ProN",serif; font-size:clamp(42px,6vw,70px); line-height:1.13; letter-spacing:-.055em; }
-      .lead { max-width:600px; margin:0; color:#4f5d55; font-size:18px; }
-      .notice { display:flex; gap:12px; align-items:flex-start; margin-top:28px; padding:17px 18px; border:1px solid #e4cbae; background:#fff7ec; font-size:14px; }
-      .notice strong { color:#9a551e; white-space:nowrap; }
-      .illustration { display:block; width:100%; max-width:480px; margin:auto; }
-      .section { padding:84px 0; }
-      .section-tint { background:var(--warm); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-      .section-head { display:grid; grid-template-columns:1fr minmax(280px, 410px); gap:28px; margin-bottom:34px; align-items:end; }
-      h2 { margin:0; font-family:ui-serif,Georgia,"Hiragino Mincho ProN",serif; font-size:clamp(29px,4vw,44px); letter-spacing:-.04em; line-height:1.22; }
-      .section-head p { margin:0; color:var(--muted); font-size:15px; }
-      .category-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); background:var(--line); gap:1px; }
-      .category { min-height:192px; padding:22px; display:flex; flex-direction:column; justify-content:space-between; background:var(--paper); text-decoration:none; transition:background .18s ease, transform .18s ease; }
-      .category:hover { background:#f0f6ee; transform:translateY(-2px); }
-      .category-mark { color:#94a395; font-size:12px; font-weight:800; letter-spacing:.1em; }
-      .category h3 { margin:30px 0 7px; font-size:22px; letter-spacing:.02em; }
-      .category p { margin:0; color:var(--sage-deep); font-size:12px; font-weight:800; }
-      .article-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-      .article-card { display:flex; min-height:220px; flex-direction:column; justify-content:space-between; padding:24px; border:1px solid var(--line); background:var(--paper); text-decoration:none; }
-      .article-card:hover { background:#f0f6ee; }
-      .article-category { margin:0; color:var(--sage-deep); font-size:12px; font-weight:800; letter-spacing:.08em; }
-      .article-card h3 { margin:16px 0 12px; font-size:20px; line-height:1.45; }
-      .article-card p { color:var(--muted); font-size:14px; }
-      .disclosure { display:grid; grid-template-columns:160px 1fr; gap:28px; padding:28px 0; border-top:1px solid var(--line); }
-      .disclosure h2 { font-family:inherit; font-size:14px; letter-spacing:.04em; }
-      .disclosure p { max-width:760px; margin:0; color:#536057; font-size:14px; }
-      .policy { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-      .policy-card { padding:30px; background:var(--paper); border:1px solid var(--line); }
-      .policy-card h3 { margin:0 0 12px; font-size:18px; }
-      .policy-card p { margin:0; color:var(--muted); font-size:14px; }
-      .policy-card ul { padding-left:1.2em; margin:14px 0 0; color:var(--muted); font-size:14px; }
-      .footer { padding:30px 0 42px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
-      .footer-inner { display:flex; gap:14px; justify-content:space-between; align-items:center; }
-      @media (max-width: 820px) { .hero { padding:52px 0 58px; } .hero-grid, .section-head { grid-template-columns:1fr; gap:24px; } .illustration { max-width:390px; } .category-grid { grid-template-columns:repeat(2,1fr); } .article-grid { grid-template-columns:1fr; } .section { padding:58px 0; } .policy { grid-template-columns:1fr; } .disclosure { grid-template-columns:1fr; gap:10px; } }
-      @media (max-width: 520px) { .wrap { width:min(100% - 28px,1120px); } .nav { padding:14px 0; align-items:flex-start; flex-direction:column; gap:9px; } .nav-links { justify-content:start; gap:12px 16px; } .category { min-height:164px; padding:17px; } .category h3 { margin-top:20px; font-size:19px; } .notice { font-size:13px; } .footer-inner { align-items:flex-start; flex-direction:column; } }
-      @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .category { transition:none; } }
+      :root{--ink:#14211e;--muted:#60706a;--paper:#fbfbf8;--line:#dde4df;--mist:#eef3ef;--mint:#a5e9ca;--mint-deep:#12694e;--lime:#d8f363;--orange:#ffb777;--blue:#9dc9ff;--radius:22px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.65}a{color:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.topline{height:5px;background:linear-gradient(90deg,var(--mint-deep),var(--mint),var(--lime))}.site-header{border-bottom:1px solid var(--line);background:rgba(251,251,248,.94);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-family:"DM Sans",sans-serif;font-size:22px;font-weight:700;letter-spacing:-.05em;text-decoration:none}.brand i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--mint-deep);margin:0 6px 2px 1px}.nav-links{display:flex;align-items:center;gap:23px;font-size:14px;font-weight:700}.nav-links a{text-decoration:none;color:#40504a}.nav-links a:hover{color:var(--mint-deep)}.contact{border:1px solid #b8c7bf;border-radius:999px;padding:8px 14px}.hero{padding:74px 0 64px;background:linear-gradient(115deg,#f4f8f3 0%,#fbfbf8 57%,#f0f7f0 100%);overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:56px;align-items:center}.kicker{font:700 12px/1 "DM Sans",sans-serif;letter-spacing:.16em;color:var(--mint-deep);margin:0 0 20px}.hero h1{font-size:clamp(42px,5vw,72px);letter-spacing:-.075em;line-height:1.13;margin:0 0 22px;max-width:660px}.hero h1 em{font-style:normal;color:var(--mint-deep)}.hero p{max-width:540px;margin:0;color:var(--muted);font-size:17px}.hero-actions{display:flex;gap:12px;align-items:center;margin-top:30px}.button{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:999px;padding:13px 18px;text-decoration:none;font-size:14px;font-weight:700}.button span{font-size:18px;line-height:0}.plain-link{font-size:14px;font-weight:700;color:var(--mint-deep)}.photo-composition{height:440px;position:relative}.photo-main{width:78%;height:100%;object-fit:cover;border-radius:34px;display:block;box-shadow:0 26px 58px rgba(23,47,38,.18)}.photo-small{position:absolute;width:43%;height:47%;right:0;bottom:-18px;object-fit:cover;border:8px solid var(--paper);border-radius:26px;box-shadow:0 20px 45px rgba(23,47,38,.18)}.image-label{position:absolute;top:22px;left:22px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.92);font:700 11px "DM Sans",sans-serif;letter-spacing:.08em}.section{padding:94px 0}.eyebrow{font:700 12px "DM Sans",sans-serif;letter-spacing:.14em;color:var(--mint-deep);margin:0 0 12px}.heading-row{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:34px}.heading-row h2{font-size:clamp(30px,3.7vw,48px);letter-spacing:-.065em;line-height:1.2;margin:0}.heading-row p{max-width:430px;color:var(--muted);font-size:14px;margin:0}.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.category{position:relative;min-height:216px;padding:19px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;text-decoration:none;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}.category:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(32,56,46,.12)}.category:nth-child(2n) .category-icon{background:#e6f6ee}.category:nth-child(3n) .category-icon{background:#edf4ff}.category:nth-child(4n) .category-icon{background:#fff0e2}.category-no{font:700 11px "DM Sans",sans-serif;color:#91a098;letter-spacing:.1em}.category-icon{display:grid;place-items:center;width:51px;height:51px;margin-top:26px;border-radius:16px;background:#f0f5ee;color:var(--mint-deep)}.category-icon :global(svg){width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.category h3{margin:18px 0 6px;font-size:20px;letter-spacing:-.03em}.category p{font-size:12px;color:var(--muted);line-height:1.65;margin:0}.category-arrow{position:absolute;right:17px;bottom:15px;color:var(--mint-deep);font-size:20px}.compare-band{background:#172a25;color:#f6fbf7}.compare-band .eyebrow{color:var(--mint)}.compare-grid{display:grid;grid-template-columns:1fr .9fr;gap:64px;align-items:center}.compare-band h2{font-size:clamp(31px,4vw,51px);letter-spacing:-.07em;line-height:1.18;margin:0 0 18px}.compare-band p{margin:0;color:#c0d0c8;max-width:520px}.steps{display:grid;gap:12px;margin-top:30px}.step{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:center}.step b{display:grid;place-items:center;width:32px;height:32px;background:var(--lime);color:var(--ink);border-radius:10px;font:700 13px "DM Sans",sans-serif}.step span{font-size:14px}.matrix{padding:22px;background:#f4faf5;border-radius:26px;color:var(--ink)}.matrix small{font:700 10px "DM Sans",sans-serif;letter-spacing:.12em;color:var(--mint-deep)}.matrix h3{margin:7px 0 18px;font-size:18px}.matrix-visual{height:215px;position:relative;border-left:1px solid #a9beb0;border-bottom:1px solid #a9beb0;background:repeating-linear-gradient(0deg,transparent 0 52px,#dce8df 53px),repeating-linear-gradient(90deg,transparent 0 62px,#dce8df 63px)}.axis-x,.axis-y{position:absolute;color:#688077;font-size:10px;font-weight:700}.axis-x{right:2px;bottom:-23px}.axis-y{left:-1px;top:-22px}.dot{position:absolute;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;font:700 10px "DM Sans",sans-serif}.dot.one{left:22%;top:55%;background:var(--orange)}.dot.two{left:58%;top:27%;background:var(--mint)}.dot.three{left:69%;top:64%;background:var(--blue)}.dot.four{left:37%;top:18%;background:var(--lime)}.articles{background:#f1f4f1}.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.article-card{display:flex;flex-direction:column;min-height:310px;padding:25px;border-radius:var(--radius);background:#fff;text-decoration:none;border:1px solid transparent;transition:transform .2s ease,border .2s ease}.article-card:hover{transform:translateY(-4px);border-color:#c2d4ca}.card-top{display:flex;align-items:center;justify-content:space-between}.mini-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#eff6f1;color:var(--mint-deep)}.mini-icon :global(svg){width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.article-card.orange .mini-icon{background:#fff0df;color:#ac5c1d}.article-card.blue .mini-icon{background:#e8f1ff;color:#286da6}.article-type{font:700 11px "DM Sans",sans-serif;letter-spacing:.1em;color:#7b8a83}.article-card h3{margin:31px 0 12px;font-size:23px;line-height:1.46;letter-spacing:-.05em}.article-card p{color:var(--muted);font-size:14px;margin:0}.read-more{margin-top:auto;padding-top:27px;font:700 13px "DM Sans",sans-serif;color:var(--mint-deep);letter-spacing:.02em}.coming{display:grid;grid-template-columns:.95fr 1.05fr;gap:20px;align-items:stretch}.coming-copy{padding:34px;border-radius:var(--radius);background:var(--lime)}.coming-copy h2{font-size:31px;letter-spacing:-.06em;line-height:1.25;margin:0 0 11px}.coming-copy p{font-size:14px;margin:0;color:#3e4f36}.coming-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.coming-item{min-height:134px;padding:19px;border:1px solid var(--line);border-radius:18px;background:#fff}.coming-item .category-icon{width:39px;height:39px;margin:0;border-radius:12px}.coming-item .category-icon :global(svg){width:21px;height:21px}.coming-item h3{font-size:15px;margin:12px 0 0}.disclosure{padding:33px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:180px 1fr;gap:32px}.disclosure h2{font-size:14px;margin:0}.disclosure p{font-size:13px;color:var(--muted);margin:0}.disclosure p+p{margin-top:7px}.footer{background:#14211e;color:#d7e3db;padding:43px 0 32px}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.footer .brand{color:#fff}.footer p{font-size:12px;color:#9baca3;margin:10px 0 0}.footer a{font-size:13px;color:#d7e3db;margin-left:15px}@media(max-width:880px){.hero-grid,.compare-grid,.coming{grid-template-columns:1fr}.photo-composition{height:390px;max-width:620px}.category-grid{grid-template-columns:repeat(2,1fr)}.article-grid{grid-template-columns:1fr}.article-card{min-height:240px}.coming-list{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.wrap{width:min(100% - 28px,1180px)}.nav{height:auto;min-height:68px;padding:12px 0;align-items:flex-start;flex-direction:column;gap:10px}.nav-links{gap:13px;font-size:12px}.nav-links .contact{padding:0;border:0}.hero{padding:48px 0 50px}.hero h1{font-size:43px}.hero p{font-size:15px}.photo-composition{height:305px}.photo-main{width:82%;border-radius:24px}.photo-small{width:43%;height:45%;border-width:5px;border-radius:18px}.section{padding:65px 0}.heading-row{display:block;margin-bottom:25px}.heading-row h2{font-size:34px}.heading-row p{margin-top:12px}.category-grid{gap:9px}.category{min-height:177px;padding:14px;border-radius:17px}.category-icon{width:43px;height:43px;margin-top:17px;border-radius:13px}.category h3{font-size:17px;margin:13px 0 4px}.category p{font-size:11px}.compare-grid{gap:36px}.matrix{padding:17px}.coming-list{grid-template-columns:1fr}.coming-item{min-height:80px;display:flex;align-items:center;gap:13px}.coming-item h3{margin:0}.disclosure{grid-template-columns:1fr;gap:10px}.footer-inner{flex-direction:column}.footer a{margin:0 15px 0 0}}
     </style>
   </head>
   <body>
-    <header class="site-header">
-      <div class="wrap nav">
-        <a class="brand" href="#top"><span>えらび</span>ノート</a>
-        <nav class="nav-links" aria-label="主要メニュー">
-          <a href="#articles">記事</a>
-          <a href="#categories">カテゴリ</a>
-          <a href="#disclosure">広告表記</a>
-          <a href="/policies/">運営・ポリシー</a>
-          <a href="/contact/">お問い合わせ</a>
-        </nav>
-      </div>
-    </header>
+    <div class="topline"></div>
+    <header class="site-header"><div class="wrap nav"><a class="brand" href="#top"><i></i>えらびノート</a><nav class="nav-links" aria-label="主要メニュー"><a href="#categories">カテゴリ</a><a href="#articles">比較ガイド</a><a href="#coming">準備中の記事</a><a href="/contact/" class="contact">お問い合わせ</a></nav></div></header>
     <main id="top">
-      <section class="hero">
-        <div class="wrap hero-grid">
-          <div>
-            <p class="eyebrow">PRODUCT COMPARISON GUIDE</p>
-            <h1>毎日使うものを、<br />比べて選ぶ。</h1>
-            <p class="lead">日用品や暮らしの道具を、使い方・容量・対応条件・購入のしやすさで比べる一般商品ガイドです。迷いやすい違いを比較表とともに整理します。</p>
-          </div>
-          <img class="illustration" src="/images/guide-illustration.svg" alt="ノートとチェックマークを描いた案内イラスト" width="640" height="440" />
-        </div>
-      </section>
-
-      <section class="section section-tint" id="categories" aria-labelledby="categories-title">
-        <div class="wrap">
-          <div class="section-head"><h2 id="categories-title">取り扱いカテゴリ</h2><p>買い替えやすい日用品を中心に、使い方や優先したい条件に合わせて選べる比較記事を追加していきます。</p></div>
-          <div class="category-grid">
-            {categories.map((category) => <a class="category" href={category.href} aria-label={`${category.name}：${category.note}`}><span class="category-mark">{category.mark} / GUIDE AREA</span><div><h3>{category.name}</h3><p>{category.note}</p></div></a>)}
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="articles" aria-labelledby="articles-title">
-        <div class="wrap">
-          <div class="section-head"><h2 id="articles-title">公開中のガイド</h2><p>個別商品の推奨ではなく、比較前に確認したい評価軸を整理した記事です。</p></div>
-          <div class="article-grid">
-            {articles.map((article) => <a class="article-card" href={article.href}><div><p class="article-category">{article.category}</p><h3>{article.title}</h3><p>{article.description}</p></div><span>記事を読む →</span></a>)}
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="disclosure" aria-labelledby="disclosure-title">
-        <div class="wrap disclosure"><h2 id="disclosure-title">広告・アフィリエイト表記</h2><p><strong>Amazonのアソシエイトとして、えらびノートは適格販売により収入を得ています。</strong></p><p>当サイトは広告または成果報酬型のリンクを掲載する場合があります。掲載する場合は、該当するページ・リンクの近くで、広告・アフィリエイトを含むことを分かりやすく明示します。現在、このサイトには広告リンク、Amazonリンク、購入リンク、価格情報はありません。</p></div>
-      </section>
-
+      <section class="hero"><div class="wrap hero-grid"><div><p class="kicker">EVERYDAY PRODUCT COMPARISON</p><h1>暮らしの<em>ちょうどいい</em>を、<br />比べて見つける。</h1><p>買い替えやすい日用品から、毎日の道具まで。使い方や優先したい条件に合わせて、候補を整理する比較ガイドです。</p><div class="hero-actions"><a class="button" href="#categories">カテゴリから探す <span>→</span></a><a class="plain-link" href="#articles">公開中の記事を見る</a></div></div><div class="photo-composition"><img class="photo-main" src="/images/lifestyle-kitchen.jpg" alt="キッチンで料理をする生活シーン" width="1400" height="933" /><span class="image-label">EVERYDAY SCENE</span><img class="photo-small" src="/images/lifestyle-living.jpg" alt="椅子と照明のある室内" width="1400" height="1867" /></div></div></section>
+      <section class="section" id="categories"><div class="wrap"><div class="heading-row"><div><p class="eyebrow">EXPLORE BY CATEGORY</p><h2>何を比べたい？</h2></div><p>キッチン・清掃・ペット用品など、日々の買い替えや使い分けで迷いやすいカテゴリから探せます。</p></div><div class="category-grid">{categories.map((category) => <a class="category" href={category.href}><span class="category-no">{category.mark} / CATEGORY</span><span class="category-icon" set:html={icon(category.slug)} /><div><h3>{category.name}</h3><p>{category.desc}</p></div><span class="category-arrow">↗</span></a>)}</div></div></section>
+      <section class="section compare-band"><div class="wrap compare-grid"><div><p class="eyebrow">HOW TO COMPARE</p><h2>“一番いい”より、<br />自分に合う条件から。</h2><p>比較記事では、容量・サイズ・対応条件・買い替えやすさなどを並べて、優先したい条件ごとに候補を考えます。</p><div class="steps"><div class="step"><b>01</b><span>いつ・どこで使うかを決める</span></div><div class="step"><b>02</b><span>外せない条件を3つに絞る</span></div><div class="step"><b>03</b><span>比較表で候補を見比べる</span></div></div></div><div class="matrix"><small>CHOICE MAP / ILLUSTRATION</small><h3>優先条件で候補を見つけるイメージ</h3><div class="matrix-visual"><span class="axis-y">買い替えやすさ ↑</span><span class="axis-x">比較したい条件 →</span><span class="dot one">A</span><span class="dot two">B</span><span class="dot three">C</span><span class="dot four">D</span></div></div></div></section>
+      <section class="section articles" id="articles"><div class="wrap"><div class="heading-row"><div><p class="eyebrow">LATEST GUIDES</p><h2>公開中のガイド</h2></div><p>まずは購入前の見落としを減らすための記事から公開しています。比較記事を順次追加します。</p></div><div class="article-grid">{articles.map((article) => <a class={`article-card ${article.tone}`} href={article.href}><div class="card-top"><span class="mini-icon" set:html={icon(article.icon)} /><span class="article-type">{article.category}</span></div><div><h3>{article.title}</h3><p>{article.description}</p></div><span class="read-more">READ GUIDE　→</span></a>)}</div></div></section>
+      <section class="section" id="coming"><div class="wrap coming"><div class="coming-copy"><p class="eyebrow">COMING NEXT</p><h2>買い替えやすい日用品の比較を、順次追加します。</h2><p>洗剤、スポンジ、猫砂など、比較するポイントが多い消耗品から記事を準備しています。</p></div><div class="coming-list"><div class="coming-item"><span class="category-icon" set:html={icon('kitchen')} /><h3>食洗機用洗剤</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('cleaning')} /><h3>洗濯洗剤</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('pet')} /><h3>猫砂・トイレ用品</h3></div></div></div></section>
+      <section class="wrap disclosure"><h2>広告・アフィリエイト表記</h2><div><p><strong>Amazonのアソシエイトとして、えらびノートは適格販売により収入を得ています。</strong></p><p>記事内に広告・アフィリエイトリンクを掲載する場合は、分かりやすく表示します。</p></div></section>
     </main>
-    <footer class="footer"><div class="wrap footer-inner"><span>えらびノート — 日用品の比較・選び方ガイド</span><span><a href="/policies/">運営・ポリシー</a>　<a href="/contact/">お問い合わせ</a>　© {new Date().getFullYear()} えらびノート</span></div></footer>
+    <footer class="footer"><div class="wrap footer-inner"><div><a class="brand" href="/"><i></i>えらびノート</a><p>日用品の比較・選び方ガイド</p></div><div><a href="/policies/">運営・ポリシー</a><a href="/contact/">お問い合わせ</a><p>© {new Date().getFullYear()} えらびノート</p></div></div></footer>
   </body>
 </html>

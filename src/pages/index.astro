@@ -107,7 +107,7 @@ const articles = [
 
       <section class="section section-tint" id="categories" aria-labelledby="categories-title">
         <div class="wrap">
-          <div class="section-head"><h2 id="categories-title">これから整えるカテゴリ</h2><p>以下はすべて、選び方の観点を準備している段階です。個別商品の推奨・比較ページではありません。</p></div>
+          <div class="section-head"><h2 id="categories-title">取り扱いカテゴリ</h2><p>掲載する比較記事では、公式情報に基づく比較表と、向く条件・合わない条件を明示します。確認できない内容は掲載しません。</p></div>
           <div class="category-grid">
             {categories.map((category) => <a class="category" href={category.href} aria-label={`${category.name}：${category.note}`}><span class="category-mark">{category.mark} / GUIDE AREA</span><div><h3>{category.name}</h3><p>{category.note}</p></div></a>)}
           </div>
@@ -131,10 +131,10 @@ const articles = [
         <div class="wrap">
           <div class="section-head"><h2 id="policy-title">編集方針</h2><p>読者が判断の土台をつくれるように、出典・検証・表現の基準を明確にします。</p></div>
           <div class="policy">
-            <article class="policy-card"><h3>転載・模倣をしません</h3><p>第三者のレビュー、評価、比較記事、購入者の感想を無断でコピー・転載しません。引用が必要な場合は、著作権と出典表示のルールを確認し、必要な範囲に限定します。</p></article>
-            <article class="policy-card"><h3>裏づけのない表現をしません</h3><p>実測していない性能、確認できない仕様、価格・在庫、利用結果を事実のように記載しません。不確かな内容は掲載せず、更新が必要な情報は確認方法も含めて扱います。</p></article>
-            <article class="policy-card"><h3>準備段階の情報として示します</h3><p>現在のカテゴリは、検討時の項目や注意点を整理するための枠組みです。商品を選ぶための断定的な結論や、購入を促す表現は掲載しません。</p></article>
-            <article class="policy-card"><h3>掲載基準を公開します</h3><ul><li>根拠の確認できる情報を優先します。</li><li>広告の有無を分かりやすく示します。</li><li>誤りを見つけた場合は、内容を見直します。</li></ul></article>
+            <article class="policy-card"><h3>比較の根拠を示します</h3><p>比較表には公式仕様・注意事項・確認日を添え、候補ごとに向く条件と合わない条件を分けて示します。確認できない性能や価格は断定しません。</p></article>
+            <article class="policy-card"><h3>実使用を偽りません</h3><p>実測していない性能や、使っていない商品の体験談は掲載しません。実使用の記録を載せる場合は、条件と確認日を明示します。</p></article>
+            <article class="policy-card"><h3>投稿・レビューを転載しません</h3><p>購入者レビューやXの投稿は、比較観点を考えるための参考に限ります。本文・投稿者・IDを保存、転載、根拠としての引用には使いません。</p></article>
+            <article class="policy-card"><h3>高リスク領域は自動公開しません</h3><ul><li>健康・サプリ・プロテイン、金融、転職などは個別確認します。</li><li>広告の有無を分かりやすく示します。</li><li>誤りを見つけた場合は内容を見直します。</li></ul></article>
           </div>
         </div>
       </section>

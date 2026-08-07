@@ -1,13 +1,13 @@
 ---
 const categories = [
-  { name: 'キッチン', note: '準備中｜情報整理のみ', mark: '01', href: '#policy' },
+  { name: 'キッチン', note: '比較記事を準備中', mark: '01', href: '#articles' },
   { name: '収納', note: 'ガイド公開中', mark: '02', href: '/articles/storage-box-sizing/' },
-  { name: '清掃', note: '準備中｜情報整理のみ', mark: '03', href: '#policy' },
+  { name: '清掃', note: '比較記事を準備中', mark: '03', href: '#articles' },
   { name: 'PC周辺', note: 'ガイド公開中', mark: '04', href: '/articles/keyboard-selection-axis/' },
   { name: '防災', note: 'ガイド公開中', mark: '05', href: '/articles/bousai-supplies-checklist/' },
-  { name: '文房具', note: '準備中｜情報整理のみ', mark: '06', href: '#policy' },
-  { name: '園芸', note: '準備中｜情報整理のみ', mark: '07', href: '#policy' },
-  { name: 'ペット', note: '準備中｜情報整理のみ', mark: '08', href: '#policy' }
+  { name: '文房具', note: '比較記事を準備中', mark: '06', href: '#articles' },
+  { name: '園芸', note: '比較記事を準備中', mark: '07', href: '#articles' },
+  { name: 'ペット', note: '比較記事を準備中', mark: '08', href: '#articles' }
 ];
 const articles = [
   { category: '防災用品', title: '防災用品をそろえる前に確認する5項目', description: '家庭や住まいに合わせて必要条件を整理する、購入前のチェックリストです。', href: '/articles/bousai-supplies-checklist/' },
@@ -21,9 +21,9 @@ const articles = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="暮らしに合う道具の選び方を考えるための、準備中の一般商品ガイドです。" />
+    <meta name="description" content="日用品や暮らしの道具を、比較表と選び方で整理する一般商品ガイドです。" />
     <link rel="canonical" href="https://erabi-note.jp/" />
-    <title>えらびノート｜準備中の一般商品ガイド</title>
+    <title>えらびノート｜日用品の比較・選び方ガイド</title>
     <style>
       :root { --paper:#fffdf8; --ink:#27352d; --muted:#627068; --line:#dbe2d8; --sage:#dfeadd; --sage-deep:#547258; --peach:#f7e6d3; --warm:#f6f3ed; --link:#315f3b; }
       * { box-sizing:border-box; }
@@ -96,10 +96,9 @@ const articles = [
       <section class="hero">
         <div class="wrap hero-grid">
           <div>
-            <p class="eyebrow">GENERAL PRODUCT GUIDE / PREPARING</p>
-            <h1>選ぶ前に、<br />考えることを整える。</h1>
-            <p class="lead">くらしの道具を検討するときの視点を、静かに整理するための一般商品ガイドです。特定商品の優劣ではなく、購入前の確認項目と比較の進め方を掲載しています。</p>
-            <aside class="notice" aria-label="現在の掲載方針"><strong>現在の掲載範囲</strong><span>評価軸や確認方法を中心に掲載しています。特定商品の紹介、価格案内、根拠のないランキングは行いません。</span></aside>
+            <p class="eyebrow">PRODUCT COMPARISON GUIDE</p>
+            <h1>毎日使うものを、<br />比べて選ぶ。</h1>
+            <p class="lead">日用品や暮らしの道具を、使い方・容量・対応条件・購入のしやすさで比べる一般商品ガイドです。迷いやすい違いを比較表とともに整理します。</p>
           </div>
           <img class="illustration" src="/images/guide-illustration.svg" alt="ノートとチェックマークを描いた案内イラスト" width="640" height="440" />
         </div>
@@ -107,7 +106,7 @@ const articles = [
 
       <section class="section section-tint" id="categories" aria-labelledby="categories-title">
         <div class="wrap">
-          <div class="section-head"><h2 id="categories-title">取り扱いカテゴリ</h2><p>掲載する比較記事では、公式情報に基づく比較表と、向く条件・合わない条件を明示します。確認できない内容は掲載しません。</p></div>
+          <div class="section-head"><h2 id="categories-title">取り扱いカテゴリ</h2><p>買い替えやすい日用品を中心に、使い方や優先したい条件に合わせて選べる比較記事を追加していきます。</p></div>
           <div class="category-grid">
             {categories.map((category) => <a class="category" href={category.href} aria-label={`${category.name}：${category.note}`}><span class="category-mark">{category.mark} / GUIDE AREA</span><div><h3>{category.name}</h3><p>{category.note}</p></div></a>)}
           </div>
@@ -128,6 +127,6 @@ const articles = [
       </section>
 
     </main>
-    <footer class="footer"><div class="wrap footer-inner"><span>えらびノート — 一般商品ガイド（準備中）</span><span><a href="/policies/">運営・ポリシー</a>　<a href="/contact/">お問い合わせ</a>　© {new Date().getFullYear()} えらびノート</span></div></footer>
+    <footer class="footer"><div class="wrap footer-inner"><span>えらびノート — 日用品の比較・選び方ガイド</span><span><a href="/policies/">運営・ポリシー</a>　<a href="/contact/">お問い合わせ</a>　© {new Date().getFullYear()} えらびノート</span></div></footer>
   </body>
 </html>

@@ -1,8 +1,8 @@
 ---
 const categories = [
-  { name: 'キッチン', slug: 'kitchen', mark: '01', desc: '洗剤・スポンジ・保存用品など、毎日使うものから。', href: '#coming' },
+  { name: 'キッチン', slug: 'kitchen', mark: '01', desc: '洗剤・スポンジ・保存用品など、毎日使うものから。', href: '/articles/dishwasher-detergent-comparison/' },
   { name: '収納', slug: 'storage', mark: '02', desc: 'サイズ、置き場所、出し入れのしやすさで選ぶ。', href: '/articles/storage-box-sizing/' },
-  { name: '清掃', slug: 'cleaning', mark: '03', desc: '消耗品の使い分けと、続けやすい選び方。', href: '#coming' },
+  { name: '清掃', slug: 'cleaning', mark: '03', desc: '消耗品の使い分けと、続けやすい選び方。', href: '/articles/laundry-liquid-detergent-comparison/' },
   { name: 'PC周辺', slug: 'pc', mark: '04', desc: 'デスク環境や接続方法から候補を絞る。', href: '/articles/keyboard-selection-axis/' },
   { name: '防災', slug: 'disaster', mark: '05', desc: '家庭の状況に合わせて、必要なものを考える。', href: '/articles/bousai-supplies-checklist/' },
   { name: '文房具', slug: 'stationery', mark: '06', desc: '書く・切る・整理する道具を比べる。', href: '#coming' },
@@ -11,6 +11,9 @@ const categories = [
 ];
 
 const articles = [
+  { category: 'キッチン｜商品比較', icon: 'kitchen', title: '食洗機用洗剤の比較｜粉末・ジェル・タブレット6製品を公式表示で比べる', description: '6社の食洗機用洗剤を、形状・容量・成分表示・使用量の公式案内・使用上の注意で比べます。', href: '/articles/dishwasher-detergent-comparison/', tone: 'green' },
+  { category: '清掃｜商品比較', icon: 'cleaning', title: '洗濯用液体洗剤の比較｜合成洗剤と石けん洗剤6製品を公式表示で比べる', description: '6社の液体洗剤を、処方タイプ・液性・蛍光増白剤・すすぎ回数・ドラム式対応の公式表示で比べます。', href: '/articles/laundry-liquid-detergent-comparison/', tone: 'blue' },
+  { category: 'キッチン｜商品比較', icon: 'cleaning', title: 'キッチンスポンジの比較｜6製品を素材・研磨面・コーティング対応で比べる', description: '6社の台所用スポンジを、素材・層構造と研磨面・抗菌加工・コーティング調理器具への使用可否で比べます。', href: '/articles/kitchen-sponge-comparison/', tone: 'green' },
   { category: 'ペット用品｜商品比較', icon: 'pet', title: '猫砂の比較｜固まるタイプ5製品を鉱物・紙・おから系で比べる', description: '鉱物・紙・おから系5社の猫砂を、原料タイプ・容量・香りの公式表示・処理方法の案内で比べます。', href: '/articles/cat-litter-clumping-comparison/', tone: 'green' },
   { category: '防災用品', icon: 'disaster', title: '防災用品をそろえる前に確認する5項目', description: '家族構成と住まいに合わせて、優先順位を整理するチェックリスト。', href: '/articles/bousai-supplies-checklist/', tone: 'orange' },
   { category: '収納用品', icon: 'storage', title: '収納ボックスは買う前の採寸で決まる', description: '内寸・外寸・動線・手入れを先に確認して、置き場所から候補を絞る。', href: '/articles/storage-box-sizing/', tone: 'green' },
@@ -51,7 +54,7 @@ const icon = (name: string) => ({
       <section class="section" id="categories"><div class="wrap"><div class="heading-row"><div><p class="eyebrow">EXPLORE BY CATEGORY</p><h2>何を比べたい？</h2></div><p>キッチン・清掃・ペット用品など、日々の買い替えや使い分けで迷いやすいカテゴリから探せます。</p></div><div class="category-grid">{categories.map((category) => <a class="category" href={category.href}><span class="category-no">{category.mark} / CATEGORY</span><span class="category-icon" set:html={icon(category.slug)} /><div><h3>{category.name}</h3><p>{category.desc}</p></div><span class="category-arrow">↗</span></a>)}</div></div></section>
       <section class="section compare-band"><div class="wrap compare-grid"><div><p class="eyebrow">HOW TO COMPARE</p><h2>“一番いい”より、<br />自分に合う条件から。</h2><p>比較記事では、容量・サイズ・対応条件・買い替えやすさなどを並べて、優先したい条件ごとに候補を考えます。</p><div class="steps"><div class="step"><b>01</b><span>いつ・どこで使うかを決める</span></div><div class="step"><b>02</b><span>外せない条件を3つに絞る</span></div><div class="step"><b>03</b><span>比較表で候補を見比べる</span></div></div></div><div class="matrix"><small>CHOICE MAP / ILLUSTRATION</small><h3>優先条件で候補を見つけるイメージ</h3><div class="matrix-visual"><span class="axis-y">買い替えやすさ ↑</span><span class="axis-x">比較したい条件 →</span><span class="dot one">A</span><span class="dot two">B</span><span class="dot three">C</span><span class="dot four">D</span></div></div></div></section>
       <section class="section articles" id="articles"><div class="wrap"><div class="heading-row"><div><p class="eyebrow">LATEST GUIDES</p><h2>公開中のガイド</h2></div><p>まずは購入前の見落としを減らすための記事から公開しています。比較記事を順次追加します。</p></div><div class="article-grid">{articles.map((article) => <a class={`article-card ${article.tone}`} href={article.href}><div class="card-top"><span class="mini-icon" set:html={icon(article.icon)} /><span class="article-type">{article.category}</span></div><div><h3>{article.title}</h3><p>{article.description}</p></div><span class="read-more">READ GUIDE　→</span></a>)}</div></div></section>
-      <section class="section" id="coming"><div class="wrap coming"><div class="coming-copy"><p class="eyebrow">COMING NEXT</p><h2>買い替えやすい日用品の比較を、順次追加します。</h2><p>洗剤、スポンジ、猫砂など、比較するポイントが多い消耗品から記事を準備しています。</p></div><div class="coming-list"><div class="coming-item"><span class="category-icon" set:html={icon('kitchen')} /><h3>食洗機用洗剤</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('cleaning')} /><h3>洗濯洗剤</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('pet')} /><h3>猫砂・トイレ用品</h3></div></div></div></section>
+      <section class="section" id="coming"><div class="wrap coming"><div class="coming-copy"><p class="eyebrow">COMING NEXT</p><h2>買い替えやすい日用品の比較を、順次追加します。</h2><p>買い替えの周期が決まっていて、メーカーごとに仕様の書き方が分かれるものから準備しています。</p></div><div class="coming-list"><div class="coming-item"><span class="category-icon" set:html={icon('kitchen')} /><h3>浄水器の交換カートリッジ</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('cleaning')} /><h3>フローリング用ドライシート</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('pet')} /><h3>猫用トイレ消臭シート</h3></div></div></div></section>
       <section class="wrap disclosure"><h2>広告・アフィリエイト表記</h2><div><p><strong>Amazonのアソシエイトとして、えらびノートは適格販売により収入を得ています。</strong></p></div></section>
     </main>
     <footer class="footer"><div class="wrap footer-inner"><div><a class="brand" href="/"><i></i>えらびノート</a><p>日用品の比較・選び方ガイド</p></div><div><a href="/policies/">運営・ポリシー</a><p>© {new Date().getFullYear()} えらびノート</p></div></div></footer>

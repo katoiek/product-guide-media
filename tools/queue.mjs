@@ -38,10 +38,10 @@ if (cmd === 'status') {
   const rows = [...queue.items].sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
   console.log(`キュー ${rows.length} 件（更新: ${queue.updated}）\n`);
   const pad = (s, n) => String(s).padEnd(n, ' ');
-  console.log(pad('STATE', 16) + pad('SLUG', 38) + pad('担当', 22) + '成果物');
-  console.log('-'.repeat(94));
+  console.log(pad('STATE', 16) + pad('SLUG', 42) + pad('担当', 22) + '成果物');
+  console.log('-'.repeat(98));
   for (const it of rows) {
-    console.log(pad(it.state, 16) + pad(it.slug, 38) + pad(FLOW[it.state]?.agent ?? '?', 22) + artifacts(it));
+    console.log(pad(it.state, 16) + pad(it.slug, 42) + pad(FLOW[it.state]?.agent ?? '?', 22) + artifacts(it));
     const memo = it.blockedReason ?? it.note;
     if (memo) console.log(`${' '.repeat(16)}└ ${memo}`);
   }

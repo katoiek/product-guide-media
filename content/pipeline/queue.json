@@ -79,7 +79,7 @@
       "category": "キッチン",
       "categorySlug": "kitchen",
       "type": "comparison",
-      "state": "drafting",
+      "state": "gate",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -103,9 +103,14 @@
           "date": "2026-08-08",
           "state": "drafting",
           "note": "公式仕様6社・関連2件を検証済み。PA-API未接続のため購入導線は後付け"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "新規執筆。購入導線はASIN取得後に追加"
         }
       ],
-      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
+      "note": "公式仕様6社（花王/ライオン/P&G/フィニッシュ/シャボン玉石けん/サラヤ）検証済み。ジョンソンは該当製品が公式で確認できずサラヤへ差し替え。",
       "relatedCandidates": [
         "食洗機用庫内クリーナー",
         "食洗機用乾燥仕上げ剤"
@@ -114,7 +119,10 @@
         "repurchaseCycle": "1〜3か月（消耗品）",
         "priceBand": "未確認",
         "splitPoint": "粉末／ジェル／タブレットの形状差、庫内での溶け残りに関する注意表示"
-      }
+      },
+      "articleFile": "src/pages/articles/dishwasher-detergent-comparison.astro",
+      "specFile": "content/pipeline/specs/dishwasher-detergent-comparison.json",
+      "productsFile": "content/pipeline/products/dishwasher-detergent-comparison.json"
     },
     {
       "slug": "laundry-liquid-detergent-comparison",
@@ -122,7 +130,7 @@
       "category": "清掃",
       "categorySlug": "cleaning",
       "type": "comparison",
-      "state": "drafting",
+      "state": "gate",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -146,9 +154,14 @@
           "date": "2026-08-08",
           "state": "drafting",
           "note": "公式仕様6社・関連3件を検証済み。PA-API未接続のため購入導線は後付け"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "新規執筆。導線追加とASINは後続"
         }
       ],
-      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
+      "note": "公式仕様6社（花王/ライオン/P&G/NSファーファ/ミヨシ石鹸/シャボン玉石けん）検証済み。",
       "relatedCandidates": [
         "柔軟剤",
         "洗濯槽クリーナー",
@@ -158,7 +171,10 @@
         "repurchaseCycle": "1〜2か月（消耗品）",
         "priceBand": "未確認",
         "splitPoint": "すすぎ回数の指定、蛍光増白剤の有無、ドラム式対応の表示"
-      }
+      },
+      "articleFile": "src/pages/articles/laundry-liquid-detergent-comparison.astro",
+      "specFile": "content/pipeline/specs/laundry-liquid-detergent-comparison.json",
+      "productsFile": "content/pipeline/products/laundry-liquid-detergent-comparison.json"
     },
     {
       "slug": "kitchen-sponge-comparison",
@@ -166,7 +182,7 @@
       "category": "キッチン",
       "categorySlug": "kitchen",
       "type": "comparison",
-      "state": "assets_pending",
+      "state": "gate",
       "brandCandidates": [
         "3M スコッチブライト",
         "レック",
@@ -185,9 +201,19 @@
           "date": "2026-08-08",
           "state": "assets_pending",
           "note": "公式仕様6製品・関連消耗品2件を確認"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "公式仕様6社・関連2件を検証済み。3Mと山崎産業はキクロン・サンベルムへ差し替え"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "新規執筆。導線追加とASINは後続"
         }
       ],
-      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
+      "note": "公式仕様6社（レック/オーエ/ダスキン/マーナ/キクロン/サンベルム）検証済み。3M・山崎産業は公式ページ未確認のため除外。",
       "relatedCandidates": [
         "食器用洗剤",
         "スポンジホルダー"
@@ -196,7 +222,10 @@
         "repurchaseCycle": "2週間〜1か月（消耗品）",
         "priceBand": "未確認",
         "splitPoint": "素材（ウレタン／不織布／セルロース）、抗菌加工の表示、フッ素加工調理器具への使用可否"
-      }
+      },
+      "articleFile": "src/pages/articles/kitchen-sponge-comparison.astro",
+      "specFile": "content/pipeline/specs/kitchen-sponge-comparison.json",
+      "productsFile": "content/pipeline/products/kitchen-sponge-comparison.json"
     },
     {
       "slug": "bousai-supplies-checklist",
@@ -243,6 +272,90 @@
           "date": "2026-08-08",
           "state": "published",
           "note": "既存の一般ガイドを管理下に取り込み"
+        }
+      ]
+    },
+    {
+      "slug": "water-filter-cartridge-comparison",
+      "title": "浄水器の交換カートリッジの比較",
+      "category": "キッチン",
+      "categorySlug": "kitchen",
+      "relatedCandidates": [
+        "浄水器本体",
+        "蛇口用アダプター"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "2〜4か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "除去対象物質の表示範囲、総ろ過水量、対応する本体型番の指定"
+      },
+      "type": "comparison",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/water-filter-cartridge-comparison.json",
+      "productsFile": "content/pipeline/products/water-filter-cartridge-comparison.json",
+      "articleFile": "src/pages/articles/water-filter-cartridge-comparison.astro",
+      "note": "トップページの「準備中の記事」に掲載済み。ブランド候補の洗い出しから開始する。",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "公開済み3ジャンルの隣接カテゴリとして登録"
+        }
+      ]
+    },
+    {
+      "slug": "floor-dry-sheet-comparison",
+      "title": "フローリング用ドライシートの比較",
+      "category": "清掃",
+      "categorySlug": "cleaning",
+      "relatedCandidates": [
+        "フロアワイパー本体",
+        "ウェットシート"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "1〜2か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "シート寸法と対応ワイパーの幅、立体加工の有無、使用できる床材の指定"
+      },
+      "type": "comparison",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/floor-dry-sheet-comparison.json",
+      "productsFile": "content/pipeline/products/floor-dry-sheet-comparison.json",
+      "articleFile": "src/pages/articles/floor-dry-sheet-comparison.astro",
+      "note": "トップページの「準備中の記事」に掲載済み。ブランド候補の洗い出しから開始する。",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "公開済み3ジャンルの隣接カテゴリとして登録"
+        }
+      ]
+    },
+    {
+      "slug": "cat-litter-deodorizing-sheet-comparison",
+      "title": "猫用トイレ消臭シートの比較",
+      "category": "ペット用品",
+      "categorySlug": "pet",
+      "relatedCandidates": [
+        "システムトイレ用猫砂",
+        "猫用トイレ本体"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "1週間〜1か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "対応するトイレ本体の指定、交換頻度の公式案内、シート寸法"
+      },
+      "type": "comparison",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/cat-litter-deodorizing-sheet-comparison.json",
+      "productsFile": "content/pipeline/products/cat-litter-deodorizing-sheet-comparison.json",
+      "articleFile": "src/pages/articles/cat-litter-deodorizing-sheet-comparison.astro",
+      "note": "トップページの「準備中の記事」に掲載済み。ブランド候補の洗い出しから開始する。",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "公開済み3ジャンルの隣接カテゴリとして登録"
         }
       ]
     }

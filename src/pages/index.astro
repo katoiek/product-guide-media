@@ -45,7 +45,7 @@ const icon = (name: string) => ({
   </head>
   <body>
     <div class="topline"></div>
-    <header class="site-header"><div class="wrap nav"><a class="brand" href="#top"><i></i>えらびノート</a><nav class="nav-links" aria-label="主要メニュー"><a href="#categories">カテゴリ</a><a href="#articles">比較ガイド</a><a href="#coming">準備中の記事</a><a href="/contact/" class="contact">お問い合わせ</a></nav></div></header>
+    <header class="site-header"><div class="wrap nav"><a class="brand" href="#top"><i></i>えらびノート</a><nav class="nav-links" aria-label="主要メニュー"><a href="#categories">カテゴリ</a><a href="#articles">比較ガイド</a><a href="#coming">準備中の記事</a></nav></div></header>
     <main id="top">
       <section class="hero"><div class="wrap hero-grid"><div><p class="kicker">EVERYDAY PRODUCT COMPARISON</p><h1>暮らしの<em>ちょうどいい</em>を、<br />比べて見つける。</h1><p>買い替えやすい日用品から、毎日の道具まで。使い方や優先したい条件に合わせて、候補を整理する比較ガイドです。</p><div class="hero-actions"><a class="button" href="#categories">カテゴリから探す <span>→</span></a><a class="plain-link" href="#articles">公開中の記事を見る</a></div></div><div class="photo-composition"><img class="photo-main" src="/images/lifestyle-kitchen.jpg" alt="キッチンで料理をする生活シーン" width="1400" height="933" /><span class="image-label">EVERYDAY SCENE</span><img class="photo-small" src="/images/lifestyle-living.jpg" alt="椅子と照明のある室内" width="1400" height="1867" /></div></div></section>
       <section class="section" id="categories"><div class="wrap"><div class="heading-row"><div><p class="eyebrow">EXPLORE BY CATEGORY</p><h2>何を比べたい？</h2></div><p>キッチン・清掃・ペット用品など、日々の買い替えや使い分けで迷いやすいカテゴリから探せます。</p></div><div class="category-grid">{categories.map((category) => <a class="category" href={category.href}><span class="category-no">{category.mark} / CATEGORY</span><span class="category-icon" set:html={icon(category.slug)} /><div><h3>{category.name}</h3><p>{category.desc}</p></div><span class="category-arrow">↗</span></a>)}</div></div></section>
@@ -54,6 +54,6 @@ const icon = (name: string) => ({
       <section class="section" id="coming"><div class="wrap coming"><div class="coming-copy"><p class="eyebrow">COMING NEXT</p><h2>買い替えやすい日用品の比較を、順次追加します。</h2><p>洗剤、スポンジ、猫砂など、比較するポイントが多い消耗品から記事を準備しています。</p></div><div class="coming-list"><div class="coming-item"><span class="category-icon" set:html={icon('kitchen')} /><h3>食洗機用洗剤</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('cleaning')} /><h3>洗濯洗剤</h3></div><div class="coming-item"><span class="category-icon" set:html={icon('pet')} /><h3>猫砂・トイレ用品</h3></div></div></div></section>
       <section class="wrap disclosure"><h2>広告・アフィリエイト表記</h2><div><p><strong>Amazonのアソシエイトとして、えらびノートは適格販売により収入を得ています。</strong></p><p>記事内に広告・アフィリエイトリンクを掲載する場合は、分かりやすく表示します。</p></div></section>
     </main>
-    <footer class="footer"><div class="wrap footer-inner"><div><a class="brand" href="/"><i></i>えらびノート</a><p>日用品の比較・選び方ガイド</p></div><div><a href="/policies/">運営・ポリシー</a><a href="/contact/">お問い合わせ</a><p>© {new Date().getFullYear()} えらびノート</p></div></div></footer>
+    <footer class="footer"><div class="wrap footer-inner"><div><a class="brand" href="/"><i></i>えらびノート</a><p>日用品の比較・選び方ガイド</p></div><div><a href="/policies/">運営・ポリシー</a><p>© {new Date().getFullYear()} えらびノート</p></div></div></footer>
   </body>
 </html>

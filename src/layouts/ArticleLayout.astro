@@ -18,9 +18,9 @@ const canonical = `https://erabi-note.jp/articles/${slug}/`;
     <title>{title}｜えらびノート</title>
   </head>
   <body>
-    <header><div class="wrap bar"><a class="brand" href="/">えらびノート</a><nav aria-label="主要メニュー"><a href="/">トップ</a><a href="/policies/">運営・ポリシー</a><a href="/contact/">お問い合わせ</a></nav></div></header>
+    <header><div class="wrap bar"><a class="brand" href="/">えらびノート</a><nav aria-label="主要メニュー"><a href="/">トップ</a><a href="/policies/">運営・ポリシー</a></nav></div></header>
     <main class="wrap"><p class="category">{category}</p><slot /></main>
-    <footer><div class="wrap"><a href="/policies/">運営・ポリシー</a><span>　</span><a href="/contact/">お問い合わせ</a><p>© {new Date().getFullYear()} えらびノート</p></div></footer>
+    <footer><div class="wrap"><a href="/policies/">運営・ポリシー</a><p>© {new Date().getFullYear()} えらびノート</p></div></footer>
   </body>
 </html>
 <style>

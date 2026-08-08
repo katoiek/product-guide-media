@@ -68,9 +68,30 @@ idea ─▶ spec_research ─▶ assets_pending ─▶ drafting ─▶ gate ─�
 - 「erabi-spec-researcher で kitchen-sponge-comparison の公式仕様を調べて」
 - 「erabi-publish-gate で全記事のゲートを回して」
 
-### 定期実行
+### 定期実行と更新頻度
 
-`.github/workflows/pipeline.yml` が毎週 月・木 07:00 JST に1周回します。
+`.github/workflows/pipeline.yml` が週2回動きます。**役割が違います。**
+
+| 曜日（JST） | モード | 内容 |
+| --- | --- | --- |
+| 火 07:00 | `new` | 新規記事を**1本だけ**進める |
+| 金 07:00 | `refresh` | `queue.mjs stale` の最も古い1件を再確認。対象が無ければ何もしない |
+
+手動実行では `mode` を `new` / `refresh` / `auto` から選べます。
+
+**新規は週1本を上限にしています。** これを超えると公式ページとの突き合わせ検証が追いつかず、形骸化します。実際に製品名の不一致が2件見つかっており（ブランドサイトの表記と流通名の差、特にP&G系）、検証を省くと誤った商品にアフィリエイトリンクを貼ることになります。
+
+**既存記事の再確認を新規と同じペースで回します。** 収益は記事数ではなく「成約している記事が生き続けていること」から出ます。仕様が古い記事を放置して新規を積むのは、資産を減らしながら増やしているのと同じです。記事が10本を超えたら新規を減らし、更新側に寄せてください。
+
+再確認が必要になる条件:
+
+| きっかけ | 対応 |
+| --- | --- |
+| `verifiedAt` から180日経過 | 全製品の公式ページを再確認 |
+| 製品の廃番・リニューアル | 該当製品を差し替え、比較表を更新 |
+| メーカーが仕様表示を変更 | `specs` を更新し `verifiedAt` を更新 |
+| ASIN が別商品を指すようになった | `erabi-asset-broker` でリンクを取り直す |
+
 有効化には次が必要です。
 
 1. リポジトリ Secrets に `ANTHROPIC_API_KEY`
@@ -86,6 +107,7 @@ idea ─▶ spec_research ─▶ assets_pending ─▶ drafting ─▶ gate ─�
 | --- | --- |
 | `npm run queue status` | キュー一覧と担当エージェント |
 | `npm run queue next` | 次に着手すべき1件（JSON） |
+| `npm run queue stale` | 仕様確認が180日以上古い公開済み記事 |
 | `npm run queue set <slug> <state> "備考"` | 状態遷移（履歴に記録される） |
 | `npm run queue add <slug> "<タイトル>" "<カテゴリ>" <categorySlug>` | 新規テーマ登録 |
 | `npm run validate:products [slug]` | 商品アセットの検証 |
@@ -197,14 +219,13 @@ node tools/validate-products.mjs <slug>
 
 ## 8. 既知のギャップ
 
-- **PA-API 未接続。** 認証情報が未設定のため、全記事で購入導線と製品画像が未掲載。アソシエイト審査の状態も `unknown`。
-- **猫砂記事の `officialUrl` が未記録。** 記事作成時に根拠URLが保存されておらず、
-  `content/pipeline/specs/cat-litter-clumping-comparison.json` の `officialUrl` が `null`。
-  現在この記事は公開ゲートで落ちる。`erabi-spec-researcher` での再取得が必要。
-- **既存記事が新しい構成に未対応。** 「意見が割れやすい仕様」節と「一緒に見ておきたい消耗品」節が無い。
-  仕様データに `relatedProducts` を入れたうえで `erabi-article-writer` による書き直しが必要。
-- **食洗機用洗剤・洗濯用液体洗剤・キッチンスポンジ**は `spec_research` のまま未着手。
+- **PA-API 未接続。** 認証情報が未設定のため、**全4記事で購入導線と製品画像が未掲載**。
+  これが収益ゼロの直接原因であり、最優先の課題。アソシエイト審査の状態も `unknown`。
 - **比較表画像の作成が手作業。** Pinterest 投稿案は生成できるが、画像そのものは人が作る。
+  Pinterest 導線（`distribution`）はまだ1本も実行していない。
 - **収益の計測経路が無い。** どの記事がいくら生んだかをパイプラインが知らないため、
   「稼いでいるジャンルの隣を掘る」判断ができない。PA-API 接続後、アソシエイトのレポートを
   取り込んで `queue.json` に実績を戻す仕組みが次の課題。
+- **エージェントの報告は検証が必要。** 実運用で製品名の不一致が2件見つかっている
+  （アリエール、ジョイ。いずれもブランドサイトの表記と流通名の差）。
+  ASIN を引く前に必ず製品名を公式ページと照合すること。

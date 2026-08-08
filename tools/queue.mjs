@@ -2,10 +2,14 @@
 // 記事パイプラインのキュー操作。
 //   node tools/queue.mjs status
 //   node tools/queue.mjs next
+//   node tools/queue.mjs stale        公開済みで仕様確認が古い記事を出す
 //   node tools/queue.mjs set <slug> <state> "備考"
 //   node tools/queue.mjs add <slug> "<タイトル>" "<カテゴリ>" <categorySlug>
 import { existsSync } from 'node:fs';
-import { loadQueue, saveQueue, specPath, productsPath, pinterestPath, articlePath, today } from './lib/pipeline.mjs';
+import {
+  loadQueue, saveQueue, loadPolicy, loadSpec, loadProducts,
+  specPath, productsPath, pinterestPath, articlePath, today, daysSince,
+} from './lib/pipeline.mjs';
 
 // 各状態で次に動くエージェントと、そこを抜ける条件。
 const FLOW = {
@@ -55,6 +59,32 @@ if (cmd === 'status') {
   }
   const it = rows[0];
   console.log(JSON.stringify({ ...it, agent: FLOW[it.state]?.agent, exitCriteria: FLOW[it.state]?.exit }, null, 2));
+} else if (cmd === 'stale') {
+  // 公開済み記事のうち、仕様・商品データの確認日が古いものを再確認対象として出す。
+  const policy = loadPolicy();
+  const limit = policy.sources.maxSpecAgeDays;
+  const rows = [];
+  for (const it of queue.items) {
+    if (it.type !== 'comparison') continue;
+    if (!['published', 'distribution', 'gate'].includes(it.state)) continue;
+    const spec = loadSpec(it.slug);
+    const products = loadProducts(it.slug);
+    const specAge = spec?.verifiedAt ? daysSince(spec.verifiedAt) : null;
+    const prodAge = products?.verifiedAt ? daysSince(products.verifiedAt) : null;
+    const worst = Math.max(specAge ?? -1, prodAge ?? -1);
+    if (worst >= limit) rows.push({ it, specAge, prodAge, worst });
+  }
+  rows.sort((a, b) => b.worst - a.worst);
+  if (!rows.length) {
+    console.log(`再確認が必要な記事はありません（しきい値 ${limit} 日）。`);
+    process.exit(0);
+  }
+  console.log(`再確認が必要な記事 ${rows.length} 件（しきい値 ${limit} 日）\n`);
+  for (const { it, specAge, prodAge } of rows) {
+    console.log(`${it.slug}`);
+    console.log(`  仕様データ: ${specAge === null ? 'なし' : specAge + '日前'} / 商品データ: ${prodAge === null ? 'なし' : prodAge + '日前'}`);
+    console.log(`  → node tools/queue.mjs set ${it.slug} spec_research "定期再確認（${specAge}日経過）"`);
+  }
 } else if (cmd === 'set') {
   const [, , , slug, state, note] = process.argv;
   if (!slug || !state) { console.error('用法: queue.mjs set <slug> <state> "備考"'); process.exit(2); }
@@ -84,6 +114,6 @@ if (cmd === 'status') {
   saveQueue(queue);
   console.log(`${slug} を idea として登録しました。`);
 } else {
-  console.error(`未知のコマンド: ${cmd}（status | next | set | add）`);
+  console.error(`未知のコマンド: ${cmd}（status | next | stale | set | add）`);
   process.exit(2);
 }

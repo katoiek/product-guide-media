@@ -13,13 +13,22 @@ name: パイプライン自動実行
 
 on:
   schedule:
-    - cron: '0 22 * * 1,4' # 毎週 月・木 07:00 JST（UTC 22:00 前日）
+    # 新規1本: 毎週火 07:00 JST。検証が追いつく上限として週1本に設定している。
+    - cron: '0 22 * * 1'
+    # 既存の再確認: 毎週金 07:00 JST。verifiedAt が古い記事を差し戻す。
+    - cron: '0 22 * * 4'
   workflow_dispatch:
     inputs:
       slug:
         description: '進めたい slug（空ならキューの最優先1件）'
         required: false
         default: ''
+      mode:
+        description: '実行モード'
+        required: false
+        default: 'auto'
+        type: choice
+        options: [auto, new, refresh]
 
 concurrency:
   group: erabi-pipeline
@@ -42,8 +51,22 @@ jobs:
           cache: npm
       - run: npm ci
 
+      # 金曜の定期実行と mode=refresh は既存記事の再確認、それ以外は新規1本。
+      - name: 実行モードを決める
+        id: mode
+        run: |
+          mode="${{ github.event.inputs.mode || 'auto' }}"
+          if [ "$mode" = "auto" ]; then
+            if [ "${{ github.event.schedule }}" = "0 22 * * 4" ]; then mode=refresh; else mode=new; fi
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "実行モード: $mode"
+
       - name: 開始前のキュー状態
-        run: node tools/queue.mjs status
+        run: |
+          node tools/queue.mjs status
+          echo '--- 再確認が必要な記事 ---'
+          node tools/queue.mjs stale
 
       - name: パイプラインを1周回す
         uses: anthropics/claude-code-action@v1
@@ -58,13 +81,21 @@ jobs:
             .claude/skills/erabi-pipeline/SKILL.md の手順に従って、
             えらびノートの記事パイプラインを1周回してください。
 
-            対象 slug: ${{ github.event.inputs.slug || '(指定なし。node tools/queue.mjs next の結果に従う)' }}
+            実行モード: ${{ steps.mode.outputs.mode }}
+            対象 slug: ${{ github.event.inputs.slug || '(指定なし)' }}
+
+            モードの意味:
+            - new     … `node tools/queue.mjs next` の最優先1件を進める。**1周で1本だけ**
+            - refresh … `node tools/queue.mjs stale` の結果から最も古い1件を
+                        spec_research へ差し戻し、公式ページを再確認して更新する。
+                        stale が空なら、何もせず「再確認対象なし」と報告して終了する
 
             守ること:
             - content/pipeline/policy.json を変更しない
             - 検証をスキップして公開しない
             - PA-API の認証情報が無い場合は推測でリンクを作らず blocked にして止まる
             - 同じ state で2回進まなければ止めて報告する
+            - **1回の実行で2本以上の新規記事を進めない**（検証が形骸化するため）
 
       - name: 終了後のキュー状態
         if: always()

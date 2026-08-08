@@ -24,16 +24,20 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
   }
 
   const items = Array.isArray(data.products) ? data.products : [];
-  const { minProducts, maxProducts, minDistinctBrands } = policy.comparison;
+  const related = Array.isArray(data.related) ? data.related : [];
+  const { minProducts, maxProducts, minDistinctBrands, minRelatedProducts, maxRelatedProducts } = policy.comparison;
   if (items.length < minProducts || items.length > maxProducts) {
     report.error('products/count', `製品数が ${items.length} 件。${minProducts}〜${maxProducts} 件である必要がある`);
+  }
+  // 関連消耗品（同時に買われやすい商品）。0件は許容するが、入れるなら件数制限を守る。
+  if (related.length && (related.length < minRelatedProducts || related.length > maxRelatedProducts)) {
+    report.error('products/related-count', `関連消耗品が ${related.length} 件。${minRelatedProducts}〜${maxRelatedProducts} 件である必要がある`);
   }
 
   const asins = new Set();
   const brands = new Set();
 
-  items.forEach((p, i) => {
-    const at = `#${i + 1} ${p.title || p.asin || '(名称不明)'}`;
+  const checkItem = (p, at, { countBrand }) => {
 
     for (const field of policy.amazon.requiredProductFields) {
       if (!p[field]) report.error('products/field', `${at}: 必須項目 ${field} が空`);
@@ -45,7 +49,8 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
     }
     if (asins.has(p.asin)) report.error('products/asin-dup', `${at}: ASIN ${p.asin} が重複`);
     asins.add(p.asin);
-    if (p.brand) brands.add(p.brand.trim());
+    // 関連消耗品はブランド多様性の要件に数えない（比較対象ではないため）。
+    if (countBrand && p.brand) brands.add(p.brand.trim());
 
     if (p.url) {
       const v = validateAmazonUrl(policy, p.url, p.asin);
@@ -69,7 +74,10 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
     if (p.verifiedAt && daysSince(p.verifiedAt) > policy.sources.maxSpecAgeDays) {
       report.warn('products/stale', `${at}: 確認日 ${p.verifiedAt} が ${policy.sources.maxSpecAgeDays} 日より古い`);
     }
-  });
+  };
+
+  items.forEach((p, i) => checkItem(p, `#${i + 1} ${p.title || p.asin || '(名称不明)'}`, { countBrand: true }));
+  related.forEach((p, i) => checkItem(p, `関連#${i + 1} ${p.title || p.asin || '(名称不明)'}`, { countBrand: false }));
 
   if (brands.size < minDistinctBrands) {
     report.error(
@@ -78,7 +86,7 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
     );
   }
 
-  report.note(`製品 ${items.length} 件 / ブランド ${brands.size} 社 / タグ ${tag ?? '未設定'}`);
+  report.note(`製品 ${items.length} 件 / 関連消耗品 ${related.length} 件 / ブランド ${brands.size} 社 / タグ ${tag ?? '未設定'}`);
   return report;
 }
 

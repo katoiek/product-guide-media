@@ -8,7 +8,8 @@
 // 必要な環境変数（リポジトリには絶対に書かない）:
 //   AMAZON_ACCESS_KEY / AMAZON_SECRET_KEY / AMAZON_ASSOCIATE_TAG
 import { createHmac, createHash } from 'node:crypto';
-import { loadPolicy, productsPath, writeJson, today } from './lib/pipeline.mjs';
+import { existsSync } from 'node:fs';
+import { loadPolicy, productsPath, writeJson, readJson, today } from './lib/pipeline.mjs';
 
 const REGION = 'us-west-2';
 const HOST = 'webservices.amazon.co.jp';
@@ -126,15 +127,18 @@ if (cmd === 'search') {
   const items = (data.SearchResult?.Items ?? []).map((i) => normalize(i, partnerTag));
   console.log(JSON.stringify(items, null, 2));
 } else if (cmd === 'items') {
-  const [slug, ...asins] = rest;
-  if (!slug || !asins.length) { console.error('用法: amazon-fetch.mjs items <slug> <ASIN> ...'); process.exit(2); }
+  const isRelated = rest.includes('--related');
+  const args = rest.filter((a) => a !== '--related');
+  const [slug, ...asins] = args;
+  if (!slug || !asins.length) { console.error('用法: amazon-fetch.mjs items <slug> [--related] <ASIN> ...'); process.exit(2); }
   const bad = asins.filter((a) => !/^[A-Z0-9]{10}$/.test(a));
   if (bad.length) { console.error(`ASIN形式が不正: ${bad.join(', ')}`); process.exit(2); }
 
   const policy = loadPolicy();
-  const { minProducts, maxProducts } = policy.comparison;
-  if (asins.length < minProducts || asins.length > maxProducts) {
-    console.error(`ASINが ${asins.length} 件。公開ポリシーは ${minProducts}〜${maxProducts} 件を要求します。`);
+  const { minProducts, maxProducts, minRelatedProducts, maxRelatedProducts } = policy.comparison;
+  const [lo, hi] = isRelated ? [minRelatedProducts, maxRelatedProducts] : [minProducts, maxProducts];
+  if (asins.length < lo || asins.length > hi) {
+    console.error(`ASINが ${asins.length} 件。公開ポリシーは${isRelated ? '関連消耗品' : '比較製品'}に ${lo}〜${hi} 件を要求します。`);
     process.exit(2);
   }
 
@@ -145,16 +149,20 @@ if (cmd === 'search') {
   const missing = asins.filter((a) => !items.some((i) => i.asin === a));
   if (missing.length) console.error(`取得できなかったASIN: ${missing.join(', ')}`);
 
+  // --related は既存ファイルの products を残したまま related だけを差し替える。
+  const existing = (isRelated && existsSync(productsPath(slug))) ? readJson(productsPath(slug)) : {};
   writeJson(productsPath(slug), {
+    ...existing,
     slug,
     source: 'paapi5',
     associateTag: partnerTag,
     verifiedAt: today(),
-    products: items,
+    products: isRelated ? (existing.products ?? []) : items,
+    ...(isRelated ? { related: items } : existing.related ? { related: existing.related } : {}),
   });
-  console.log(`${productsPath(slug)} に ${items.length} 件を書き出しました。`);
+  console.log(`${productsPath(slug)} の ${isRelated ? 'related' : 'products'} に ${items.length} 件を書き出しました。`);
   console.log(`次: node tools/validate-products.mjs ${slug}`);
 } else {
-  console.error('用法: amazon-fetch.mjs search "キーワード" | items <slug> <ASIN> ...');
+  console.error('用法: amazon-fetch.mjs search "キーワード" | items <slug> [--related] <ASIN> ...');
   process.exit(2);
 }

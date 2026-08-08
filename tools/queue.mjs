@@ -5,7 +5,7 @@
 //   node tools/queue.mjs set <slug> <state> "備考"
 //   node tools/queue.mjs add <slug> "<タイトル>" "<カテゴリ>" <categorySlug>
 import { existsSync } from 'node:fs';
-import { loadQueue, saveQueue, specPath, productsPath, articlePath, today } from './lib/pipeline.mjs';
+import { loadQueue, saveQueue, specPath, productsPath, pinterestPath, articlePath, today } from './lib/pipeline.mjs';
 
 // 各状態で次に動くエージェントと、そこを抜ける条件。
 const FLOW = {
@@ -13,12 +13,13 @@ const FLOW = {
   spec_research:  { agent: 'erabi-spec-researcher', exit: 'メーカー公式ページのみを根拠に全製品の仕様JSONが揃ったら assets_pending へ' },
   assets_pending: { agent: 'erabi-asset-broker',    exit: '全製品のASIN・直接リンク・許諾済み画像が揃い validate-products が通ったら drafting へ' },
   drafting:       { agent: 'erabi-article-writer',  exit: '記事(.astro)とトップページ・sitemap導線を書いたら gate へ' },
-  gate:           { agent: 'erabi-publish-gate',    exit: 'validate + build が全て通ったら published へ（不合格なら blocked）' },
+  gate:           { agent: 'erabi-publish-gate',    exit: 'validate + build が全て通り push できたら distribution へ（不合格なら差し戻し）' },
+  distribution:   { agent: 'erabi-pinterest-scout',  exit: 'Pinterest投稿案10本を生成したら published へ' },
   published:      { agent: '—',                     exit: '公開済み。仕様変更の再確認のみ' },
   blocked:        { agent: '（人の判断）',           exit: 'blockedReason を解消して該当状態へ差し戻す' },
 };
 
-const ORDER = ['gate', 'drafting', 'assets_pending', 'spec_research', 'idea', 'blocked', 'published'];
+const ORDER = ['gate', 'distribution', 'drafting', 'assets_pending', 'spec_research', 'idea', 'blocked', 'published'];
 
 const artifacts = (item) => {
   const s = item.slug;
@@ -26,6 +27,7 @@ const artifacts = (item) => {
     existsSync(specPath(s)) ? 'spec' : null,
     existsSync(productsPath(s)) ? 'products' : null,
     existsSync(articlePath(s)) ? 'article' : null,
+    existsSync(pinterestPath(s)) ? 'pins' : null,
   ].filter(Boolean).join(',') || '—';
 };
 

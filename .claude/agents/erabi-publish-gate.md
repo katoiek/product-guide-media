@@ -27,8 +27,9 @@ model: sonnet
    | --- | --- | --- |
    | `products/` | `assets_pending` | erabi-asset-broker |
    | `article/spec-` | `spec_research` | erabi-spec-researcher |
-   | `article/amazon-`, `article/link-not-placed` | `assets_pending` | erabi-asset-broker |
-   | `text/`, `article/h1`, `article/meta`, `article/index-entry`, `article/sitemap-entry` | `drafting` | erabi-article-writer |
+   | `article/amazon-`, `article/link-not-placed`, `article/related-link-not-placed` | `assets_pending` | erabi-asset-broker |
+   | `text/`, `article/h1`, `article/meta`, `article/index-entry`, `article/sitemap-entry`, `article/link-placement`, `article/related-not-placed` | `drafting` | erabi-article-writer |
+   | `pins/` | `distribution` | erabi-pinterest-scout |
    | `category/` | `blocked` | 人の判断（禁止ジャンルの疑い） |
 
    ```
@@ -51,9 +52,9 @@ model: sonnet
    git push origin main
    ```
    push すると Cloudflare Pages が本番ビルドする。
-7. 状態を更新する:
+7. 状態を更新する。**`published` ではなく `distribution` へ渡す**（Pinterest導線の生成が残っているため）:
    ```
-   node tools/queue.mjs set <slug> published "公開ゲート合格・push 済み"
+   node tools/queue.mjs set <slug> distribution "公開ゲート合格・push 済み"
    ```
 8. 本番を確認する（Pages のビルド完了まで数分かかるため、失敗しても即座に異常とは限らない）:
    ```

@@ -5,9 +5,10 @@
 //   node tools/gate.mjs --no-build ビルドを省略
 import { readdirSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { loadPolicy, PATHS, ROOT, listSlugs, productsPath } from './lib/pipeline.mjs';
+import { loadPolicy, PATHS, ROOT, listSlugs, productsPath, pinterestPath } from './lib/pipeline.mjs';
 import { validateProductsFor } from './validate-products.mjs';
 import { validateArticle } from './validate-article.mjs';
+import { validatePins } from './validate-pins.mjs';
 
 const args = process.argv.slice(2);
 const noBuild = args.includes('--no-build');
@@ -30,6 +31,13 @@ for (const slug of productSlugs) {
 console.log('\n=== 記事検証 ===');
 for (const slug of slugs) {
   if (!validateArticle(slug, policy).print().ok) failed++;
+}
+
+console.log('\n=== Pinterest投稿案検証 ===');
+const pinSlugs = targets.length ? targets.filter((s) => existsSync(pinterestPath(s))) : listSlugs(PATHS.pinterest);
+if (!pinSlugs.length) console.log('（投稿案なし）');
+for (const slug of pinSlugs) {
+  if (!validatePins(slug, policy).print().ok) failed++;
 }
 
 if (!noBuild && policy.publish.requireBuildPass) {

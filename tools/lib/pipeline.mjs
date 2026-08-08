@@ -10,6 +10,7 @@ export const PATHS = {
   queue: join(ROOT, 'content', 'pipeline', 'queue.json'),
   specs: join(ROOT, 'content', 'pipeline', 'specs'),
   products: join(ROOT, 'content', 'pipeline', 'products'),
+  pinterest: join(ROOT, 'content', 'pipeline', 'pinterest'),
   articles: join(ROOT, 'src', 'pages', 'articles'),
   index: join(ROOT, 'src', 'pages', 'index.astro'),
   sitemap: join(ROOT, 'public', 'sitemap.xml'),
@@ -25,6 +26,7 @@ export const saveQueue = (queue) => writeJson(PATHS.queue, queue);
 
 export const specPath = (slug) => join(PATHS.specs, `${slug}.json`);
 export const productsPath = (slug) => join(PATHS.products, `${slug}.json`);
+export const pinterestPath = (slug) => join(PATHS.pinterest, `${slug}.json`);
 export const articlePath = (slug) => join(PATHS.articles, `${slug}.astro`);
 
 export const loadSpec = (slug) =>

@@ -6,9 +6,19 @@
     "assets_pending",
     "drafting",
     "gate",
+    "distribution",
     "published",
     "blocked"
   ],
+  "associateProgram": {
+    "status": "unknown",
+    "appliedOn": null,
+    "qualifyingSalesRequired": 3,
+    "qualificationWindowDays": 180,
+    "deadline": null,
+    "paapiAccess": false,
+    "note": "申請から180日以内に適格販売3件を満たさないとアカウントが取り消される。PA-API の利用資格も同条件に連動するため、購入導線を持つ比較記事を数本公開してから申請・計測する。appliedOn を埋めたら deadline を再計算すること。"
+  },
   "types": {
     "comparison": "異なる5〜7ブランドの製品比較記事。アフィリエイト導線を持つ。仕様データ・商品アセット・公開ゲートの全条件が必要。",
     "guide": "具体商品のアフィリエイト導線を持たない一般ガイド。表現・ジャンル・サイト内導線のみ検証する。"
@@ -20,7 +30,7 @@
       "category": "ペット用品",
       "categorySlug": "pet",
       "type": "comparison",
-      "state": "assets_pending",
+      "state": "spec_research",
       "specFile": "content/pipeline/specs/cat-litter-clumping-comparison.json",
       "productsFile": "content/pipeline/products/cat-litter-clumping-comparison.json",
       "articleFile": "src/pages/articles/cat-litter-clumping-comparison.astro",
@@ -29,9 +39,24 @@
           "date": "2026-08-08",
           "state": "assets_pending",
           "note": "既存記事をパイプライン管理下に取り込み"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "spec_research",
+          "note": "公開ゲートが article/spec-source で不合格。5製品のメーカー公式ページURLと関連消耗品を再取得する"
         }
       ],
-      "note": "5製品のASIN・直接商品リンク・許諾済み画像が未取得。記事は公開済みだが購入導線と製品画像は未掲載。"
+      "note": "5製品のASIN・直接商品リンク・許諾済み画像が未取得。記事は公開済みだが購入導線と製品画像は未掲載。",
+      "relatedCandidates": [
+        "猫用トイレ消臭シート",
+        "猫トイレ用スコップ",
+        "ペット用消臭スプレー"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "1〜2か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "原料タイプ・香りの公式表示・処理方法（水洗トイレ可否）"
+      }
     },
     {
       "slug": "dishwasher-detergent-comparison",
@@ -55,7 +80,16 @@
           "note": "引き継ぎ書の調査キューから移行"
         }
       ],
-      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。"
+      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
+      "relatedCandidates": [
+        "食洗機用庫内クリーナー",
+        "食洗機用乾燥仕上げ剤"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "1〜3か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "粉末／ジェル／タブレットの形状差、庫内での溶け残りに関する注意表示"
+      }
     },
     {
       "slug": "laundry-liquid-detergent-comparison",
@@ -79,7 +113,17 @@
           "note": "引き継ぎ書の調査キューから移行"
         }
       ],
-      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。"
+      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
+      "relatedCandidates": [
+        "柔軟剤",
+        "洗濯槽クリーナー",
+        "衣類用漂白剤"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "1〜2か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "すすぎ回数の指定、蛍光増白剤の有無、ドラム式対応の表示"
+      }
     },
     {
       "slug": "kitchen-sponge-comparison",
@@ -103,7 +147,16 @@
           "note": "引き継ぎ書の調査キューから移行"
         }
       ],
-      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。"
+      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
+      "relatedCandidates": [
+        "食器用洗剤",
+        "スポンジホルダー"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "2週間〜1か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "素材（ウレタン／不織布／セルロース）、抗菌加工の表示、フッ素加工調理器具への使用可否"
+      }
     },
     {
       "slug": "bousai-supplies-checklist",

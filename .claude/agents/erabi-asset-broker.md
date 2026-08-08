@@ -36,6 +36,12 @@ model: sonnet
    ```
    node tools/amazon-fetch.mjs items <slug> <ASIN1> <ASIN2> ... <ASIN5>
    ```
+6. 仕様データの `relatedProducts`（同時に買われやすい消耗品）にも同じ手順で ASIN を割り当て、
+   `--related` を付けて追記する:
+   ```
+   node tools/amazon-fetch.mjs items <slug> --related <ASIN> <ASIN>
+   ```
+   関連消耗品は比較対象ではないので、ブランド多様性の要件には数えない。2〜4件にする。
 
 ### 経路B: PA-API が使えない場合
 

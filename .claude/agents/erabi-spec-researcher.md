@@ -45,17 +45,24 @@ model: sonnet
       "unfitConditions": "候補から外す条件"
     }
   ],
+  "relatedProducts": [
+    { "name": "同時に買われやすい関連消耗品", "why": "なぜこの記事の読者が一緒に必要とするか" }
+  ],
   "cautions": ["購入前に確認したい注意事項"]
 }
 ```
 
 6. 製品は**異なるメーカー5〜7社**。同一シリーズの変種を混ぜない。
-7. `node tools/validate-article.mjs <slug>` はまだ記事が無いので走らない。代わりに JSON が壊れていないかを `node -e "JSON.parse(require('fs').readFileSync('content/pipeline/specs/<slug>.json','utf8'))"` で確認する。
-8. 全製品に `officialUrl` が入り、`specs` が同じキー構成で埋まったら:
+7. `relatedProducts` を**2〜4件**入れる。キューの `relatedCandidates` を出発点にし、記事の読者が同じ買い物のついでに必要とするものだけにする。無関係な高単価品を混ぜない。
+8. JSON が壊れていないかを確認する（記事はまだ無いので `validate-article.mjs` は走らせない）:
    ```
-   node tools/queue.mjs set <slug> assets_pending "公式仕様 N 製品を確認"
+   node --input-type=module -e "import {readFileSync} from 'node:fs'; JSON.parse(readFileSync('content/pipeline/specs/<slug>.json','utf8')); console.log('ok')"
    ```
-9. 5社ぶんの公式仕様が揃わなければ状態を進めない。`node tools/queue.mjs set <slug> blocked "<理由>"` にして、何社まで取れたかを報告する。
+9. 全製品に `officialUrl` が入り、`specs` が同じキー構成で埋まり、`relatedProducts` が2件以上あれば:
+   ```
+   node tools/queue.mjs set <slug> assets_pending "公式仕様 N 製品 / 関連消耗品 M 件を確認"
+   ```
+10. 5社ぶんの公式仕様が揃わなければ状態を進めない。`node tools/queue.mjs set <slug> blocked "<理由>"` にして、何社まで取れたかを報告する。
 
 ## 報告
 

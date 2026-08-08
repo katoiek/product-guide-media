@@ -8,7 +8,26 @@
     "minProducts": 5,
     "maxProducts": 7,
     "minDistinctBrands": 5,
-    "rejectSameSeriesVariants": true
+    "rejectSameSeriesVariants": true,
+    "minRelatedProducts": 2,
+    "maxRelatedProducts": 4
+  },
+  "topicSelection": {
+    "note": "報酬率ではなく買い替え頻度で選ぶ。率の高いカテゴリは検索需要が薄いか比較記事が飽和している。",
+    "required": [
+      { "id": "consumable", "label": "消耗品または定期的に買い替えが発生する日用品であること" },
+      { "id": "year-round", "label": "季節による需要変動が小さいこと（セール期依存の記事を作らない）" },
+      { "id": "split-opinion", "label": "仕様や対応条件で評価が割れやすく、比較する意味があること" },
+      { "id": "price-band", "label": "実売価格帯がおおむね1,500〜8,000円であること" },
+      { "id": "hidden-difference", "label": "カタログ上の差が購入判断に直結し、選び分けの余地があること" },
+      { "id": "repeat-purchase", "label": "同じ購入者が半年以内に再購入する見込みがあること" }
+    ],
+    "rejectReasons": [
+      "報酬率の高さだけを理由に選んでいる",
+      "プライムデー・ブラックフライデーなど特定セール期に依存する",
+      "単一ブランドまたは同一シリーズの変種比較になる",
+      "blockedCategories に該当する"
+    ]
   },
   "blockedCategories": [
     { "id": "finance", "label": "クレジットカード・ローン・保険・投資", "patterns": ["クレジットカード", "カードローン", "キャッシング", "生命保険", "医療保険", "自動車保険", "投資信託", "NISA", "iDeCo", "FX", "暗号資産"] },
@@ -42,7 +61,26 @@
       { "id": "gp-product", "pattern": "amazon\\.co\\.jp/gp/product", "reason": "/dp/<ASIN> 形式に正規化していない" }
     ],
     "allowedImageLicenses": ["amazon_program_content"],
-    "requiredProductFields": ["asin", "title", "brand", "url", "imageUrl", "imageLicense", "verifiedAt"]
+    "requiredProductFields": ["asin", "title", "brand", "url", "imageUrl", "imageLicense", "verifiedAt"],
+    "linkPlacement": {
+      "forbidBeforeComparisonTable": true,
+      "reason": "比較を読み終える前に導線を置かない。冒頭リンクは購入まで進みにくく、記事の信頼も落ちる。"
+    },
+    "associateProgram": {
+      "qualificationWindowDays": 180,
+      "qualifyingSalesRequired": 3,
+      "note": "アソシエイト申請から180日以内に適格販売3件を満たさないとアカウントが取り消される。PA-API の利用資格も同じ条件に連動するため、記事を数本公開してから申請する。"
+    }
+  },
+  "distribution": {
+    "pinterest": {
+      "pinsPerArticle": 10,
+      "forbidProductImages": true,
+      "imageSourceNote": "Amazonの商品画像・メーカー画像をピンに使わない。自作の比較表画像だけを使う。",
+      "titleMaxChars": 20,
+      "descriptionMaxChars": 200,
+      "forbidHypePhrases": true
+    }
   },
   "sources": {
     "requireOfficialSpecUrl": true,

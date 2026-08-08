@@ -60,6 +60,17 @@ export function validateArticle(slug, policy = loadPolicy(), queue = loadQueue()
   if (type === 'guide' && urls.length) {
     report.error('article/guide-affiliate', `一般ガイドに商品アフィリエイト導線がある（${urls.length}件）。比較記事として登録し直すか導線を外す`);
   }
+
+  // 冒頭にリンクを置かない。比較表より前に導線があると購入まで進みにくい。
+  if (type === 'comparison' && urls.length && policy.amazon.linkPlacement?.forbidBeforeComparisonTable) {
+    const firstTable = src.indexOf('<table');
+    const firstLink = Math.min(...urls.map((u) => src.indexOf(u)).filter((i) => i >= 0));
+    if (firstTable < 0) {
+      report.error('article/no-table', '比較表(<table>)が無い');
+    } else if (firstLink < firstTable) {
+      report.error('article/link-placement', `比較表より前にAmazonリンクがある。${policy.amazon.linkPlacement.reason}`);
+    }
+  }
   const products = loadProducts(slug);
   const productByUrl = new Map((products?.products ?? []).map((p) => [p.url, p]));
   for (const url of urls) {
@@ -103,6 +114,20 @@ export function validateArticle(slug, policy = loadPolicy(), queue = loadQueue()
     if (spec.verifiedAt && daysSince(spec.verifiedAt) > policy.sources.maxSpecAgeDays) {
       report.warn('article/spec-stale', `仕様確認日 ${spec.verifiedAt} が ${policy.sources.maxSpecAgeDays} 日より古い`);
     }
+
+    // 同時に買われやすい関連消耗品。24時間の成果条件を活かすため、比較対象の後に置く。
+    const rel = spec.relatedProducts ?? [];
+    if (rel.length < policy.comparison.minRelatedProducts) {
+      report.warn(
+        'article/related-missing',
+        `関連消耗品が ${rel.length} 件。仕様データに relatedProducts を ${policy.comparison.minRelatedProducts} 件以上入れると、ついで買いの導線を作れる`
+      );
+    }
+    for (const r of rel) {
+      if (r.name && !src.includes(r.name)) {
+        report.error('article/related-not-placed', `関連消耗品「${r.name}」が本文に出てこない`);
+      }
+    }
   }
 
   // --- 商品アセットの掲載状況（比較記事のみ） ---
@@ -116,6 +141,9 @@ export function validateArticle(slug, policy = loadPolicy(), queue = loadQueue()
       if (p.imageUrl && !src.includes(p.imageUrl)) {
         report.warn('article/image-not-placed', `${p.title}: 許諾済み商品画像が本文に未掲載`);
       }
+    }
+    for (const p of products.related ?? []) {
+      if (!src.includes(p.url)) report.error('article/related-link-not-placed', `関連消耗品 ${p.title}: 直接商品リンクが本文に未掲載`);
     }
   } else {
     report.warn('article/products-invalid', '商品データがゲート不合格のため、購入導線は掲載できない');

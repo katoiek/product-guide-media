@@ -10,19 +10,30 @@ description: えらびノートのアフィリエイト記事パイプライン�
 ## 状態機械
 
 ```
-idea ──▶ spec_research ──▶ assets_pending ──▶ drafting ──▶ gate ──▶ published
-  │            │                  │               │           │
-  └────────────┴──────────────────┴───────────────┴───────────┴──▶ blocked
+idea ─▶ spec_research ─▶ assets_pending ─▶ drafting ─▶ gate ─▶ distribution ─▶ published
+  │           │                │              │          │           │
+  └───────────┴────────────────┴──────────────┴──────────┴───────────┴──▶ blocked
 ```
 
 | state | 担当エージェント | 抜ける条件 |
 | --- | --- | --- |
-| `idea` | `erabi-topic-scout` | 異なる5〜7ブランドで比較単位が成立し、禁止ジャンルでない |
-| `spec_research` | `erabi-spec-researcher` | 全製品の公式仕様と `officialUrl` が揃った |
-| `assets_pending` | `erabi-asset-broker` | `validate-products.mjs` が PASS |
+| `idea` | `erabi-topic-scout` | 消耗品・通年需要・買い替え頻度の条件を満たし、異なる5〜7ブランドで比較単位が成立する |
+| `spec_research` | `erabi-spec-researcher` | 全製品の公式仕様と `officialUrl`、関連消耗品2件以上が揃った |
+| `assets_pending` | `erabi-asset-broker` | `validate-products.mjs` が PASS（比較製品 + 関連消耗品） |
 | `drafting` | `erabi-article-writer` | 記事 + index.astro + sitemap.xml を書き `validate-article.mjs` が PASS |
 | `gate` | `erabi-publish-gate` | `gate.mjs` 全PASS → commit → push |
+| `distribution` | `erabi-pinterest-scout` | Pinterest投稿案10本を生成し `validate-pins.mjs` が PASS |
 | `blocked` | — | 人の判断が必要。理由を報告して止まる |
+
+## この媒体のゴール
+
+**アフィリエイトで安定した収益を自動的に得ること。** 「安定」の実体は次の3つで、パイプラインの各判断はここに紐づきます。
+
+1. **1本の記事が繰り返し成約する** — だから消耗品・買い替え頻度でジャンルを選ぶ（`policy.topicSelection`）
+2. **季節や順位変動で沈まない** — だから通年需要のテーマを選び、検索とPinterestの2経路を作る
+3. **アカウントが止まらない** — だからレビュー転載・未使用体験談・画像の無断利用を機械的に落とす（`policy.text` / `policy.amazon`）
+
+短期の記事数より、この3つを崩さないことを優先してください。
 
 ## 手順
 

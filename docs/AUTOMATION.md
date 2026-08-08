@@ -5,24 +5,51 @@
 比較記事の企画から公開までを、5体の専任エージェントと機械的な公開ゲートで回す仕組みです。
 **認証情報、APIキー、トークン、パスワードはこのリポジトリに保存しません。**
 
+## 0. ゴール
+
+**アフィリエイトで安定した収益を自動的に得ること。** 「安定」の実体は3つで、以下の設計はすべてこれに紐づいています。
+
+1. **1本の記事が繰り返し成約する** → 消耗品・買い替え頻度でジャンルを選ぶ（`policy.topicSelection`）
+2. **季節や検索順位の変動で沈まない** → 通年需要のテーマに限り、検索とPinterestの2経路を作る
+3. **アカウントが止まらない** → レビュー転載・未使用体験談・画像の無断利用を機械的に落とす
+
+記事数を増やすことは目的ではありません。3を破ると1と2がまとめて消えます。
+
 ## 1. 全体像
 
 ```
-idea ──▶ spec_research ──▶ assets_pending ──▶ drafting ──▶ gate ──▶ published
-  │            │                  │               │           │
-  └────────────┴──────────────────┴───────────────┴───────────┴──▶ blocked
+idea ─▶ spec_research ─▶ assets_pending ─▶ drafting ─▶ gate ─▶ distribution ─▶ published
+  │           │                │              │          │           │
+  └───────────┴────────────────┴──────────────┴──────────┴───────────┴──▶ blocked
 ```
 
 | state | 担当エージェント | やること | 抜ける条件 |
 | --- | --- | --- | --- |
-| `idea` | `erabi-topic-scout` | テーマ発掘、比較単位の成立判定 | 異なる5〜7ブランドで成立し、禁止ジャンルでない |
-| `spec_research` | `erabi-spec-researcher` | メーカー公式ページのみで仕様収集 | 全製品の仕様と `officialUrl` が揃う |
+| `idea` | `erabi-topic-scout` | テーマ発掘、比較単位の成立判定 | 消耗品・通年需要・買い替え頻度の条件を満たし、異なる5〜7ブランドで成立 |
+| `spec_research` | `erabi-spec-researcher` | メーカー公式ページのみで仕様収集 | 全製品の仕様と `officialUrl`、関連消耗品2件以上 |
 | `assets_pending` | `erabi-asset-broker` | ASIN・直接リンク・許諾済み画像の取得 | `validate-products.mjs` が PASS |
 | `drafting` | `erabi-article-writer` | 記事(.astro) + トップ導線 + sitemap | `validate-article.mjs` が PASS |
 | `gate` | `erabi-publish-gate` | 全検証 + ビルド + commit + push | `gate.mjs` 全 PASS |
+| `distribution` | `erabi-pinterest-scout` | Pinterest投稿案10本の生成 | `validate-pins.mjs` が PASS |
 | `blocked` | — | 人の判断待ち | 理由を解消して差し戻す |
 
 エージェント定義は `.claude/agents/erabi-*.md`、オーケストレータは `.claude/skills/erabi-pipeline/SKILL.md` にあります。
+
+## 1-2. ジャンル選定の原則
+
+**報酬率で選びません。買い替え頻度で選びます。** 率の高いカテゴリは検索需要が薄いか比較記事が飽和しています。率が低くても同じ人が半年ごとに買い続けるジャンルのほうが、記事1本あたりの累積収益が大きくなります。
+
+`policy.topicSelection.required` が機械可読の条件です。
+
+| 条件 | 理由 |
+| --- | --- |
+| 消耗品・定期的に買い替える日用品 | 1本の記事が繰り返し成約する |
+| 季節変動が小さい | セール期だけ跳ねて閑散期に沈む構成を避ける |
+| 仕様や対応条件で評価が割れやすい | 全製品が同仕様なら比較記事に価値がない |
+| 実売1,500〜8,000円 | 単価が低すぎると件数が要り、高すぎると買い替えが起きない |
+| 半年以内に再購入される | 過去記事が資産として積み上がる |
+
+却下理由は `policy.topicSelection.rejectReasons` に定義しています。
 
 ## 2. 動かし方
 
@@ -63,7 +90,8 @@ idea ──▶ spec_research ──▶ assets_pending ──▶ drafting ──�
 | `npm run queue add <slug> "<タイトル>" "<カテゴリ>" <categorySlug>` | 新規テーマ登録 |
 | `npm run validate:products [slug]` | 商品アセットの検証 |
 | `npm run validate:articles [slug]` | 記事の検証 |
-| `npm run gate [slug]` | 商品 + 記事 + ビルドをまとめて検証 |
+| `npm run validate:pins [slug]` | Pinterest投稿案の検証 |
+| `npm run gate [slug]` | 商品 + 記事 + 投稿案 + ビルドをまとめて検証 |
 | `npm run gate:fast` | ビルドを省略して検証だけ |
 | `node tools/amazon-fetch.mjs search "<語>" --brand <B>` | PA-API で ASIN 候補を探す |
 | `node tools/amazon-fetch.mjs items <slug> <ASIN>...` | PA-API で商品データを書き出す |
@@ -76,7 +104,8 @@ idea ──▶ spec_research ──▶ assets_pending ──▶ drafting ──�
 | `content/pipeline/policy.json` | 機械可読の公開ポリシー。**唯一の正** |
 | `content/pipeline/queue.json` | 企画キューと状態機械 |
 | `content/pipeline/specs/<slug>.json` | メーカー公式仕様（記事の根拠） |
-| `content/pipeline/products/<slug>.json` | ASIN・直接リンク・画像（購入導線） |
+| `content/pipeline/products/<slug>.json` | ASIN・直接リンク・画像（`products` = 比較対象、`related` = 関連消耗品） |
+| `content/pipeline/pinterest/<slug>.json` | Pinterest投稿案（人が画像を作るための指示書） |
 | `src/pages/articles/<slug>.astro` | 公開記事 |
 | `tools/` | 検証・取得スクリプト（Node標準ライブラリのみ、依存追加なし） |
 
@@ -93,10 +122,14 @@ idea ──▶ spec_research ──▶ assets_pending ──▶ drafting ──�
 - 未実使用製品の使用感・実測値・レビュー要約
 - `amazon.co.jp/s?k=` の検索結果リンク、`tag=` の無いリンク、`/gp/product` 形式
 - URL の ASIN と商品データの ASIN が不一致
+- **比較表より前にAmazonリンクがある**（冒頭リンクは購入まで進みにくく、記事の信頼も落ちる）
 - 画像が `m.media-amazon.com` などのAmazonプログラム配信元でない（メーカーサイト画像の転載）
 - 画像許諾種別が `amazon_program_content` 以外
 - 製品にメーカー公式ページURL(`officialUrl`)が無い
 - 比較表に「確認日」が無い
+- 仕様データの関連消耗品が本文に出てこない／`related` のリンクが未掲載
+- 一般ガイド(`type: guide`)に商品アフィリエイト導線がある
+- Pinterest投稿案に煽り表現、Amazon直リンク、Amazon商品画像が含まれる
 - トップページ(`index.astro`)または `sitemap.xml` に導線が無い
 - `astro build` が失敗する
 
@@ -116,8 +149,13 @@ AMAZON_ASSOCIATE_TAG
 `SearchItems` / `GetItems` を呼びます。直接商品リンクは API の返す URL ではなく、
 検証済み ASIN とタグから `https://www.amazon.co.jp/dp/<ASIN>?tag=<tag>` を自前で組み立てます。
 
-PA-API の利用には Amazonアソシエイト側の資格条件（一定期間内の適格販売実績など）があります。
-条件を満たしていない間は経路Bを使います。
+### アソシエイト審査の期限（PA-API 解禁の前提）
+
+**申請から180日以内に適格販売3件**を満たさないとアカウントが取り消されます。PA-API の利用資格もこの条件に連動します。
+
+したがって順番が重要です。**先に申請せず、購入導線を持つ比較記事を数本公開してから申請します。** 記事が0本の状態で申請すると、180日のカウントだけが進みます。
+
+状態は `content/pipeline/queue.json` の `associateProgram` に記録します。`appliedOn` を埋めたら `deadline`（申請日 + 180日）を再計算してください。現在は `status: "unknown"` / `paapiAccess: false` です。
 
 ### 経路B: SiteStripe — 暫定
 
@@ -146,10 +184,27 @@ node tools/validate-products.mjs <slug>
 - 禁止ジャンルの疑いが出た
 - `git push` が失敗した、`git status` に想定外のファイルがある
 
+## 7-2. Pinterest 導線
+
+検索順位が立ち上がるまでの空白を埋め、順位変動のリスクを分散するための第2経路です。`erabi-pinterest-scout` が記事1本につき投稿案を10本生成します。
+
+- **ピンに Amazon の商品画像・メーカーの製品写真を使いません。** 自作の比較表画像だけを使います。Amazonプログラムの画像許諾はピン画像への転用を含みません
+- ピンの遷移先は記事URLのみ。Amazon直リンクをピンに貼りません
+- 煽り表現（「絶対」「必ず」「最強」「これだけで」「知らないと損」）は `validate-pins.mjs` が機械的に落とします
+- 10本は同じ記事の**別の切り口**にします（比較軸ごと、先に外す条件、読者状況、意見が割れる仕様）
+
+**比較表画像そのものの作成は自動化していません。** JSON の `imageText` / `palette` / `layout` は、人が Canva 等で作るための指示書です。ここが現在唯一の手作業です。
+
 ## 8. 既知のギャップ
 
-- **PA-API 未接続。** 認証情報が未設定のため、全記事で購入導線と製品画像が未掲載。
+- **PA-API 未接続。** 認証情報が未設定のため、全記事で購入導線と製品画像が未掲載。アソシエイト審査の状態も `unknown`。
 - **猫砂記事の `officialUrl` が未記録。** 記事作成時に根拠URLが保存されておらず、
   `content/pipeline/specs/cat-litter-clumping-comparison.json` の `officialUrl` が `null`。
   現在この記事は公開ゲートで落ちる。`erabi-spec-researcher` での再取得が必要。
+- **既存記事が新しい構成に未対応。** 「意見が割れやすい仕様」節と「一緒に見ておきたい消耗品」節が無い。
+  仕様データに `relatedProducts` を入れたうえで `erabi-article-writer` による書き直しが必要。
 - **食洗機用洗剤・洗濯用液体洗剤・キッチンスポンジ**は `spec_research` のまま未着手。
+- **比較表画像の作成が手作業。** Pinterest 投稿案は生成できるが、画像そのものは人が作る。
+- **収益の計測経路が無い。** どの記事がいくら生んだかをパイプラインが知らないため、
+  「稼いでいるジャンルの隣を掘る」判断ができない。PA-API 接続後、アソシエイトのレポートを
+  取り込んで `queue.json` に実績を戻す仕組みが次の課題。

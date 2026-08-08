@@ -79,7 +79,7 @@
       "category": "キッチン",
       "categorySlug": "kitchen",
       "type": "comparison",
-      "state": "assets_pending",
+      "state": "drafting",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -98,6 +98,11 @@
           "date": "2026-08-08",
           "state": "assets_pending",
           "note": "公式仕様6製品(花王/ライオン/P&G/レキットベンキーザー/シャボン玉石けん/サラヤ)・関連消耗品2件を確認。ジョンソンは家庭用食洗機専用洗剤が確認できず除外"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "公式仕様6社・関連2件を検証済み。PA-API未接続のため購入導線は後付け"
         }
       ],
       "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
@@ -117,7 +122,7 @@
       "category": "清掃",
       "categorySlug": "cleaning",
       "type": "comparison",
-      "state": "assets_pending",
+      "state": "drafting",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -136,6 +141,11 @@
           "date": "2026-08-08",
           "state": "assets_pending",
           "note": "公式仕様6製品(花王/ライオン/P&G/NSファーファ/ミヨシ石鹸/シャボン玉石けん)・関連消耗品3件を確認"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "公式仕様6社・関連3件を検証済み。PA-API未接続のため購入導線は後付け"
         }
       ],
       "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
@@ -156,7 +166,7 @@
       "category": "キッチン",
       "categorySlug": "kitchen",
       "type": "comparison",
-      "state": "spec_research",
+      "state": "assets_pending",
       "brandCandidates": [
         "3M スコッチブライト",
         "レック",
@@ -170,6 +180,11 @@
           "date": "2026-08-08",
           "state": "spec_research",
           "note": "引き継ぎ書の調査キューから移行"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "assets_pending",
+          "note": "公式仕様6製品・関連消耗品2件を確認"
         }
       ],
       "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",

@@ -61,7 +61,9 @@
       { "id": "gp-product", "pattern": "amazon\\.co\\.jp/gp/product", "reason": "/dp/<ASIN> 形式に正規化していない" }
     ],
     "allowedImageLicenses": ["amazon_program_content"],
-    "requiredProductFields": ["asin", "title", "brand", "url", "imageUrl", "imageLicense", "verifiedAt"],
+    "requiredProductFields": ["asin", "title", "brand", "url", "verifiedAt"],
+    "optionalProductFields": ["imageUrl", "imageLicense"],
+    "imageNote": "画像は任意。無い製品は購入リンクのみを掲載する。ただし掲載する場合はAmazonプログラム配信元に限る。",
     "linkPlacement": {
       "forbidBeforeComparisonTable": true,
       "reason": "比較を読み終える前に導線を置かない。冒頭リンクは購入まで進みにくく、記事の信頼も落ちる。"

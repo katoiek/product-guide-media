@@ -30,7 +30,7 @@
       "category": "ペット用品",
       "categorySlug": "pet",
       "type": "comparison",
-      "state": "gate",
+      "state": "spec_research",
       "specFile": "content/pipeline/specs/cat-litter-clumping-comparison.json",
       "productsFile": "content/pipeline/products/cat-litter-clumping-comparison.json",
       "articleFile": "src/pages/articles/cat-litter-clumping-comparison.astro",
@@ -59,6 +59,16 @@
           "date": "2026-08-08",
           "state": "gate",
           "note": "新構成で全面書き直し。購入導線はASIN取得後に追加"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "assets_pending",
+          "note": "ボンビアルコンのASIN待ち（他4製品は取得済み）"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "spec_research",
+          "note": "ボンビアルコンは販売終了のため削除。別メーカーの5製品目を調査中"
         }
       ],
       "note": "公式仕様・関連消耗品は取得済み。ASIN・購入リンク・商品画像はPA-API未接続のため保留。記事は新構成で書き直し中。",
@@ -108,6 +118,16 @@
           "date": "2026-08-08",
           "state": "gate",
           "note": "新規執筆。購入導線はASIN取得後に追加"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "ASIN取得済み。購入導線を追加する"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "購入導線・商品画像を追加"
         }
       ],
       "note": "公式仕様6社（花王/ライオン/P&G/フィニッシュ/シャボン玉石けん/サラヤ）検証済み。ジョンソンは該当製品が公式で確認できずサラヤへ差し替え。",
@@ -159,6 +179,16 @@
           "date": "2026-08-08",
           "state": "gate",
           "note": "新規執筆。導線追加とASINは後続"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "ASIN取得済み。購入導線を追加する"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "購入導線・商品画像を追加"
         }
       ],
       "note": "公式仕様6社（花王/ライオン/P&G/NSファーファ/ミヨシ石鹸/シャボン玉石けん）検証済み。",
@@ -211,6 +241,16 @@
           "date": "2026-08-08",
           "state": "gate",
           "note": "新規執筆。導線追加とASINは後続"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "ASIN取得済み。購入導線を追加する"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "購入導線・商品画像を追加"
         }
       ],
       "note": "公式仕様6社（レック/オーエ/ダスキン/マーナ/キクロン/サンベルム）検証済み。3M・山崎産業は公式ページ未確認のため除外。",

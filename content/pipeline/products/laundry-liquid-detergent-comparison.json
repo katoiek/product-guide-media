@@ -1,0 +1,63 @@
+{
+  "slug": "laundry-liquid-detergent-comparison",
+  "source": "manual-asin",
+  "associateTag": "erabinote-22",
+  "verifiedAt": "2026-08-08",
+  "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
+  "products": [
+    {
+      "asin": "B0GM6K3VC1",
+      "title": "アタック ZERO 本体",
+      "brand": "花王",
+      "url": "https://www.amazon.co.jp/dp/B0GM6K3VC1?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/61KTIu5PN2L._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B0FHW4FVRX",
+      "title": "NANOX one 洗浄プラス",
+      "brand": "ライオン",
+      "url": "https://www.amazon.co.jp/dp/B0FHW4FVRX?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/51xPCBnKh4L._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B0DV5GMNBP",
+      "title": "アリエール 漂白剤レベル洗浄 エリそで＆くすみ 液体洗剤",
+      "brand": "P&G（アリエール）",
+      "url": "https://www.amazon.co.jp/dp/B0DV5GMNBP?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/719DuYcbzwL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B08XC3LTCY",
+      "title": "ファーファストーリー 液体洗剤 あわあわウォッシュ",
+      "brand": "NSファーファ・ジャパン",
+      "url": "https://www.amazon.co.jp/dp/B08XC3LTCY?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71AeOJgdrML._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B07LGG9XTQ",
+      "title": "無添加 お肌のための洗濯用せっけん 1.1L",
+      "brand": "ミヨシ石鹸",
+      "url": "https://www.amazon.co.jp/dp/B07LGG9XTQ?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/51ys+fTtk8L._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B008RTS8DW",
+      "title": "シャボン玉スノール ボトル 1000mL",
+      "brand": "シャボン玉石けん",
+      "url": "https://www.amazon.co.jp/dp/B008RTS8DW?tag=erabinote-22",
+      "imageUrl": "",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    }
+  ]
+}

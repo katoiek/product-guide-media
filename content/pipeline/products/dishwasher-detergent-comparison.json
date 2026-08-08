@@ -1,0 +1,63 @@
+{
+  "slug": "dishwasher-detergent-comparison",
+  "source": "manual-asin",
+  "associateTag": "erabinote-22",
+  "verifiedAt": "2026-08-08",
+  "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
+  "products": [
+    {
+      "asin": "B0H99LYFDF",
+      "title": "食洗機用キュキュットウルトラクリーン 食器も庫内もまるごと一発洗浄 無香性 本体 (× 2)",
+      "brand": "花王",
+      "url": "https://www.amazon.co.jp/dp/B0H99LYFDF?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71BEpuax2QL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B0GKN7Y7SL",
+      "title": "CHARMY クリスタ クリアEXジェル 本体",
+      "brand": "ライオン",
+      "url": "https://www.amazon.co.jp/dp/B0GKN7Y7SL?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/711UyERCYhL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B001DCEI1Q",
+      "title": "ジョイ P&G 食洗機用 ジョイ（粉末）",
+      "brand": "P&G",
+      "url": "https://www.amazon.co.jp/dp/B001DCEI1Q?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/81T7+sA7EqL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B0FZ43R2SL",
+      "title": "フィニッシュ ウルトラタブレット",
+      "brand": "レキットベンキーザー・ジャパン",
+      "url": "https://www.amazon.co.jp/dp/B0FZ43R2SL?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/51-vWuAZmCL._AC_SX679_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B0CMT6ZJ2T",
+      "title": "シャボン玉食器洗い機専用 500g",
+      "brand": "シャボン玉石けん",
+      "url": "https://www.amazon.co.jp/dp/B0CMT6ZJ2T?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/61JZZt0IwsL._SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "asin": "B0FL1X9JLD",
+      "title": "ハッピーエレファント 食器洗い機用ジェル",
+      "brand": "サラヤ",
+      "url": "https://www.amazon.co.jp/dp/B0FL1X9JLD?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71Ri3ehbCiL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-08"
+    }
+  ]
+}

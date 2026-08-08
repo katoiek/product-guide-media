@@ -41,9 +41,24 @@ export const listSlugs = (dir) =>
         .map((f) => f.replace(/\.json$/, ''))
     : [];
 
-/** アソシエイトタグ。環境変数を優先し、なければ policy の既定値。 */
+/**
+ * .env から値を1つ読む。秘密値を扱うため、値はここから外へ出さない。
+ * 環境変数が設定されていればそちらを優先する。
+ */
+export function readEnv(name) {
+  if (process.env[name]) return process.env[name];
+  const path = join(ROOT, '.env');
+  if (!existsSync(path)) return null;
+  const line = readFileSync(path, 'utf8')
+    .split(/\r?\n/)
+    .find((l) => l.trim().startsWith(`${name}=`));
+  if (!line) return null;
+  return line.slice(line.indexOf('=') + 1).trim().replace(/^["']|["']$/g, '') || null;
+}
+
+/** アソシエイトタグ。環境変数 → .env → policy の既定値の順に探す。 */
 export const associateTag = (policy) =>
-  process.env[policy.site.associateTagEnv] || policy.site.associateTag || null;
+  readEnv(policy.site.associateTagEnv) || policy.site.associateTag || null;
 
 /** 検証結果コレクタ。error が1件でもあれば公開ゲートは落ちる。 */
 export class Report {

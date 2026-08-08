@@ -53,15 +53,32 @@ function parseLine(line) {
 
 const bySlug = new Map();
 const skipped = [];
+const issues = [];
 let lineNo = 0;
 
 for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
   lineNo++;
   const line = raw.trim();
   if (!line || line.startsWith('#')) continue;
-  const [slug, , kind, name, asin = '', imageUrl = ''] = parseLine(line);
-  if (!slug || slug === 'slug') continue; // ヘッダ行
+  const cols = parseLine(line);
+  const [slug, , kind, name] = cols;
+  let asin = (cols[4] ?? '').trim();
+  const imageUrl = (cols[5] ?? '').trim();
+  // Excel で開くと "Column1,Column2,..." の行やカンマ列が付く。見出し行はすべて読み飛ばす。
+  if (!slug || slug === 'slug' || /^Column\d+$/.test(slug)) continue;
   if (only.length && !only.includes(slug)) continue;
+
+  // ASIN 列に商品ページURLを貼った場合は ASIN を取り出す（よくある記入ゆれ）
+  const fromUrl = asin.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/);
+  if (fromUrl) asin = fromUrl[1];
+
+  // 短縮リンク(link.amazon / amzn.to)は、その先が商品ページか検索結果か判別できない。
+  // 検索結果リンクは商品リンクとして掲載できないため（アソシエイト規約）、ASINとして採用しない。
+  const shortLink = /(link\.amazon|amzn\.(to|asia))/;
+  if (shortLink.test(asin)) {
+    issues.push({ line: lineNo, name, kind: 'short-link', value: asin });
+    asin = '';
+  }
 
   if (!bySlug.has(slug)) bySlug.set(slug, { products: [], related: [] });
   const bucket = bySlug.get(slug);
@@ -71,22 +88,31 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
     console.error(`${csvPath}:${lineNo} ASINが10桁の英数字ではありません: ${name} → "${asin}"`);
     process.exit(2);
   }
-  if (imageUrl && !/^https:\/\/(m\.media-amazon\.com|images-na\.ssl-images-amazon\.com|images-fe\.ssl-images-amazon\.com)\//.test(imageUrl)) {
-    console.error(`${csvPath}:${lineNo} 画像URLがAmazon配信元ではありません: ${name}\n  → ${imageUrl}`);
-    process.exit(2);
+
+  // 画像は Amazon プログラム配信元のみ。それ以外は掲載できないので落とす。
+  // 商品リンク自体は有効なので、画像なしで通す。
+  let image = imageUrl;
+  if (shortLink.test(image)) {
+    issues.push({ line: lineNo, name, kind: 'short-link-image', value: image });
+    image = '';
+  } else if (image && !/^https:\/\/(m\.media-amazon\.com|images-na\.ssl-images-amazon\.com|images-fe\.ssl-images-amazon\.com)\//.test(image)) {
+    issues.push({ line: lineNo, name, kind: 'foreign-image', value: image });
+    image = '';
   }
 
   const sep = name.indexOf('｜');
-  bySlug.get(slug)[kind === 'related' ? 'related' : 'products'].push({
+  if (sep < 0 && kind !== 'related') {
+    issues.push({ line: lineNo, name, kind: 'no-brand-separator', value: name });
+  }
+  bucket[kind === 'related' ? 'related' : 'products'].push({
     asin,
     title: sep > 0 ? name.slice(sep + 1).trim() : name,
     brand: sep > 0 ? name.slice(0, sep).trim() : '',
     url: `https://www.amazon.co.jp/dp/${asin}?tag=${tag}`,
-    imageUrl,
+    imageUrl: image,
     imageLicense: 'amazon_program_content',
     verifiedAt: today(),
   });
-  void bucket;
 }
 
 if (!bySlug.size) {
@@ -117,8 +143,33 @@ console.log(`\n${written} 記事ぶんの商品データを書き出しました
 if (empty.length) {
   console.log(`ASIN未記入のため出力しなかった記事: ${empty.join(', ')}`);
 }
+
+const LABEL = {
+  'short-link': '短縮リンクはASINとして使えない',
+  'short-link-image': '画像URL列に短縮リンク（画像として使えないため無視）',
+  'foreign-image': '画像がAmazon配信元でない（掲載できないため無視）',
+  'no-brand-separator': '製品名に「｜」が無くブランドを判別できない',
+};
+if (issues.length) {
+  console.log(`\n── 要対応 ${issues.length} 件 ──`);
+  for (const kind of Object.keys(LABEL)) {
+    const list = issues.filter((i) => i.kind === kind);
+    if (!list.length) continue;
+    console.log(`\n[${LABEL[kind]}] ${list.length}件`);
+    for (const i of list) console.log(`  行${i.line} ${i.name}\n    → ${i.value}`);
+  }
+  if (issues.some((i) => i.kind.startsWith('short-link'))) {
+    console.log(
+      `\n短縮リンク(link.amazon)について:\n` +
+      `  リンク先が検索結果の場合、商品リンクとして掲載できません（アソシエイト規約）。\n` +
+      `  リンクを開いて個別の商品ページへ移動し、URLの /dp/ の直後にある10桁のASINを\n` +
+      `  「ASIN」列（画像URL列ではありません）に記入してください。`
+    );
+  }
+}
+
 if (skipped.length) {
   console.log(`\nASIN未記入でスキップした行 ${skipped.length} 件:`);
   for (const s of skipped) console.log(`  - ${s}`);
 }
-console.log(`\n次: node tools/validate-products.mjs`);
+console.log(`\n次: npm run validate:products`);

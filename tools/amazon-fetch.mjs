@@ -35,7 +35,7 @@ function creds() {
   if (missing.length) {
     console.error(
       `PA-APIの認証情報が未設定です: ${missing.join(', ')}\n` +
-      `PA-APIを使えない場合は SiteStripe で取得した情報を tools/ingest-sitestripe.mjs から取り込んでください。`
+      `PA-APIを使えない場合は npm run asin:sheet で記入CSVを作り、npm run asin:ingest で取り込んでください（docs/ASIN-INPUT.md）。`
     );
     process.exit(3);
   }

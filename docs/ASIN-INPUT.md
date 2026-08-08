@@ -3,7 +3,13 @@
 比較記事にAmazonの購入リンクと商品画像を載せるための手順です。
 **この作業だけは人が行います。** ASINを推測で作ると別商品へ誘導するリンクになり、アソシエイト規約違反になるためです。
 
-所要時間の目安: 1記事あたり15〜25分（製品5〜7件 + 関連消耗品2〜4件）。
+**記入するファイルは1つだけです。**
+
+```
+content/pipeline/asin-input/asins.csv
+```
+
+全記事ぶんの製品がこの1ファイルに入っています（現在33行）。
 
 ## 0. 一度だけ: アソシエイトタグを設定する
 
@@ -15,38 +21,28 @@ AMAZON_ASSOCIATE_TAG=あなたのトラッキングID
 
 トラッキングIDは `〜-22` の形式です。アソシエイト管理画面の右上、または「トラッキングID の管理」で確認できます。
 
-## 1. 記入用シートを作る
+## 1. CSVを開いてASINを記入する
 
-```bash
-node tools/make-asin-sheet.mjs <slug>
-```
+Excel、Google スプレッドシート、メモ帳のいずれでも開けます。
 
-`content/pipeline/asin-input/<slug>.tsv` に、仕様データの製品名を並べたファイルができます。4記事ぶんは作成済みです。
+| 列 | 内容 |
+| --- | --- |
+| `slug` | 記事のID。**編集しない** |
+| `記事` | カテゴリ。目印用 |
+| `種別` | `product`=比較対象、`related`=関連消耗品。**編集しない** |
+| `製品名` | `メーカー｜製品名`。**編集しない** |
+| **`ASIN`** | **ここに記入する** |
+| **`画像URL`** | 任意。省略可 |
 
-| slug | 比較対象 | 関連消耗品 |
-| --- | --- | --- |
-| `cat-litter-clumping-comparison` | 5件 | 3件 |
-| `dishwasher-detergent-comparison` | 6件 | 2件 |
-| `laundry-liquid-detergent-comparison` | 6件 | 3件 |
-| `kitchen-sponge-comparison` | 6件 | 2件 |
-
-## 2. ASINを記入する
-
-各行の製品を Amazon.co.jp で検索し、商品ページURLからASINを取り出して2列目に貼ります。
+各行の製品を Amazon.co.jp で検索し、商品ページURLからASINを取り出します。
 
 ```
 https://www.amazon.co.jp/dp/B08XYZ1234/
                              ~~~~~~~~~~
-                             ここの10桁がASIN
+                             この10桁がASIN
 ```
 
-タブ区切りです。Excel や Google スプレッドシートで開いても構いません（保存時はタブ区切りテキストのまま）。
-
-```
-ライオンペット｜ニオイをとる砂 5L	B08XYZ1234	https://m.media-amazon.com/images/I/xxxx.jpg
-```
-
-3列目の商品画像URLは省略できます。入れる場合は SiteStripe の「画像」リンクから取得したURL（`m.media-amazon.com` で始まるもの）を使ってください。**メーカーサイトの写真を貼らないでください。**
+画像URLは省略できます。入れる場合は SiteStripe の「画像」リンクから取得したURL（`m.media-amazon.com` で始まるもの）だけを使ってください。**メーカーサイトの写真は使えません**（取り込み時にエラーで止まります）。
 
 ### 選ぶときの注意
 
@@ -57,23 +53,33 @@ https://www.amazon.co.jp/dp/B08XYZ1234/
 - セット品・まとめ買い
 - 並行輸入品
 
-判断がつかない製品は、**ASIN欄を空のままにしてください。** 行を削除する必要はありません。空欄の行は自動でスキップされ、その製品にはリンクが付きません（記事は他の製品のリンクだけで公開できます）。
+判断がつかない製品は、**ASIN欄を空のままにしてください。** 行を削除する必要はありません。空欄の行は自動でスキップされ、その製品だけリンク無しで記事が公開されます。
 
-関連消耗品はブランド指定がありません。その用途の代表的な商品を1つ選んでください。
+関連消耗品（`related`）はブランド指定がありません。その用途の代表的な商品を1つ選んでください。
 
-## 3. 取り込む
+**全記事ぶんが揃うまで待つ必要はありません。** 1記事ぶんだけ記入して先に進められます。
+
+## 2. 取り込む
 
 ```bash
-node tools/ingest-sitestripe.mjs <slug>
+node tools/ingest-asins.mjs
 ```
 
-`content/pipeline/products/<slug>.json` が作られます。直接商品リンクは、記入されたASINとタグから
-`https://www.amazon.co.jp/dp/<ASIN>?tag=<タグ>` の形で自動生成されます。
+記入されている記事をすべて自動で判別し、`content/pipeline/products/<slug>.json` を記事ごとに書き出します。
+直接商品リンクは `https://www.amazon.co.jp/dp/<ASIN>?tag=<タグ>` の形で自動生成されます。
 
-## 4. 検証する
+特定の記事だけ取り込む場合:
 
 ```bash
-node tools/validate-products.mjs <slug>
+node tools/ingest-asins.mjs cat-litter-clumping-comparison
+```
+
+記入ミスがあると、**行番号付きでエラーを出して止まります**（ASINの桁数違い、Amazon以外の画像URLなど）。
+
+## 3. 検証する
+
+```bash
+npm run validate:products
 ```
 
 `[PASS]` になればデータは公開可能です。落ちる主な理由:
@@ -82,29 +88,29 @@ node tools/validate-products.mjs <slug>
 | --- | --- |
 | `products/asin-format` | ASINが10桁の英数字になっていない |
 | `products/asin-dup` | 同じASINを複数行に書いている（別商品を選び直す） |
-| `products/image-host` | 画像URLがAmazon配信元でない（メーカーサイトの写真は使えない） |
+| `products/image-host` | 画像URLがAmazon配信元でない |
 | `products/count` | 比較対象が5〜7件の範囲外 |
 | `products/brands` | 異なるメーカーが5社未満 |
 
-## 5. 記事にリンクを差し込む
+## 4. 記事にリンクを差し込む
 
-商品データが `[PASS]` になったら、記事本文へのリンク配置は自動化されています。
+商品データが `[PASS]` になったら、Claude Code に
 
-```
-node tools/queue.mjs set <slug> drafting "ASIN取得済み。購入導線を追加する"
-```
+> 「ASINを記入したので取り込んで、記事にリンクを差し込んで」
 
-そのうえで Claude Code に「`erabi-article-writer` で `<slug>` に購入導線を追加して」と指示してください。比較表への購入リンク列、製品カードの画像、関連消耗品のリンクが追加されます。
+と指示してください。比較表への購入リンク列、製品カードの画像、関連消耗品のリンクが追加され、ゲート通過後に公開されます。
 
 **リンクは比較表より後ろにしか置けません**（冒頭リンクは公開ゲートが機械的に落とします）。
 
-## 6. 公開する
+## CSVを作り直す
+
+記事を追加したあとなど、CSVを再生成する場合:
 
 ```bash
-npm run gate
+node tools/make-asin-sheet.mjs
 ```
 
-全項目 PASS を確認してから commit / push します。Cloudflare Pages が本番ビルドします。
+**記入済みのASINは引き継がれます**（既存CSVと商品データの両方から復元します）。上書きを恐れず実行できます。
 
 ## アソシエイト審査の期限
 

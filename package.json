@@ -12,7 +12,9 @@
     "gate:fast": "node tools/gate.mjs --no-build",
     "validate:articles": "node tools/validate-article.mjs",
     "validate:products": "node tools/validate-products.mjs",
-    "validate:pins": "node tools/validate-pins.mjs"
+    "validate:pins": "node tools/validate-pins.mjs",
+    "asin:sheet": "node tools/make-asin-sheet.mjs",
+    "asin:ingest": "node tools/ingest-asins.mjs"
   },
   "dependencies": {
     "astro": "^5.16.6"

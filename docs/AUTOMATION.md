@@ -117,7 +117,8 @@ idea ─▶ spec_research ─▶ assets_pending ─▶ drafting ─▶ gate ─�
 | `npm run gate:fast` | ビルドを省略して検証だけ |
 | `node tools/amazon-fetch.mjs search "<語>" --brand <B>` | PA-API で ASIN 候補を探す |
 | `node tools/amazon-fetch.mjs items <slug> <ASIN>...` | PA-API で商品データを書き出す |
-| `node tools/ingest-sitestripe.mjs <slug> <tsv>` | SiteStripe の取得結果を取り込む |
+| `npm run asin:sheet` | ASIN記入用CSVを生成（記入済みは引き継ぐ） |
+| `npm run asin:ingest` | 記入済みCSVから商品データを作る |
 
 ## 4. データの置き場所
 
@@ -184,17 +185,19 @@ AMAZON_ASSOCIATE_TAG
 **PA-APIの承認を待つ必要はありません。** アソシエイトアカウントとタグがあれば、この経路で今日リンクを載せられます。
 
 ```bash
-node tools/make-asin-sheet.mjs <slug>      # 製品名入りの記入シートを作る
-# → content/pipeline/asin-input/<slug>.tsv に人がASINを記入
-node tools/ingest-sitestripe.mjs <slug>    # 取り込む
-node tools/validate-products.mjs <slug>    # 検証
+npm run asin:sheet          # 全記事ぶんの記入CSVを1枚作る
+# → content/pipeline/asin-input/asins.csv に人がASINを記入
+npm run asin:ingest         # 記入された記事をまとめて取り込む
+npm run validate:products   # 検証
 ```
 
 **詳しい手順は [`docs/ASIN-INPUT.md`](./ASIN-INPUT.md) を参照してください。**
 
-記入シートは仕様データの製品名・ブランドで事前に埋まっています。人がやるのはASINを探して貼ることだけです。ASIN未記入の行は自動でスキップされるため、判断がつかない製品だけリンク無しで公開できます。
+記入するファイルは **`content/pipeline/asin-input/asins.csv` の1枚だけ**です。全記事の製品が `slug` 列付きで並んでおり、製品名・ブランドは事前に埋まっています。人がやるのはASINを探して貼ることだけです。
 
-記入済みシートは `.gitignore` 済みです（タグを含む可能性があるため）。
+ASIN未記入の行は自動でスキップされるため、判断がつかない製品だけリンク無しで公開できます。1記事ぶんだけ記入して先に進めることもできます。記入ミス（ASINの桁数違い、Amazon以外の画像URL）は行番号付きで止まります。
+
+CSVを再生成しても記入済みのASINは引き継がれます。記入済みCSVは `.gitignore` 済みです（タグを含むため）。
 
 どちらの経路でも、**Amazonのページ・検索結果・画像CDN・レビューをスクレイピングしません。**
 
@@ -203,7 +206,7 @@ node tools/validate-products.mjs <slug>    # 検証
 エージェントは次の場合、回避策を探さずに止めて報告します。
 
 - ポリシーを変更しないと通せない
-- PA-API 認証情報が無く、人手の SiteStripe 取得が必要
+- ASIN が未取得で、人手での記入が必要（docs/ASIN-INPUT.md）
 - 公式仕様が5社ぶん揃わない
 - 禁止ジャンルの疑いが出た
 - `git push` が失敗した、`git status` に想定外のファイルがある

@@ -46,15 +46,18 @@ model: sonnet
 ### 経路B: PA-API が使えない場合
 
 4. 認証情報が無い、または `amazon-fetch.mjs` が 4xx を返す場合は、**ここで止まる**。推測でリンクを作らない。
-5. 人が SiteStripe で取得すべき項目を明示して依頼する。TSV の形式（1行1製品、タブ区切り）:
+5. 人が記入するCSVを用意する（記入済みのASINは引き継がれるので、何度実行してもよい）:
    ```
-   ASIN	商品名	メーカー／ブランド	商品画像URL
+   npm run asin:sheet
    ```
-6. TSV を受け取ったら取り込む:
+   `content/pipeline/asin-input/asins.csv` に全記事の製品が並ぶ。人はASIN列を埋めるだけでよい。
+   手順は `docs/ASIN-INPUT.md` にあるので、依頼時はこれを案内する。
+6. 記入されたら取り込む:
    ```
-   node tools/ingest-sitestripe.mjs <slug> <input.tsv>
+   npm run asin:ingest
    ```
-7. 待ちの間は `node tools/queue.mjs set <slug> blocked "SiteStripeでのASIN・画像取得待ち"` にする。
+   ASIN未記入の行は自動でスキップされる。**全製品が揃うのを待たずに、埋まったぶんだけ先へ進めてよい。**
+7. 待ちの間は `node tools/queue.mjs set <slug> blocked "ASIN記入待ち（docs/ASIN-INPUT.md）"` にする。
 
 ## 検証と受け渡し
 

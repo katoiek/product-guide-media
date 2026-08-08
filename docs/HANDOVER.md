@@ -182,7 +182,8 @@ curl -sS -o /dev/null -w 'status=%{http_code}\n' -L \
 | `content/pipeline/specs/<slug>.json` | メーカー公式仕様（記事の根拠） |
 | `content/pipeline/products/<slug>.json` | ASIN・直接リンク・許諾済み画像 |
 | `tools/amazon-fetch.mjs` | PA-API v5（SigV4署名）でのASIN・商品画像取得 |
-| `tools/ingest-sitestripe.mjs` | PA-API未接続時のSiteStripe取り込み |
+| `tools/make-asin-sheet.mjs` | ASIN記入用CSVの生成（全記事1枚） |
+| `tools/ingest-asins.mjs` | 記入済みCSVから商品データを作る |
 | `tools/validate-products.mjs` | ASIN直リンク・タグ一致・画像許諾の検証 |
 | `tools/validate-article.mjs` | 記事の構成・表現・根拠・サイト内導線の検証 |
 | `tools/gate.mjs` | 上記＋`astro build` をまとめた公開ゲート |

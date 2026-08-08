@@ -1,8 +1,5 @@
 ---
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
-
-const amazonAssociateTag = 'erabinote-22';
-const amazonSearch = (productName: string) => `https://www.amazon.co.jp/s?k=${encodeURIComponent(productName)}&tag=${amazonAssociateTag}`;
 ---
 <ArticleLayout
   title="猫砂の比較｜固まるタイプ5製品を鉱物・紙・おから系で比べる"
@@ -31,12 +28,12 @@ const amazonSearch = (productName: string) => `https://www.amazon.co.jp/s?k=${en
   <p>比較した製品の表示容量は2.5kg、5L、6Lなどです。単位がLとkgで混在するため、単純な数値だけで量を比べません。処理方法・交換方法・誤食や粉末に関する注意は製品ごとにパッケージと公式案内を確認します。</p>
 
   <h2>固まる猫砂5製品の比較表</h2>
-  <div class="score"><table><thead><tr><th>製品</th><th>メーカー</th><th>公式表示の原料・タイプ</th><th>容量</th><th>香りの公式表示</th><th>Amazon</th></tr></thead><tbody>
-    <tr><td><strong><a href={amazonSearch('ライオンペット ニオイをとる砂 5L')} rel="nofollow sponsored noopener noreferrer">ニオイをとる砂 5L</a></strong></td><td>ライオンペット</td><td>ベントナイト、消臭・抗菌剤／鉱物系</td><td>5L</td><td>公式ページで香り・無香の明示を確認できず</td><td><a href={amazonSearch('ライオンペット ニオイをとる砂 5L')} rel="nofollow sponsored noopener noreferrer">Amazonで見る</a></td></tr>
-    <tr><td><strong><a href={amazonSearch('ユニチャーム デオサンド ギュッと固まる紙砂')} rel="nofollow sponsored noopener noreferrer">デオサンド ギュッと固まる紙砂</a></strong></td><td>ユニ・チャーム</td><td>再生パルプ、高分子吸水材、デンプン、香料／紙タイプ</td><td>5L</td><td>原材料に香料の表示あり。香り名は公式ページで確認できず</td><td><a href={amazonSearch('ユニチャーム デオサンド ギュッと固まる紙砂')} rel="nofollow sponsored noopener noreferrer">Amazonで見る</a></td></tr>
-    <tr><td><strong><a href={amazonSearch('マルカン ナクラム 猫砂 5L')} rel="nofollow sponsored noopener noreferrer">ナクラム 猫砂5L</a></strong></td><td>マルカン</td><td>おから、コーンスターチ、粟粉、グアーガム等／植物由来原料</td><td>5L</td><td>公式ページで香り・無香の明示を確認できず</td><td><a href={amazonSearch('マルカン ナクラム 猫砂 5L')} rel="nofollow sponsored noopener noreferrer">Amazonで見る</a></td></tr>
-    <tr><td><strong><a href={amazonSearch('ボンビアルコン タピおかサンド 2.5kg')} rel="nofollow sponsored noopener noreferrer">タピおかサンド2.5kg</a></strong></td><td>ボンビアルコン</td><td>キャッサバ（タピオカ原料）・おからのミックス／天然素材の猫砂</td><td>2.5kg</td><td>バニラ系の微香と表示</td><td><a href={amazonSearch('ボンビアルコン タピおかサンド 2.5kg')} rel="nofollow sponsored noopener noreferrer">Amazonで見る</a></td></tr>
-    <tr><td><strong><a href={amazonSearch('スーパーキャット 消臭おからサンドα 6L')} rel="nofollow sponsored noopener noreferrer">消臭おからサンドα 6L</a></strong></td><td>スーパーキャット</td><td>おから、炭酸カルシウム、木粉、コーンスターチ、クエン酸／おから・でんぷん系</td><td>6L（商品重量2,600gの表示あり）</td><td>ひのきの香りと表示</td><td><a href={amazonSearch('スーパーキャット 消臭おからサンドα 6L')} rel="nofollow sponsored noopener noreferrer">Amazonで見る</a></td></tr>
+  <div class="score"><table><thead><tr><th>製品</th><th>メーカー</th><th>公式表示の原料・タイプ</th><th>容量</th><th>香りの公式表示</th><th>購入リンク</th></tr></thead><tbody>
+    <tr><td><strong>ニオイをとる砂 5L</strong></td><td>ライオンペット</td><td>ベントナイト、消臭・抗菌剤／鉱物系</td><td>5L</td><td>公式ページで香り・無香の明示を確認できず</td><td>Amazon商品ページを確認中</td></tr>
+    <tr><td><strong>デオサンド ギュッと固まる紙砂</strong></td><td>ユニ・チャーム</td><td>再生パルプ、高分子吸水材、デンプン、香料／紙タイプ</td><td>5L</td><td>原材料に香料の表示あり。香り名は公式ページで確認できず</td><td>Amazon商品ページを確認中</td></tr>
+    <tr><td><strong>ナクラム 猫砂5L</strong></td><td>マルカン</td><td>おから、コーンスターチ、粟粉、グアーガム等／植物由来原料</td><td>5L</td><td>公式ページで香り・無香の明示を確認できず</td><td>Amazon商品ページを確認中</td></tr>
+    <tr><td><strong>タピおかサンド2.5kg</strong></td><td>ボンビアルコン</td><td>キャッサバ（タピオカ原料）・おからのミックス／天然素材の猫砂</td><td>2.5kg</td><td>バニラ系の微香と表示</td><td>Amazon商品ページを確認中</td></tr>
+    <tr><td><strong>消臭おからサンドα 6L</strong></td><td>スーパーキャット</td><td>おから、炭酸カルシウム、木粉、コーンスターチ、クエン酸／おから・でんぷん系</td><td>6L（商品重量2,600gの表示あり）</td><td>ひのきの香りと表示</td><td>Amazon商品ページを確認中</td></tr>
   </tbody></table></div>
   <p class="source">確認日：2026年8月8日。原料、容量、香り、固まる旨の表示は各メーカー公式ページを確認しています。価格、在庫、購入条件は変動するため比較対象にしていません。</p>
 
@@ -79,5 +76,4 @@ const amazonSearch = (productName: string) => `https://www.amazon.co.jp/s?k=${en
     <li>ボンビアルコン｜タピおかサンド2.5kg</li>
     <li>スーパーキャット｜消臭おからサンドα 6L</li>
   </ul>
-  <p class="disclosure">当サイトはAmazonアソシエイトを利用しています。表内の「Amazonで見る」と製品名のリンクは、Amazonのアソシエイトリンクです。Amazon内の販売状況、仕様、価格、配送条件は移動先で確認してください。</p>
 </ArticleLayout>

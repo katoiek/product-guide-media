@@ -41,14 +41,59 @@ model: opus
 
 1. `node tools/queue.mjs next` で state が `drafting` の対象を取る。
 2. `content/pipeline/specs/<slug>.json` と `content/pipeline/products/<slug>.json` を読む。
-3. `src/layouts/ArticleLayout.astro` を読み、props（`title` / `description` / `category` / `slug`）を確認する。
-4. `src/pages/articles/<slug>.astro` を書く。`slug` プロパティは**ファイル名と完全一致**させる。`description` は40〜200文字。
+3. `src/layouts/ArticleLayout.astro` を読み、props を確認する。比較記事では **`type="comparison"` と `verifiedAt="YYYY-MM-DD"` を必ず渡す**。`type="comparison"` を渡すとレイアウトが広告開示（アソシエイト表記）と根拠の注記を自動で出力する。**開示を本文に手書きしない。** 渡し忘れると公開ゲートが `article/type-prop` で落とす。
+
+   ```astro
+   <ArticleLayout
+     title="..." description="..." category="キッチン"
+     slug="<ファイル名と完全一致>" type="comparison" verifiedAt="2026-08-08"
+   >
+   ```
+
+4. `src/pages/articles/<slug>.astro` を書く。`description` は40〜200文字。
 5. 比較表の購入リンク列は、products がある場合のみ:
    ```html
-   <td><a href="<productsのurlをそのまま>" rel="sponsored nofollow noopener" target="_blank">Amazonで見る</a></td>
+   <td><a class="buy" href="<productsのurlをそのまま>" rel="sponsored nofollow noopener" target="_blank">Amazon</a></td>
    ```
    products が無い／検証不合格なら**リンク列自体を作らない**。空リンクや「確認中」のダミーを置かない。
-6. 商品画像を載せる場合は products の `imageUrl` を `<img src="..." alt="<製品名>" loading="lazy" width="160" height="160" />` で入れる。
+6. 製品ごとの解説は製品カードで書く。画像は products の `imageUrl` のみ:
+   ```html
+   <div class="products">
+     <article class="product">
+       <img src="<imageUrl>" alt="<製品名>" loading="lazy" width="132" height="132" />
+       <div>
+         <span class="brand-name">メーカー名</span>
+         <h3>製品名</h3>
+         <p><strong>向く条件：</strong>…<br /><strong>合わない条件：</strong>…</p>
+       </div>
+       <a class="buy" href="<url>" rel="sponsored nofollow noopener" target="_blank">Amazon</a>
+     </article>
+   </div>
+   ```
+   画像が無い場合は `<img>` ごと省略する（代替画像を用意しない）。
+7. 「一緒に見ておきたい消耗品」は軽い扱いにする:
+   ```html
+   <div class="related">
+     <div class="related-item">
+       <div><strong>関連消耗品名</strong><span>なぜ同じ買い物のついでに要るか。不要な人には不要と書く</span></div>
+       <a class="buy" href="<related の url>" rel="sponsored nofollow noopener" target="_blank">Amazon</a>
+     </div>
+   </div>
+   ```
+
+### 使えるCSSクラス
+
+レイアウトが用意しているものだけを使う。新しいクラスや `<style>` を記事側に足さない。
+
+| クラス | 用途 |
+| --- | --- |
+| `.lead` | 導入文 |
+| `.notice` | この記事で比較する範囲 |
+| `.score` | 表の外枠。**必ず `<table>` をこれで包む**（横スクロール対応） |
+| `.source` | 根拠・確認先。`<p>` でも `<ul>` でも可 |
+| `.products` / `.product` / `.brand-name` | 製品カード |
+| `.related` / `.related-item` | 関連消耗品 |
+| `.buy` | 購入ボタン（`rel="sponsored nofollow noopener"` を必ず付ける） |
 7. **サイト内導線を追加する**（忘れると公開ゲートで落ちる）:
    - `src/pages/index.astro` の `articles` 配列に `{ category, icon, title, description, href: '/articles/<slug>/', tone }` を追加する。`icon` は既存の `icon()` が対応する名前（kitchen / storage / cleaning / pc / disaster / stationery / garden / pet）。
    - 同記事のカテゴリが `categories` 配列で `href: '#coming'` のままなら、記事URLへ差し替える。

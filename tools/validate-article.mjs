@@ -51,8 +51,19 @@ export function validateArticle(slug, policy = loadPolicy(), queue = loadQueue()
   checkCategory(policy, body, report, '本文');
 
   // --- 根拠の明示（比較記事のみ） ---
-  if (type === 'comparison' && policy.sources.requireVerifiedDate && !/確認日/.test(body)) {
-    report.error('article/verified-date', '「確認日」の記載が無い（比較表の根拠日が必要）');
+  // 確認日は verifiedAt プロパティ（レイアウトが描画）か本文のどちらかにあればよい。
+  if (type === 'comparison' && policy.sources.requireVerifiedDate && !prop(src, 'verifiedAt') && !/確認日/.test(body)) {
+    report.error('article/verified-date', 'verifiedAt プロパティも本文の「確認日」も無い（比較表の根拠日が必要）');
+  }
+
+  // レイアウトが広告開示を出すのは type="comparison" のときだけ。
+  // 導線があるのに guide 扱いだと、開示が出ないままリンクが載る。
+  const typeProp = prop(src, 'type');
+  if (type === 'comparison' && typeProp !== 'comparison') {
+    report.error(
+      'article/type-prop',
+      'ArticleLayout に type="comparison" が無い。広告開示がページに出力されないため、購入リンクを載せられない'
+    );
   }
 
   // --- Amazonリンク ---

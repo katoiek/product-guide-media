@@ -38,8 +38,10 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
   const brands = new Set();
 
   const checkItem = (p, at, { countBrand }) => {
-
+    // 関連消耗品は「猫用トイレ消臭シート」のような一般名で扱うため、ブランド名は必須にしない。
+    // 比較対象はブランド間比較が記事の骨格なので必須。
     for (const field of policy.amazon.requiredProductFields) {
+      if (field === 'brand' && !countBrand) continue;
       if (!p[field]) report.error('products/field', `${at}: 必須項目 ${field} が空`);
     }
     if (!p.asin) return;

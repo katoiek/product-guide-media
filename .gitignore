@@ -7,3 +7,4 @@ dist/
 *.log
 .claude/settings.local.json
 tmp/
+content/pipeline/asin-input/*.tsv

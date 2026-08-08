@@ -179,20 +179,22 @@ AMAZON_ASSOCIATE_TAG
 
 状態は `content/pipeline/queue.json` の `associateProgram` に記録します。`appliedOn` を埋めたら `deadline`（申請日 + 180日）を再計算してください。現在は `status: "unknown"` / `paapiAccess: false` です。
 
-### 経路B: SiteStripe — 暫定
+### 経路B: 手動でASIN記入 — アカウントがあれば即日使える
 
-人がアソシエイト管理画面で ASIN と商品画像URLを取得し、TSV にして取り込みます。
+**PA-APIの承認を待つ必要はありません。** アソシエイトアカウントとタグがあれば、この経路で今日リンクを載せられます。
 
-```
-# ASIN	商品名	メーカー／ブランド	商品画像URL
-B0XXXXXXXX	製品名A	メーカーA	https://m.media-amazon.com/images/I/xxxx.jpg
+```bash
+node tools/make-asin-sheet.mjs <slug>      # 製品名入りの記入シートを作る
+# → content/pipeline/asin-input/<slug>.tsv に人がASINを記入
+node tools/ingest-sitestripe.mjs <slug>    # 取り込む
+node tools/validate-products.mjs <slug>    # 検証
 ```
 
-```
-export AMAZON_ASSOCIATE_TAG=your-tag-22
-node tools/ingest-sitestripe.mjs <slug> input.tsv
-node tools/validate-products.mjs <slug>
-```
+**詳しい手順は [`docs/ASIN-INPUT.md`](./ASIN-INPUT.md) を参照してください。**
+
+記入シートは仕様データの製品名・ブランドで事前に埋まっています。人がやるのはASINを探して貼ることだけです。ASIN未記入の行は自動でスキップされるため、判断がつかない製品だけリンク無しで公開できます。
+
+記入済みシートは `.gitignore` 済みです（タグを含む可能性があるため）。
 
 どちらの経路でも、**Amazonのページ・検索結果・画像CDN・レビューをスクレイピングしません。**
 

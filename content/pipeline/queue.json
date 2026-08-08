@@ -30,7 +30,7 @@
       "category": "ペット用品",
       "categorySlug": "pet",
       "type": "comparison",
-      "state": "spec_research",
+      "state": "gate",
       "specFile": "content/pipeline/specs/cat-litter-clumping-comparison.json",
       "productsFile": "content/pipeline/products/cat-litter-clumping-comparison.json",
       "articleFile": "src/pages/articles/cat-litter-clumping-comparison.astro",
@@ -44,9 +44,24 @@
           "date": "2026-08-08",
           "state": "spec_research",
           "note": "公開ゲートが article/spec-source で不合格。5製品のメーカー公式ページURLと関連消耗品を再取得する"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "assets_pending",
+          "note": "公式URL5件・関連消耗品3件を再取得"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "公式URL5件・関連消耗品3件を取得済み。PA-API未接続のため購入導線は後付け"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "新構成で全面書き直し。購入導線はASIN取得後に追加"
         }
       ],
-      "note": "5製品のASIN・直接商品リンク・許諾済み画像が未取得。記事は公開済みだが購入導線と製品画像は未掲載。",
+      "note": "公式仕様・関連消耗品は取得済み。ASIN・購入リンク・商品画像はPA-API未接続のため保留。記事は新構成で書き直し中。",
       "relatedCandidates": [
         "猫用トイレ消臭シート",
         "猫トイレ用スコップ",
@@ -64,7 +79,7 @@
       "category": "キッチン",
       "categorySlug": "kitchen",
       "type": "comparison",
-      "state": "spec_research",
+      "state": "assets_pending",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -78,6 +93,11 @@
           "date": "2026-08-08",
           "state": "spec_research",
           "note": "引き継ぎ書の調査キューから移行"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "assets_pending",
+          "note": "公式仕様6製品(花王/ライオン/P&G/レキットベンキーザー/シャボン玉石けん/サラヤ)・関連消耗品2件を確認。ジョンソンは家庭用食洗機専用洗剤が確認できず除外"
         }
       ],
       "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",
@@ -97,7 +117,7 @@
       "category": "清掃",
       "categorySlug": "cleaning",
       "type": "comparison",
-      "state": "spec_research",
+      "state": "assets_pending",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -111,6 +131,11 @@
           "date": "2026-08-08",
           "state": "spec_research",
           "note": "引き継ぎ書の調査キューから移行"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "assets_pending",
+          "note": "公式仕様6製品(花王/ライオン/P&G/NSファーファ/ミヨシ石鹸/シャボン玉石けん)・関連消耗品3件を確認"
         }
       ],
       "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。",

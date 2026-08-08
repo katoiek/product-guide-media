@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "states": [
     "idea",
     "spec_research",
@@ -11,13 +11,13 @@
     "blocked"
   ],
   "associateProgram": {
-    "status": "unknown",
-    "appliedOn": null,
+    "status": "applied",
+    "appliedOn": "2026-08-08",
     "qualifyingSalesRequired": 3,
     "qualificationWindowDays": 180,
-    "deadline": null,
+    "deadline": "2027-02-04",
     "paapiAccess": false,
-    "note": "申請から180日以内に適格販売3件を満たさないとアカウントが取り消される。PA-API の利用資格も同条件に連動するため、購入導線を持つ比較記事を数本公開してから申請・計測する。appliedOn を埋めたら deadline を再計算すること。"
+    "note": "申請日から180日以内に適格販売3件を満たさないとアカウントが取り消される。期限を過ぎる前に達成状況を確認すること。達成後は PA-API が使えるようになり、ASINの手入力が不要になる。"
   },
   "types": {
     "comparison": "異なる5〜7ブランドの製品比較記事。アフィリエイト導線を持つ。仕様データ・商品アセット・公開ゲートの全条件が必要。",
@@ -311,38 +311,6 @@
       "type": "guide",
       "state": "published",
       "articleFile": "src/pages/articles/bousai-supplies-checklist.astro",
-      "history": [
-        {
-          "date": "2026-08-08",
-          "state": "published",
-          "note": "既存の一般ガイドを管理下に取り込み"
-        }
-      ]
-    },
-    {
-      "slug": "storage-box-sizing",
-      "title": "収納ボックスは買う前の採寸で決まる",
-      "category": "収納用品",
-      "categorySlug": "storage",
-      "type": "guide",
-      "state": "published",
-      "articleFile": "src/pages/articles/storage-box-sizing.astro",
-      "history": [
-        {
-          "date": "2026-08-08",
-          "state": "published",
-          "note": "既存の一般ガイドを管理下に取り込み"
-        }
-      ]
-    },
-    {
-      "slug": "keyboard-selection-axis",
-      "title": "キーボード選びの評価軸",
-      "category": "PC周辺機器",
-      "categorySlug": "pc",
-      "type": "guide",
-      "state": "published",
-      "articleFile": "src/pages/articles/keyboard-selection-axis.astro",
       "history": [
         {
           "date": "2026-08-08",

@@ -59,5 +59,25 @@
       "imageLicense": "amazon_program_content",
       "verifiedAt": "2026-08-08"
     }
+  ],
+  "related": [
+    {
+      "title": "柔軟剤",
+      "url": "https://link.amazon/B0cOZHLjE",
+      "linkType": "short",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "title": "洗濯槽クリーナー",
+      "url": "https://link.amazon/B0b3JAu7E",
+      "linkType": "short",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "title": "衣類用漂白剤",
+      "url": "https://link.amazon/B08CsNJC8",
+      "linkType": "short",
+      "verifiedAt": "2026-08-08"
+    }
   ]
 }

@@ -78,8 +78,32 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
     }
   };
 
+  // 関連消耗品は一般名のカテゴリなので、検索結果リンク・短縮リンクを許可する
+  // （記事が特定の1商品を名指ししていないため）。ASINも必須にしない。
+  const relCfg = policy.amazon.relatedLinks ?? {};
+  const checkRelatedLink = (p, at) => {
+    if (!p.title) report.error('products/related-field', `${at}: title が空`);
+    if (!p.url) return report.error('products/related-field', `${at}: url が空`);
+    let host = null;
+    try { host = new URL(p.url).host; } catch { /* 下でエラーにする */ }
+    if (!host) return report.error('products/related-url', `${at}: url がURLとして不正`);
+    const allowed = relCfg.allowedHosts ?? policy.amazon.allowedHosts;
+    if (!allowed.includes(host)) {
+      report.error('products/related-host', `${at}: ${host} はAmazonのドメインではない`);
+    }
+    if (p.imageUrl) {
+      report.warn('products/related-image', `${at}: 検索結果リンクに商品画像は付けられない（無視される）`);
+    }
+  };
+
   items.forEach((p, i) => checkItem(p, `#${i + 1} ${p.title || p.asin || '(名称不明)'}`, { countBrand: true }));
-  related.forEach((p, i) => checkItem(p, `関連#${i + 1} ${p.title || p.asin || '(名称不明)'}`, { countBrand: false }));
+  related.forEach((p, i) => {
+    const at = `関連#${i + 1} ${p.title || p.asin || '(名称不明)'}`;
+    // ASIN を持つものは通常の商品として、持たないものはカテゴリリンクとして検証する
+    if (p.asin) checkItem(p, at, { countBrand: false });
+    else if (relCfg.allowSearchLinks) checkRelatedLink(p, at);
+    else report.error('products/related-asin', `${at}: ASIN が無い`);
+  });
 
   if (brands.size < minDistinctBrands) {
     report.error(

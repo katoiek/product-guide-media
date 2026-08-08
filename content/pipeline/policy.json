@@ -57,9 +57,15 @@
     "allowedHosts": ["www.amazon.co.jp", "amzn.to"],
     "directLinkPattern": "^https://www\\.amazon\\.co\\.jp/dp/([A-Z0-9]{10})(/)?\\?[^\\s]*\\btag=[^&\\s]+",
     "rejectPatterns": [
-      { "id": "search-link", "pattern": "amazon\\.co\\.jp/s\\?", "reason": "検索結果リンクは商品リンクにできない" },
+      { "id": "search-link", "pattern": "amazon\\.co\\.jp/s\\?", "reason": "比較対象の製品リンクに検索結果は使えない（記事が名指しした製品とリンク先がずれるため）" },
       { "id": "gp-product", "pattern": "amazon\\.co\\.jp/gp/product", "reason": "/dp/<ASIN> 形式に正規化していない" }
     ],
+    "relatedLinks": {
+      "note": "関連消耗品は「柔軟剤」「スポンジホルダー」のような一般名のカテゴリで扱う。特定の1商品を名指ししていないため、検索結果リンクやSiteStripeの短縮リンクを許可する。比較対象の製品は記事が製品名を名指しするので /dp/<ASIN> に限る。",
+      "allowSearchLinks": true,
+      "allowedHosts": ["www.amazon.co.jp", "link.amazon", "amzn.to", "amzn.asia"],
+      "requireAsin": false
+    },
     "allowedImageLicenses": ["amazon_program_content"],
     "requiredProductFields": ["asin", "title", "brand", "url", "verifiedAt"],
     "optionalProductFields": ["imageUrl", "imageLicense"],

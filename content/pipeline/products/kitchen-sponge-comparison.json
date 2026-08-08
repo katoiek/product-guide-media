@@ -59,5 +59,19 @@
       "imageLicense": "amazon_program_content",
       "verifiedAt": "2026-08-08"
     }
+  ],
+  "related": [
+    {
+      "title": "食器用洗剤",
+      "url": "https://link.amazon/B03mJk3de",
+      "linkType": "short",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "title": "スポンジホルダー",
+      "url": "https://link.amazon/B08ITNrcd",
+      "linkType": "short",
+      "verifiedAt": "2026-08-08"
+    }
   ]
 }

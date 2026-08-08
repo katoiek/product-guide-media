@@ -68,20 +68,37 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
   if (!slug || slug === 'slug' || /^Column\d+$/.test(slug)) continue;
   if (only.length && !only.includes(slug)) continue;
 
+  if (!bySlug.has(slug)) bySlug.set(slug, { products: [], related: [] });
+  const bucket = bySlug.get(slug);
+
   // ASIN 列に商品ページURLを貼った場合は ASIN を取り出す（よくある記入ゆれ）
   const fromUrl = asin.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/);
   if (fromUrl) asin = fromUrl[1];
 
-  // 短縮リンク(link.amazon / amzn.to)は、その先が商品ページか検索結果か判別できない。
-  // 検索結果リンクは商品リンクとして掲載できないため（アソシエイト規約）、ASINとして採用しない。
   const shortLink = /(link\.amazon|amzn\.(to|asia))/;
+  const searchLink = /amazon\.co\.jp\/s\?/;
+  const isRelated = kind === 'related';
+
+  // 関連消耗品は一般名のカテゴリなので、検索結果リンク・短縮リンクをそのまま使う。
+  // 比較対象は記事が製品名を名指しするため /dp/<ASIN> に限る。
+  if (isRelated && policy.amazon.relatedLinks?.allowSearchLinks) {
+    const link = [asin, imageUrl].find((v) => shortLink.test(v) || searchLink.test(v));
+    if (link && !/^[A-Z0-9]{10}$/.test(asin)) {
+      bucket.related.push({
+        title: name,
+        url: link,
+        linkType: shortLink.test(link) ? 'short' : 'search',
+        verifiedAt: today(),
+      });
+      continue;
+    }
+  }
+
+  // 比較対象に短縮リンクが入っていた場合は、リンク先が判別できないため採用しない。
   if (shortLink.test(asin)) {
     issues.push({ line: lineNo, name, kind: 'short-link', value: asin });
     asin = '';
   }
-
-  if (!bySlug.has(slug)) bySlug.set(slug, { products: [], related: [] });
-  const bucket = bySlug.get(slug);
 
   if (!asin) { skipped.push(`${slug}: ${name}`); continue; }
   if (!/^[A-Z0-9]{10}$/.test(asin)) {

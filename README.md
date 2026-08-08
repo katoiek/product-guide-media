@@ -1,6 +1,15 @@
-# product-guide-media
+# えらびノート / product-guide-media
 
-日本語の一般商品ガイド（準備中）用 Astro 静的サイトです。現時点では、特定商品の推奨・性能比較・価格情報・レビュー・広告リンクを掲載しません。
+「何を買うか」は決まっているが、複数メーカーの製品から選べない人のための、日本語一般商品比較メディアです。
+
+- 公開URL: https://erabi-note.jp/
+- フレームワーク: Astro
+- ホスティング: Cloudflare Pages
+- Production branch: `main`
+
+## 引き継ぎ・運用方針
+
+媒体の目的、記事の公開基準、Amazonアソシエイトの直接リンク・画像要件、Cloudflare Pages設定、既知の制約、次に行う作業は [`docs/HANDOVER.md`](docs/HANDOVER.md) を参照してください。
 
 ## 開発
 
@@ -11,22 +20,31 @@ npm run dev
 
 ## ビルド
 
-共有マウントでの依存関係・ビルドの問題を避けるため、`/tmp` にコピーしてから実行する例です。
+共有マウントでの依存関係・ビルドの問題を避けるため、`/tmp`にコピーしてから実行します。
 
 ```bash
-cp -a /opt/data/workspace/product-guide-media /tmp/product-guide-media-build
-cd /tmp/product-guide-media-build
-npm install
+work="$(mktemp -d /tmp/erabi-build-XXXXXX)"
+cp -a /opt/data/workspace/product-guide-media/. "$work/"
+cd "$work"
+npm install --no-audit --no-fund
 npm run build
 ```
 
-出力先は `dist/` です。Cloudflare Pages 設定は `wrangler.toml` にあり、プロジェクト名は `product-guide-media`、出力ディレクトリは `dist` です。
+出力先は `dist/` です。Cloudflare Pagesのビルド設定は次のとおりです。
 
-## 編集方針
+```text
+Framework preset: Astro
+Build command: npm run build
+Build output directory: dist
+Root directory: (empty)
+```
 
-- カテゴリは情報設計・準備段階としてのみ表示します。
-- 実測していない性能、価格、在庫、第三者評価は掲載しません。
-- 外部レビューや記事を転載・模倣しません。
-- 将来、広告・成果報酬リンクを導入する場合は、掲載位置で明確に開示します。
+## 重要な公開ルール
 
-このリポジトリではデプロイやGitHubリポジトリの作成は行いません。
+- 同じ購入目的の、異なるメーカー／ブランド5〜7製品を比較する。
+- 同一シリーズのサイズ・容量違いだけの記事は公開しない。
+- 仕様・注意事項はメーカー公式情報で確認する。
+- 購入導線には、ASINと一致するAmazonの直接商品リンクだけを使う。検索リンクは使わない。
+- 製品画像は、Amazonプログラムで許可された画像または明示許諾済み画像だけを使う。
+- ASIN、直接リンク、画像利用許諾が欠ける記事は公開しない。
+- 秘密情報をリポジトリへ保存しない。

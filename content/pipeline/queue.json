@@ -30,7 +30,7 @@
       "category": "ペット用品",
       "categorySlug": "pet",
       "type": "comparison",
-      "state": "spec_research",
+      "state": "drafting",
       "specFile": "content/pipeline/specs/cat-litter-clumping-comparison.json",
       "productsFile": "content/pipeline/products/cat-litter-clumping-comparison.json",
       "articleFile": "src/pages/articles/cat-litter-clumping-comparison.astro",
@@ -69,6 +69,11 @@
           "date": "2026-08-08",
           "state": "spec_research",
           "note": "ボンビアルコンは販売終了のため削除。別メーカーの5製品目を調査中"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "ペティオへ差し替え済み。記事を5製品構成で書き直す"
         }
       ],
       "note": "公式仕様・関連消耗品は取得済み。ASIN・購入リンク・商品画像はPA-API未接続のため保留。記事は新構成で書き直し中。",

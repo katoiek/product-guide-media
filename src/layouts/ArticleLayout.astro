@@ -147,16 +147,49 @@ const jsonLd = {
     font-size: 15px;
   }
 
-  /* 比較表。列が多いので、はみ出す幅では横スクロールさせる。 */
+  /* 比較表。列が多く本文幅では日本語が1〜2文字で折り返されるため、本文より広く使う。 */
   .score {
+    width: min(1400px, calc(100vw - 48px));
+    margin: 1.6rem 0 1.6rem 50%;
+    transform: translateX(-50%);
     background: #fff; border: 1px solid var(--line); border-radius: 18px;
-    padding: 6px; margin: 1.4rem 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch;
   }
-  table { width: 100%; border-collapse: collapse; min-width: 620px; font-size: 14px; }
-  th, td { border-bottom: 1px solid var(--line); padding: 13px 14px; text-align: left; vertical-align: top; }
+  /* 横スクロールできることが見て分かるようにスクロールバーを常時表示する。 */
+  .score { scrollbar-color: #b9ccc2 #eef3f0; scrollbar-width: thin; }
+  .score::-webkit-scrollbar { height: 10px; }
+  .score::-webkit-scrollbar-track { background: #eef3f0; border-radius: 999px; }
+  .score::-webkit-scrollbar-thumb { background: #b9ccc2; border-radius: 999px; }
+  .score::-webkit-scrollbar-thumb:hover { background: #9bb3a6; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  /* 日本語の説明文が1〜2文字で折り返されないよう、列に最低幅を持たせる。 */
+  th, td {
+    border-bottom: 1px solid var(--line); padding: 13px 14px;
+    text-align: left; vertical-align: top; min-width: 165px;
+  }
+  /* メーカー名と購入ボタンは短いので、幅を説明列に回す。 */
+  thead th:nth-child(2), tbody td:nth-child(2) { min-width: 96px; }
+  thead th:last-child, tbody td:last-child { min-width: 104px; }
   thead th { background: var(--mist); font-weight: 700; white-space: nowrap; border-bottom: 2px solid var(--mint); }
   tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
   tbody th { width: 30%; background: #fafcfa; font-weight: 600; }
+
+  /* 製品名の列は横スクロール中も残す。どの製品の行かを見失わないようにする。 */
+  .score table thead th:first-child,
+  .score table tbody td:first-child {
+    position: sticky; left: 0; z-index: 1;
+    min-width: 210px; box-shadow: 1px 0 0 var(--line);
+  }
+  .score table tbody td:first-child { background: #fff; }
+  .score table thead th:first-child { background: var(--mist); }
+
+  /* 比較表内の製品セル（画像＋製品名）。 */
+  .cell-product { display: flex; align-items: flex-start; gap: 11px; }
+  .cell-product img {
+    flex: none; width: 56px; height: 56px; object-fit: contain;
+    background: #fafcfa; border-radius: 8px;
+  }
 
   .source {
     font-size: 13px; color: var(--muted); background: #fff; border: 1px solid var(--line);
@@ -217,6 +250,16 @@ const jsonLd = {
     .nav-links { gap: 14px; font-size: 12px; }
     .article { padding: 32px 0 56px; }
     h2 { margin-top: 2.6rem; }
+    /* 画面が狭いときは本文と同じ幅に戻し、横スクロールで読ませる。 */
+    .score { width: 100%; margin-left: 0; transform: none; }
+    th, td { min-width: 150px; padding: 11px 12px; font-size: 13px; }
+    thead th:nth-child(2), tbody td:nth-child(2) { min-width: 84px; }
+    thead th:last-child, tbody td:last-child { min-width: 96px; }
+    /* 固定列が画面の半分を占めると中身が読めないため、幅を詰めて画像は省く。
+       商品画像は下の製品カードにも出るので、表から消えても情報は失われない。 */
+    .score table thead th:first-child,
+    .score table tbody td:first-child { min-width: 132px; }
+    .cell-product img { display: none; }
     .product { grid-template-columns: 92px 1fr; gap: 14px; padding: 15px 16px; }
     .product img { width: 92px; height: 92px; }
     .product .buy { grid-column: 1 / -1; justify-content: center; }

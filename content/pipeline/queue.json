@@ -30,7 +30,7 @@
       "category": "ペット用品",
       "categorySlug": "pet",
       "type": "comparison",
-      "state": "assets_pending",
+      "state": "published",
       "specFile": "content/pipeline/specs/cat-litter-clumping-comparison.json",
       "productsFile": "content/pipeline/products/cat-litter-clumping-comparison.json",
       "articleFile": "src/pages/articles/cat-litter-clumping-comparison.astro",
@@ -79,9 +79,23 @@
           "date": "2026-08-08",
           "state": "assets_pending",
           "note": "ペティオ差し替えで記事更新。ASIN1件待ち"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "drafting",
+          "note": "ペティオASIN取得済み。購入導線を追加する"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "gate",
+          "note": "購入導線・商品画像・関連リンクを追加"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "published",
+          "note": "購入導線・表内画像を掲載"
         }
       ],
-      "note": "公式仕様・関連消耗品は取得済み。ASIN・購入リンク・商品画像はPA-API未接続のため保留。記事は新構成で書き直し中。",
       "relatedCandidates": [
         "猫用トイレ消臭シート",
         "猫トイレ用スコップ",
@@ -99,7 +113,7 @@
       "category": "キッチン",
       "categorySlug": "kitchen",
       "type": "comparison",
-      "state": "gate",
+      "state": "published",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -138,9 +152,13 @@
           "date": "2026-08-08",
           "state": "gate",
           "note": "購入導線・商品画像を追加"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "published",
+          "note": "購入導線・表内画像を掲載"
         }
       ],
-      "note": "公式仕様6社（花王/ライオン/P&G/フィニッシュ/シャボン玉石けん/サラヤ）検証済み。ジョンソンは該当製品が公式で確認できずサラヤへ差し替え。",
       "relatedCandidates": [
         "食洗機用庫内クリーナー",
         "食洗機用乾燥仕上げ剤"
@@ -160,7 +178,7 @@
       "category": "清掃",
       "categorySlug": "cleaning",
       "type": "comparison",
-      "state": "gate",
+      "state": "published",
       "brandCandidates": [
         "花王",
         "ライオン",
@@ -199,9 +217,13 @@
           "date": "2026-08-08",
           "state": "gate",
           "note": "購入導線・商品画像を追加"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "published",
+          "note": "購入導線・表内画像を掲載"
         }
       ],
-      "note": "公式仕様6社（花王/ライオン/P&G/NSファーファ/ミヨシ石鹸/シャボン玉石けん）検証済み。",
       "relatedCandidates": [
         "柔軟剤",
         "洗濯槽クリーナー",
@@ -222,7 +244,7 @@
       "category": "キッチン",
       "categorySlug": "kitchen",
       "type": "comparison",
-      "state": "gate",
+      "state": "published",
       "brandCandidates": [
         "3M スコッチブライト",
         "レック",
@@ -261,9 +283,13 @@
           "date": "2026-08-08",
           "state": "gate",
           "note": "購入導線・商品画像を追加"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "published",
+          "note": "購入導線・表内画像を掲載"
         }
       ],
-      "note": "公式仕様6社（レック/オーエ/ダスキン/マーナ/キクロン/サンベルム）検証済み。3M・山崎産業は公式ページ未確認のため除外。",
       "relatedCandidates": [
         "食器用洗剤",
         "スポンジホルダー"

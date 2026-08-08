@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(node tools/queue.mjs:*)",
+      "Bash(node tools/gate.mjs:*)",
+      "Bash(node tools/validate-article.mjs:*)",
+      "Bash(node tools/validate-products.mjs:*)",
+      "Bash(node tools/amazon-fetch.mjs:*)",
+      "Bash(node tools/ingest-sitestripe.mjs:*)",
+      "Bash(npm run build)",
+      "Bash(npm install:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(curl -sS -o /dev/null -w * -L https://erabi-note.jp/*)",
+      "WebFetch(domain:erabi-note.jp)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/*.pem)",
+      "Bash(git push --force:*)",
+      "Bash(git add -A:*)",
+      "Bash(git add .:*)"
+    ]
+  }
+}

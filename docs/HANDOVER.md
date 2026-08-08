@@ -146,19 +146,16 @@ Cloudflare Web Analyticsは有効化済み。`erabi-note.jp`上でCloudflare公�
 
 ### ローカルビルド
 
-`/opt/data` の共有マウントでは、AstroビルドやGit lockが`EPERM`になる場合がある。ビルドは`/tmp`へコピーして実行する。
-
 ```bash
-work="$(mktemp -d /tmp/erabi-build-XXXXXX)"
-cp -a /opt/data/workspace/product-guide-media/. "$work/"
-cd "$work"
 npm install --no-audit --no-fund
 npm run build
 ```
 
+（旧引き継ぎ書にあった `/opt/data` 共有マウントでの `EPERM` 回避手順は、その環境が現存しないため削除した。）
+
 ### Git操作
 
-共有マウント上のGit lock問題を避けるため、Git操作もネイティブLinux領域の`/tmp`コピーで行う。削除したファイルが作業コピーに残らないよう、削除対象を明示してから同期・commitする。
+`git add -A` は使わず、追加するパスを毎回明示する。削除したファイルが作業コピーに残らないよう、削除対象を明示してから commit する。push 前に `git status --short` で `.env` などの意図しないファイルが含まれていないことを確認する。
 
 ### 本番確認
 
@@ -173,42 +170,43 @@ curl -sS -o /dev/null -w 'status=%{http_code}\n' -L \
 
 ## 7. アフィリエイト処理の実装
 
-関連プロジェクト:
+**運用手順の詳細は [`docs/AUTOMATION.md`](./AUTOMATION.md) を参照する。** 本節は要点のみ。
 
-```text
-/opt/data/affiliate_agent
-```
+以前の引き継ぎ書は、外部サンドボックス上の Python プロジェクト `/opt/data/affiliate_agent` を参照していた。
+そのコードはリポジトリに含まれておらず再現できないため、**Node.js（サイトと同じスタック、依存追加なし）でリポジトリ内に作り直した**。
 
-主要ファイル:
-
-| ファイル | 役割 |
+| パス | 役割 |
 | --- | --- |
-| `affiliate_agent/amazon_catalog.py` | 正規Amazon商品データの正規化、画像許諾確認、記事アーティファクト生成 |
-| `affiliate_agent/amazon_runtime.py` | Creators API認証情報を保護領域から読む境界 |
-| `publish-policy.yaml` | 公開／隔離ポリシー |
-| `tests/test_amazon_catalog.py` | ASIN直リンク・画像許諾の検証テスト |
+| `content/pipeline/policy.json` | 機械可読の公開ポリシー（唯一の正） |
+| `content/pipeline/queue.json` | 企画キューと状態機械 |
+| `content/pipeline/specs/<slug>.json` | メーカー公式仕様（記事の根拠） |
+| `content/pipeline/products/<slug>.json` | ASIN・直接リンク・許諾済み画像 |
+| `tools/amazon-fetch.mjs` | PA-API v5（SigV4署名）でのASIN・商品画像取得 |
+| `tools/ingest-sitestripe.mjs` | PA-API未接続時のSiteStripe取り込み |
+| `tools/validate-products.mjs` | ASIN直リンク・タグ一致・画像許諾の検証 |
+| `tools/validate-article.mjs` | 記事の構成・表現・根拠・サイト内導線の検証 |
+| `tools/gate.mjs` | 上記＋`astro build` をまとめた公開ゲート |
+| `tools/queue.mjs` | キュー操作（status / next / set / add） |
+| `.claude/agents/erabi-*.md` | 工程別エージェント5体 |
+| `.claude/skills/erabi-pipeline/SKILL.md` | パイプラインのオーケストレータ |
 
 Amazon商品正規化では、`/dp/<ASIN>`形式でASINと一致し、`tag`パラメータを持つURLだけを許可する。検索URLは拒否する。
 
-テストは共有マウントの権限問題を避け、次のように実行できる。
+検証は次で実行する。
 
 ```bash
-cd /opt/data/affiliate_agent
-export UV_CACHE_DIR=/tmp/erabi-uv-cache
-export PYTHONPATH=/opt/data/affiliate_agent
-uv run --isolated --with pytest pytest -q -p no:cacheprovider tests
-```
-
-最新確認時点の結果:
-
-```text
-16 passed
+npm install --no-audit --no-fund
+npm run gate          # 商品 + 記事 + ビルド
+npm run gate:fast     # ビルドを省略
 ```
 
 ## 8. 調査キューと自動公開の状態
 
-- 食洗機用洗剤、洗濯用液体洗剤、キッチンスポンジの他社5製品調査を開始したが、直近の実行は外部接続エラーで終了した。仕様データは取得できていないため、記事化・公開していない。再実行時もメーカー公式ページだけを根拠にする。
-- 記事自動公開ジョブは停止状態。未検証の商品、画像、Amazonリンクを含む記事を本番へ自動公開しない。
+キューの実体は `content/pipeline/queue.json`。現在の状態は `npm run queue status` で確認する。
+
+- 猫砂記事（`assets_pending`）: 公開済みだが、仕様データに各製品の**メーカー公式ページURLが未記録**のため公開ゲートで落ちる。ASIN・画像も未取得で購入導線なし。
+- 食洗機用洗剤、洗濯用液体洗剤、キッチンスポンジ（`spec_research`）: 前回の調査が外部接続エラーで中断し、仕様データ未取得。再実行時もメーカー公式ページだけを根拠にする。
+- 定期実行ワークフロー `.github/workflows/pipeline.yml` は、`ANTHROPIC_API_KEY` が未設定の間スキップされる。未検証の商品・画像・Amazonリンクを含む記事は、ゲートで機械的に止まるため本番へ出ない。
 - 新しい比較記事は、公式仕様の調査 → ASIN・直接リンク・画像の正規取得 → 公開ゲート通過 → ビルド確認 → GitHub push の順で処理する。
 
 ## 9. 現在の優先順位
@@ -219,7 +217,7 @@ uv run --isolated --with pytest pytest -q -p no:cacheprovider tests
 4. それぞれの商品アセットがそろった記事だけを公開する。
 5. 公開後も仕様・購入条件の変更を確認し、根拠のない価格・性能・レビュー記述を追加しない。
 
-## 9. 次担当者への注意
+## 10. 次担当者への注意
 
 - 秘密値をチャット、Git、ログ、公開サイト、Markdownへ書かない。
 - 製品写真を使う要求があっても、許諾不明のメーカー画像・検索結果画像を掲載しない。

@@ -1,0 +1,75 @@
+name: パイプライン自動実行
+
+# えらびノートのアフィリエイト記事パイプラインを定期実行する。
+#
+# 有効化の条件（どれか欠けるとジョブはスキップされる）:
+#   1. リポジトリ Secrets に ANTHROPIC_API_KEY を登録する
+#   2. Amazon PA-API を使う場合は AMAZON_ACCESS_KEY / AMAZON_SECRET_KEY /
+#      AMAZON_ASSOCIATE_TAG も Secrets に登録する
+#   3. Settings > Actions > General > Workflow permissions を
+#      "Read and write permissions" にする（エージェントが main へ push するため）
+#
+# 手動実行だけにしたい場合は、下の schedule ブロックをコメントアウトする。
+
+on:
+  schedule:
+    - cron: '0 22 * * 1,4' # 毎週 月・木 07:00 JST（UTC 22:00 前日）
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: '進めたい slug（空ならキューの最優先1件）'
+        required: false
+        default: ''
+
+concurrency:
+  group: erabi-pipeline
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+
+      - name: 開始前のキュー状態
+        run: node tools/queue.mjs status
+
+      - name: パイプラインを1周回す
+        uses: anthropics/claude-code-action@v1
+        env:
+          AMAZON_ACCESS_KEY: ${{ secrets.AMAZON_ACCESS_KEY }}
+          AMAZON_SECRET_KEY: ${{ secrets.AMAZON_SECRET_KEY }}
+          AMAZON_ASSOCIATE_TAG: ${{ secrets.AMAZON_ASSOCIATE_TAG }}
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: '--max-turns 80'
+          prompt: |
+            .claude/skills/erabi-pipeline/SKILL.md の手順に従って、
+            えらびノートの記事パイプラインを1周回してください。
+
+            対象 slug: ${{ github.event.inputs.slug || '(指定なし。node tools/queue.mjs next の結果に従う)' }}
+
+            守ること:
+            - content/pipeline/policy.json を変更しない
+            - 検証をスキップして公開しない
+            - PA-API の認証情報が無い場合は推測でリンクを作らず blocked にして止まる
+            - 同じ state で2回進まなければ止めて報告する
+
+      - name: 終了後のキュー状態
+        if: always()
+        run: node tools/queue.mjs status
+
+      - name: 公開ゲート再検証
+        if: always()
+        run: node tools/gate.mjs

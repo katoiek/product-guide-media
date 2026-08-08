@@ -11,6 +11,17 @@
 
 媒体の目的、記事の公開基準、Amazonアソシエイトの直接リンク・画像要件、Cloudflare Pages設定、既知の制約、次に行う作業は [`docs/HANDOVER.md`](docs/HANDOVER.md) を参照してください。
 
+## 記事パイプラインの自動化
+
+企画から公開までを、工程別エージェント5体と機械的な公開ゲートで回します。仕組みと運用手順は [`docs/AUTOMATION.md`](docs/AUTOMATION.md) を参照してください。
+
+```bash
+npm run queue status   # キューの状態
+npm run gate           # 公開ゲート（商品 + 記事 + ビルド）
+```
+
+Claude Code からは `/erabi-pipeline` で1周回せます。
+
 ## 開発
 
 ```bash
@@ -20,12 +31,7 @@ npm run dev
 
 ## ビルド
 
-共有マウントでの依存関係・ビルドの問題を避けるため、`/tmp`にコピーしてから実行します。
-
 ```bash
-work="$(mktemp -d /tmp/erabi-build-XXXXXX)"
-cp -a /opt/data/workspace/product-guide-media/. "$work/"
-cd "$work"
 npm install --no-audit --no-fund
 npm run build
 ```

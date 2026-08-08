@@ -1,0 +1,23 @@
+name: 公開ゲート
+
+# 記事・商品データ・ビルドの検証。シークレット不要で、push と PR のたびに走る。
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: キュー状態
+        run: node tools/queue.mjs status
+      - name: 公開ゲート（検証 + ビルド）
+        run: node tools/gate.mjs

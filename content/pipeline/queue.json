@@ -1,0 +1,157 @@
+{
+  "updated": "2026-08-08",
+  "states": [
+    "idea",
+    "spec_research",
+    "assets_pending",
+    "drafting",
+    "gate",
+    "published",
+    "blocked"
+  ],
+  "types": {
+    "comparison": "異なる5〜7ブランドの製品比較記事。アフィリエイト導線を持つ。仕様データ・商品アセット・公開ゲートの全条件が必要。",
+    "guide": "具体商品のアフィリエイト導線を持たない一般ガイド。表現・ジャンル・サイト内導線のみ検証する。"
+  },
+  "items": [
+    {
+      "slug": "cat-litter-clumping-comparison",
+      "title": "猫砂の比較｜固まるタイプ5製品を鉱物・紙・おから系で比べる",
+      "category": "ペット用品",
+      "categorySlug": "pet",
+      "type": "comparison",
+      "state": "assets_pending",
+      "specFile": "content/pipeline/specs/cat-litter-clumping-comparison.json",
+      "productsFile": "content/pipeline/products/cat-litter-clumping-comparison.json",
+      "articleFile": "src/pages/articles/cat-litter-clumping-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "assets_pending",
+          "note": "既存記事をパイプライン管理下に取り込み"
+        }
+      ],
+      "note": "5製品のASIN・直接商品リンク・許諾済み画像が未取得。記事は公開済みだが購入導線と製品画像は未掲載。"
+    },
+    {
+      "slug": "dishwasher-detergent-comparison",
+      "title": "食洗機用洗剤の比較",
+      "category": "キッチン",
+      "categorySlug": "kitchen",
+      "type": "comparison",
+      "state": "spec_research",
+      "brandCandidates": [
+        "花王",
+        "ライオン",
+        "P&G",
+        "ジョンソン",
+        "シャボン玉石けん",
+        "フィニッシュ"
+      ],
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "spec_research",
+          "note": "引き継ぎ書の調査キューから移行"
+        }
+      ],
+      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。"
+    },
+    {
+      "slug": "laundry-liquid-detergent-comparison",
+      "title": "洗濯用液体洗剤の比較",
+      "category": "清掃",
+      "categorySlug": "cleaning",
+      "type": "comparison",
+      "state": "spec_research",
+      "brandCandidates": [
+        "花王",
+        "ライオン",
+        "P&G",
+        "NSファーファ",
+        "ミヨシ石鹸",
+        "シャボン玉石けん"
+      ],
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "spec_research",
+          "note": "引き継ぎ書の調査キューから移行"
+        }
+      ],
+      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。"
+    },
+    {
+      "slug": "kitchen-sponge-comparison",
+      "title": "キッチンスポンジの比較",
+      "category": "キッチン",
+      "categorySlug": "kitchen",
+      "type": "comparison",
+      "state": "spec_research",
+      "brandCandidates": [
+        "3M スコッチブライト",
+        "レック",
+        "オーエ",
+        "ダスキン",
+        "マーナ",
+        "山崎産業"
+      ],
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "spec_research",
+          "note": "引き継ぎ書の調査キューから移行"
+        }
+      ],
+      "note": "前回の調査が外部接続エラーで中断。公式仕様データ未取得。"
+    },
+    {
+      "slug": "bousai-supplies-checklist",
+      "title": "防災用品をそろえる前に確認する5項目",
+      "category": "防災用品",
+      "categorySlug": "disaster",
+      "type": "guide",
+      "state": "published",
+      "articleFile": "src/pages/articles/bousai-supplies-checklist.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "published",
+          "note": "既存の一般ガイドを管理下に取り込み"
+        }
+      ]
+    },
+    {
+      "slug": "storage-box-sizing",
+      "title": "収納ボックスは買う前の採寸で決まる",
+      "category": "収納用品",
+      "categorySlug": "storage",
+      "type": "guide",
+      "state": "published",
+      "articleFile": "src/pages/articles/storage-box-sizing.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "published",
+          "note": "既存の一般ガイドを管理下に取り込み"
+        }
+      ]
+    },
+    {
+      "slug": "keyboard-selection-axis",
+      "title": "キーボード選びの評価軸",
+      "category": "PC周辺機器",
+      "categorySlug": "pc",
+      "type": "guide",
+      "state": "published",
+      "articleFile": "src/pages/articles/keyboard-selection-axis.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "published",
+          "note": "既存の一般ガイドを管理下に取り込み"
+        }
+      ]
+    }
+  ]
+}

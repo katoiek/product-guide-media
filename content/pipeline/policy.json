@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "site": {
+    "origin": "https://erabi-note.jp",
+    "associateTagEnv": "AMAZON_ASSOCIATE_TAG"
+  },
+  "comparison": {
+    "minProducts": 5,
+    "maxProducts": 7,
+    "minDistinctBrands": 5,
+    "rejectSameSeriesVariants": true
+  },
+  "blockedCategories": [
+    { "id": "finance", "label": "クレジットカード・ローン・保険・投資", "patterns": ["クレジットカード", "カードローン", "キャッシング", "生命保険", "医療保険", "自動車保険", "投資信託", "NISA", "iDeCo", "FX", "暗号資産"] },
+    { "id": "career", "label": "転職・求人", "patterns": ["転職", "求人", "人材紹介", "エージェント登録"] },
+    { "id": "medical", "label": "医療", "patterns": ["医薬品", "処方", "サプリメント", "診断", "治療", "副作用"] },
+    { "id": "legal", "label": "法律", "patterns": ["弁護士", "債務整理", "過払い金", "示談"] },
+    { "id": "health-claim", "label": "健康効果をうたう商品", "patterns": ["痩せる", "免疫力", "デトックス", "血糖値", "アンチエイジング"] }
+  ],
+  "text": {
+    "deny": [
+      { "id": "absolute-effect", "pattern": "必ず(効|落ち|固ま|取れ|消え|防げ|安全|きれい)", "reason": "効果の断定" },
+      { "id": "absolute-guarantee", "pattern": "絶対に?(安全|落ちる|効く|大丈夫|失敗しない)", "reason": "結果保証" },
+      { "id": "percent-claim", "pattern": "100(%|％)(の|安全|除去|消臭|効果)", "reason": "数値による効果保証" },
+      { "id": "everyone", "pattern": "誰にでも(合|効|向いて|おすすめ)", "reason": "万人向けの断定" },
+      { "id": "effect-claim", "pattern": "効果が(あります|保証|確実)", "reason": "効果の断定" },
+      { "id": "superlative", "pattern": "(最強|No\\.?\\s?1|ナンバーワン|業界一|人気No)", "reason": "根拠のない最上級表現" },
+      { "id": "firsthand", "pattern": "(実際に使っ|使ってみ|使用感|使い心地は|体感で|実測(値|し))", "reason": "未実使用の体験談・実測記述" },
+      { "id": "review-digest", "pattern": "(レビューによる|口コミ(では|によ|を見る)|評判は|星\\d(\\.\\d)?)", "reason": "レビューの要約・転載" },
+      { "id": "price-claim", "pattern": "(最安|激安|コスパ最強|円で買え(る|ます))", "reason": "変動する価格を比較根拠にしている" }
+    ],
+    "warn": [
+      { "id": "vague-recommend", "pattern": "(おすすめです|一番よい|ベストな選択)", "reason": "根拠の弱い推奨表現" },
+      { "id": "soft-absolute", "pattern": "(必ず|絶対)", "reason": "断定語の使用箇所（文脈確認）" }
+    ]
+  },
+  "amazon": {
+    "allowedHosts": ["www.amazon.co.jp", "amzn.to"],
+    "directLinkPattern": "^https://www\\.amazon\\.co\\.jp/dp/([A-Z0-9]{10})(/)?\\?[^\\s]*\\btag=[^&\\s]+",
+    "rejectPatterns": [
+      { "id": "search-link", "pattern": "amazon\\.co\\.jp/s\\?", "reason": "検索結果リンクは商品リンクにできない" },
+      { "id": "gp-product", "pattern": "amazon\\.co\\.jp/gp/product", "reason": "/dp/<ASIN> 形式に正規化していない" }
+    ],
+    "allowedImageLicenses": ["amazon_program_content"],
+    "requiredProductFields": ["asin", "title", "brand", "url", "imageUrl", "imageLicense", "verifiedAt"]
+  },
+  "sources": {
+    "requireOfficialSpecUrl": true,
+    "requireVerifiedDate": true,
+    "maxSpecAgeDays": 180
+  },
+  "publish": {
+    "requireBuildPass": true,
+    "requireIndexEntry": true,
+    "requireSitemapEntry": true,
+    "autoPushBranch": "main"
+  }
+}

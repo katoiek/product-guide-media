@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "queue": "node tools/queue.mjs",
+    "gate": "node tools/gate.mjs",
+    "gate:fast": "node tools/gate.mjs --no-build",
+    "validate:articles": "node tools/validate-article.mjs",
+    "validate:products": "node tools/validate-products.mjs"
   },
   "dependencies": {
     "astro": "^5.16.6"

@@ -400,7 +400,7 @@
         "splitPoint": "対応するトイレ本体の指定、交換頻度の公式案内、シート寸法"
       },
       "type": "comparison",
-      "state": "assets_pending",
+      "state": "gate",
       "specFile": "content/pipeline/specs/cat-litter-deodorizing-sheet-comparison.json",
       "productsFile": "content/pipeline/products/cat-litter-deodorizing-sheet-comparison.json",
       "articleFile": "src/pages/articles/cat-litter-deodorizing-sheet-comparison.astro",
@@ -430,6 +430,11 @@
           "date": "2026-08-09",
           "state": "assets_pending",
           "note": "記事は公開済み。ASIN取得待ち"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "gate",
+          "note": "対応区分の訂正を反映して改稿。購入導線はASIN取得後"
         }
       ],
       "profile": "consumable"

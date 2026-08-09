@@ -1,0 +1,92 @@
+{
+  "slug": "laundry-bleach-comparison",
+  "source": "manual-asin",
+  "associateTag": "erabinote-22",
+  "verifiedAt": "2026-08-09",
+  "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
+  "products": [
+    {
+      "asin": "B002RK52TA",
+      "title": "ハイター　小",
+      "brand": "花王",
+      "url": "https://www.amazon.co.jp/dp/B002RK52TA?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/51XvL8uwdEL._AC_SL1024_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0C9465YD2",
+      "title": "ワイドハイター　ＥＸパワー　本体",
+      "brand": "花王",
+      "url": "https://www.amazon.co.jp/dp/B0C9465YD2?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71uZ1eU6j1L._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0CBMWJGF5",
+      "title": "ワイドハイター　ＰＲＯリキッド　抗菌　本体",
+      "brand": "花王",
+      "url": "https://www.amazon.co.jp/dp/B0CBMWJGF5?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71NTO7phrnL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0DXF1S3YV",
+      "title": "カネヨブリーチ (S)",
+      "brand": "カネヨ石鹸株式会社",
+      "url": "https://www.amazon.co.jp/dp/B0DXF1S3YV?tag=erabinote-22",
+      "imageUrl": "",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0CQCPN854",
+      "title": "ブライトSTRONG",
+      "brand": "ライオン株式会社",
+      "url": "https://www.amazon.co.jp/dp/B0CQCPN854?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/31nyOkGhFAL._AC_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0088B6KXE",
+      "title": "ランドリークラブ カラーブリーチ 詰替用 720ml",
+      "brand": "第一石鹸",
+      "url": "https://www.amazon.co.jp/dp/B0088B6KXE?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/81OXHe+EM2L._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B08T6WTVBG",
+      "title": "オキシクリーン 500g",
+      "brand": "グラフィコ",
+      "url": "https://www.amazon.co.jp/dp/B08T6WTVBG?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/711rDLKaaSL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    }
+  ],
+  "related": [
+    {
+      "title": "洗濯用液体洗剤",
+      "url": "https://link.amazon/B0cyjVzXQ",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "title": "洗濯槽クリーナー",
+      "url": "https://link.amazon/B0cup379X",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "title": "ゴム手袋",
+      "url": "https://link.amazon/B08SDVily",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    }
+  ]
+}

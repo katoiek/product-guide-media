@@ -433,7 +433,7 @@
         "splitPoint": "酸素系と塩素系の使い分け、色柄物への可否、素材別の使用不可（ウール・絹・金属など）"
       },
       "type": "comparison",
-      "state": "assets_pending",
+      "state": "published",
       "specFile": "content/pipeline/specs/laundry-bleach-comparison.json",
       "productsFile": "content/pipeline/products/laundry-bleach-comparison.json",
       "articleFile": "src/pages/articles/laundry-bleach-comparison.astro",
@@ -457,6 +457,21 @@
           "date": "2026-08-09",
           "state": "assets_pending",
           "note": "衣料用に限定して6製品・5社(花王2/カネヨ/ライオン/ミツエイ/ロケット石鹸)を確認"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "drafting",
+          "note": "7製品5社・関連3件のASIN取得済み"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "gate",
+          "note": "新規執筆。購入導線あり"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "published",
+          "note": "7製品5社・購入導線あり"
         }
       ],
       "note": "衣料用に限定して7製品・5社（塩素系4/酸素系3）。全製品の公式ページを突き合わせ検証済み。"

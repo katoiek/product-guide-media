@@ -20,6 +20,25 @@ const cell = (v) => {
 };
 const row = (cols) => cols.map(cell).join(',');
 
+/** 引用符つきセルに対応した1行パーサ。"1,500ml" のような値を壊さない。 */
+function parseCsvLine(line) {
+  const cols = [];
+  let cur = '';
+  let quoted = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (quoted) {
+      if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+      else if (ch === '"') quoted = false;
+      else cur += ch;
+    } else if (ch === '"') quoted = true;
+    else if (ch === ',') { cols.push(cur); cur = ''; }
+    else cur += ch;
+  }
+  cols.push(cur);
+  return cols.map((c) => c.trim());
+}
+
 /** 「メーカー｜製品名」からメーカー名を取り出す。 */
 const brandOf = (name) => {
   const i = (name ?? '').indexOf('｜');
@@ -34,18 +53,26 @@ const brandOf = (name) => {
 function existingEntries() {
   const byName = new Map();
   const byBrand = new Map();
+  const brandCount = new Map();
   if (!existsSync(OUT_PATH)) return { byName, byBrand };
   for (const line of readFileSync(OUT_PATH, 'utf8').split(/\r?\n/)) {
     if (!line || line.startsWith('#')) continue;
-    const cols = line.split(',').map((c) => c.replace(/^"|"$/g, '').trim());
+    const cols = parseCsvLine(line);
     const [slug, , kind, name, asin = '', imageUrl = ''] = cols;
     if (!slug || slug === 'slug' || /^Column\d+$/.test(slug)) continue;
     if (!asin && !imageUrl) continue;
     const entry = { asin, imageUrl, name };
     byName.set(`${slug}\t${name}`, entry);
     const brand = brandOf(name);
-    if (kind === 'product' && brand) byBrand.set(`${slug}\t${brand}`, entry);
+    if (kind === 'product' && brand) {
+      const key = `${slug}\t${brand}`;
+      brandCount.set(key, (brandCount.get(key) ?? 0) + 1);
+      byBrand.set(key, entry);
+    }
   }
+  // 同じメーカーが複数製品ある場合、メーカー名だけでは製品を特定できない。
+  // 取り違えると別製品のASINを引き当てるので、その場合は使わない。
+  for (const [key, n] of brandCount) if (n > 1) byBrand.delete(key);
   return { byName, byBrand };
 }
 
@@ -104,18 +131,25 @@ for (const slug of targets) {
   }
   for (const p of products?.related ?? []) jsonByTitle.set(p.title, p);
 
+  // 仕様データ側でも同じメーカーが複数あるなら、メーカー名での引き当ては使えない。
+  const specBrandCount = new Map();
+  for (const p of spec.products ?? []) {
+    specBrandCount.set(p.brand, (specBrandCount.get(p.brand) ?? 0) + 1);
+  }
+
   /** specName に対応する記入済みの値を探す。名前 → メーカー → 商品データ の順。 */
   const pick = (specName, kind) => {
     const brand = brandOf(specName);
+    const brandUsable = kind === 'product' && brand && specBrandCount.get(brand) === 1;
     const fromCsv =
       prev.byName.get(`${slug}\t${specName}`) ??
-      (kind === 'product' && brand ? prev.byBrand.get(`${slug}\t${brand}`) : undefined);
+      (brandUsable ? prev.byBrand.get(`${slug}\t${brand}`) : undefined);
     if (fromCsv) {
       carried++;
       return { asin: fromCsv.asin, imageUrl: fromCsv.imageUrl, name: fromCsv.name || specName };
     }
     const bare = specName.includes('｜') ? specName.slice(specName.indexOf('｜') + 1) : specName;
-    const fromJson = jsonByTitle.get(bare) ?? (kind === 'product' && brand ? jsonByBrand.get(brand) : undefined);
+    const fromJson = jsonByTitle.get(bare) ?? (brandUsable ? jsonByBrand.get(brand) : undefined);
     if (fromJson) {
       carried++;
       return { asin: fromJson.asin ?? fromJson.url ?? '', imageUrl: fromJson.imageUrl ?? '', name: specName };

@@ -1,0 +1,83 @@
+{
+  "slug": "cat-litter-deodorizing-sheet-comparison",
+  "source": "manual-asin",
+  "associateTag": "erabinote-22",
+  "verifiedAt": "2026-08-09",
+  "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
+  "products": [
+    {
+      "asin": "B0CYZH44R2",
+      "title": "デオトイレ 消臭・抗菌シート",
+      "brand": "ユニ・チャーム",
+      "url": "https://www.amazon.co.jp/dp/B0CYZH44R2?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71s4crKw7fL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B01I1G7HC8",
+      "title": "脱臭・抗菌シート",
+      "brand": "エステー株式会社（ニャンとも清潔トイレ）",
+      "url": "https://www.amazon.co.jp/dp/B01I1G7HC8?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/81CIt91femL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0DJ2CD97J",
+      "title": "ラクリーン システムトイレ用消臭シート",
+      "brand": "アイリスオーヤマ",
+      "url": "https://www.amazon.co.jp/dp/B0DJ2CD97J?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/61nF3HDcktL._AC_SL1000_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0F94D3646",
+      "title": "システムトイレ用炭の超脱臭シート 20枚",
+      "brand": "株式会社スーパーキャット",
+      "url": "https://www.amazon.co.jp/dp/B0F94D3646?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/51yGcMdIEgL._AC_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0CNTMX8CS",
+      "title": "システムトイレ用 ネオシーツ STグリーンティー20枚",
+      "brand": "株式会社コーチョー（ネオ・ルーライフ）",
+      "url": "https://www.amazon.co.jp/dp/B0CNTMX8CS?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/61Kll9ijblL._AC_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0F94BGP3Q",
+      "title": "クリーンミュウ 猫のシステムトイレ用ひのきの香りシート34枚",
+      "brand": "シーズイシハラ株式会社",
+      "url": "https://www.amazon.co.jp/dp/B0F94BGP3Q?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/51EEJJs-g1L._AC_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    }
+  ],
+  "related": [
+    {
+      "title": "システムトイレ用猫砂",
+      "url": "https://link.amazon/B0h6ECTAc",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "title": "猫用トイレ本体（システムトイレ）",
+      "url": "https://link.amazon/B0hvulmJb",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "title": "ペット用消臭スプレー",
+      "url": "https://link.amazon/B03dmHAM4",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    }
+  ]
+}

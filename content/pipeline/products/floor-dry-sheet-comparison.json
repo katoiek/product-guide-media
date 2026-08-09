@@ -1,0 +1,74 @@
+{
+  "slug": "floor-dry-sheet-comparison",
+  "source": "manual-asin",
+  "associateTag": "erabinote-22",
+  "verifiedAt": "2026-08-09",
+  "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
+  "products": [
+    {
+      "asin": "B00YQT97FA",
+      "title": "クイックルワイパー　ドライシート　２０枚入",
+      "brand": "花王",
+      "url": "https://www.amazon.co.jp/dp/B00YQT97FA?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/81slnQdxa8L._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B00NSKXIBW",
+      "title": "激落ち　立体ドライシート　20枚入",
+      "brand": "レック株式会社",
+      "url": "https://www.amazon.co.jp/dp/B00NSKXIBW?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/51qdLiBbeZL._AC_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B002PAQDAO",
+      "title": "コンドル　フローリング用ドライシートＥ　３０枚入×２",
+      "brand": "山崎産業株式会社",
+      "url": "https://www.amazon.co.jp/dp/B002PAQDAO?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71JGChpXhtL._AC_SL1443_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B09R3T29QK",
+      "title": "フローリングワイパー用ドライシート　30枚入り　FWS-D30",
+      "brand": "アイリスオーヤマ株式会社",
+      "url": "https://www.amazon.co.jp/dp/B09R3T29QK?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/512TbItvP+L._AC_SL1000_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0CNCVSS6W",
+      "title": "フロア用ドライシート　18枚／34枚入り　＜各社共通タイプ＞",
+      "brand": "ユニ・チャーム株式会社",
+      "url": "https://www.amazon.co.jp/dp/B0CNCVSS6W?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/415m+ITSWfL._AC_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
+    }
+  ],
+  "related": [
+    {
+      "title": "フロアワイパー本体",
+      "url": "https://link.amazon/B0gXXR1sF",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "title": "フロア用ウェットシート",
+      "url": "https://link.amazon/B0hXfE95G",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "title": "粘着カーペットクリーナー（コロコロ）",
+      "url": "https://link.amazon/B0gZkvwlX",
+      "linkType": "short",
+      "verifiedAt": "2026-08-09"
+    }
+  ]
+}

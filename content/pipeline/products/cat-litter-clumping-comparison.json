@@ -2,7 +2,7 @@
   "slug": "cat-litter-clumping-comparison",
   "source": "manual-asin",
   "associateTag": "erabinote-22",
-  "verifiedAt": "2026-08-08",
+  "verifiedAt": "2026-08-09",
   "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
   "products": [
     {
@@ -12,7 +12,16 @@
       "url": "https://www.amazon.co.jp/dp/B000T94UL2?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71tEmybiELL._AC_SX679_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B00JGFZBTU",
+      "title": "ニオイをとるおから砂 5L",
+      "brand": "ライオンペット",
+      "url": "https://www.amazon.co.jp/dp/B00JGFZBTU?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/817jzl65tZL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B07PC5RYZM",
@@ -21,7 +30,7 @@
       "url": "https://www.amazon.co.jp/dp/B07PC5RYZM?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/719ouRyj9AL._AC_SL1000_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0GNLMJZK8",
@@ -30,7 +39,7 @@
       "url": "https://www.amazon.co.jp/dp/B0GNLMJZK8?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71w2d9XTzsL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0B12VXP4T",
@@ -39,7 +48,7 @@
       "url": "https://www.amazon.co.jp/dp/B0B12VXP4T?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71-fYly29-L._AC_SL1250_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0B3DCSYDP",
@@ -48,7 +57,16 @@
       "url": "https://www.amazon.co.jp/dp/B0B3DCSYDP?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71ZXibCE-RL._AC_SL1000_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "asin": "B0CTC4ML26",
+      "title": "ネオ砂 クイック 10L",
+      "brand": "コーチョー（ネオ・ルーライフ）",
+      "url": "https://www.amazon.co.jp/dp/B0CTC4ML26?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71Ies+-+ZaL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-09"
     }
   ],
   "related": [
@@ -56,19 +74,19 @@
       "title": "猫用トイレ消臭シート",
       "url": "https://link.amazon/B0hmWlTjA",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "title": "猫トイレ用スコップ",
       "url": "https://link.amazon/B02pf1XJI",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "title": "ペット用消臭スプレー",
       "url": "https://link.amazon/B0e1Jp7Bk",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     }
   ]
 }

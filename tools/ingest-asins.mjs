@@ -14,7 +14,9 @@ import { loadPolicy, productsPath, writeJson, today, associateTag, ROOT } from '
 const args = process.argv.slice(2);
 const fileIdx = args.indexOf('--file');
 const csvPath = fileIdx >= 0 ? args[fileIdx + 1] : join(ROOT, 'content', 'pipeline', 'asin-input', 'asins.csv');
-const only = args.filter((a, i) => !a.startsWith('--') && i !== fileIdx + 1);
+// --file の値は位置引数から除く。--file が無いとき fileIdx は -1 なので、
+// そのまま fileIdx + 1 で比較すると先頭の slug を取りこぼす。
+const only = args.filter((a, i) => !a.startsWith('--') && !(fileIdx >= 0 && i === fileIdx + 1));
 
 const policy = loadPolicy();
 const tag = associateTag(policy);

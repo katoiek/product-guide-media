@@ -94,6 +94,21 @@
           "date": "2026-08-08",
           "state": "published",
           "note": "購入導線・表内画像を掲載"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "drafting",
+          "note": "流せる2製品を追加し7製品に。処理方法を主要比較軸へ格上げする"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "gate",
+          "note": "7製品構成に書き直し。処理方法を第1軸へ"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "published",
+          "note": "7製品構成・処理方法を第1軸へ"
         }
       ],
       "relatedCandidates": [
@@ -105,7 +120,8 @@
         "repurchaseCycle": "1〜2か月（消耗品）",
         "priceBand": "未確認",
         "splitPoint": "原料タイプ・香りの公式表示・処理方法（水洗トイレ可否）"
-      }
+      },
+      "profile": "consumable"
     },
     {
       "slug": "dishwasher-detergent-comparison",
@@ -170,7 +186,8 @@
       },
       "articleFile": "src/pages/articles/dishwasher-detergent-comparison.astro",
       "specFile": "content/pipeline/specs/dishwasher-detergent-comparison.json",
-      "productsFile": "content/pipeline/products/dishwasher-detergent-comparison.json"
+      "productsFile": "content/pipeline/products/dishwasher-detergent-comparison.json",
+      "profile": "consumable"
     },
     {
       "slug": "laundry-liquid-detergent-comparison",
@@ -236,7 +253,8 @@
       },
       "articleFile": "src/pages/articles/laundry-liquid-detergent-comparison.astro",
       "specFile": "content/pipeline/specs/laundry-liquid-detergent-comparison.json",
-      "productsFile": "content/pipeline/products/laundry-liquid-detergent-comparison.json"
+      "productsFile": "content/pipeline/products/laundry-liquid-detergent-comparison.json",
+      "profile": "consumable"
     },
     {
       "slug": "kitchen-sponge-comparison",
@@ -301,23 +319,8 @@
       },
       "articleFile": "src/pages/articles/kitchen-sponge-comparison.astro",
       "specFile": "content/pipeline/specs/kitchen-sponge-comparison.json",
-      "productsFile": "content/pipeline/products/kitchen-sponge-comparison.json"
-    },
-    {
-      "slug": "bousai-supplies-checklist",
-      "title": "防災用品をそろえる前に確認する5項目",
-      "category": "防災用品",
-      "categorySlug": "disaster",
-      "type": "guide",
-      "state": "published",
-      "articleFile": "src/pages/articles/bousai-supplies-checklist.astro",
-      "history": [
-        {
-          "date": "2026-08-08",
-          "state": "published",
-          "note": "既存の一般ガイドを管理下に取り込み"
-        }
-      ]
+      "productsFile": "content/pipeline/products/kitchen-sponge-comparison.json",
+      "profile": "consumable"
     },
     {
       "slug": "water-filter-cartridge-comparison",
@@ -345,7 +348,8 @@
           "state": "idea",
           "note": "公開済み3ジャンルの隣接カテゴリとして登録"
         }
-      ]
+      ],
+      "profile": "consumable"
     },
     {
       "slug": "floor-dry-sheet-comparison",
@@ -373,7 +377,8 @@
           "state": "idea",
           "note": "公開済み3ジャンルの隣接カテゴリとして登録"
         }
-      ]
+      ],
+      "profile": "consumable"
     },
     {
       "slug": "cat-litter-deodorizing-sheet-comparison",
@@ -401,7 +406,343 @@
           "state": "idea",
           "note": "公開済み3ジャンルの隣接カテゴリとして登録"
         }
-      ]
+      ],
+      "profile": "consumable"
+    },
+    {
+      "slug": "laundry-bleach-comparison",
+      "title": "洗濯用漂白剤の比較",
+      "category": "清掃",
+      "categorySlug": "cleaning",
+      "profile": "consumable",
+      "brandCandidates": [
+        "花王",
+        "ライオン",
+        "P&G",
+        "シャボン玉石けん",
+        "ミツエイ",
+        "graf"
+      ],
+      "relatedCandidates": [
+        "洗濯用液体洗剤",
+        "洗濯槽クリーナー"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "2〜3か月（消耗品）",
+        "priceBand": "未確認",
+        "splitPoint": "酸素系と塩素系の使い分け、色柄物への可否、素材別の使用不可（ウール・絹・金属など）"
+      },
+      "type": "comparison",
+      "state": "assets_pending",
+      "specFile": "content/pipeline/specs/laundry-bleach-comparison.json",
+      "productsFile": "content/pipeline/products/laundry-bleach-comparison.json",
+      "articleFile": "src/pages/articles/laundry-bleach-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-09",
+          "state": "idea",
+          "note": "依頼により登録"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "spec_research",
+          "note": "公式仕様調査を開始"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "assets_pending",
+          "note": "公式仕様7製品・関連消耗品3件を確認"
+        }
+      ],
+      "note": "公式仕様7製品（塩素系2・酸素系5）を取得済み。ただし公式ページとの突き合わせ検証が未実施。記事化の前に必ず照合すること。"
+    },
+    {
+      "slug": "keyboard-switch-type-comparison",
+      "title": "キーボードの方式比較｜静電容量式・メカニカル・パンタグラフ・メンブレン",
+      "category": "PC周辺機器",
+      "categorySlug": "pc",
+      "profile": "durable",
+      "brandCandidates": [
+        "東プレ",
+        "PFU",
+        "ロジクール",
+        "エレコム",
+        "バッファロー",
+        "アーキサイト",
+        "キークロン"
+      ],
+      "relatedCandidates": [
+        "パームレスト",
+        "キーキャップ引き抜き工具"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "数年（耐久財）",
+        "priceBand": "3,000〜30,000円",
+        "splitPoint": "方式ごとの打鍵感・静音性・耐久性・価格帯の差。静電容量式は高価だが耐久性、パンタグラフは薄型、メンブレンは低価格"
+      },
+      "type": "comparison",
+      "state": "blocked",
+      "specFile": "content/pipeline/specs/keyboard-switch-type-comparison.json",
+      "productsFile": "content/pipeline/products/keyboard-switch-type-comparison.json",
+      "articleFile": "src/pages/articles/keyboard-switch-type-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-09",
+          "state": "idea",
+          "note": "依頼により登録"
+        }
+      ],
+      "blockedReason": "依頼により保留。再開する場合は topicSelection.profiles.durable の条件で進める。"
+    },
+    {
+      "slug": "mechanical-keyboard-switch-comparison",
+      "title": "メカニカルキーボードの軸の比較｜赤軸・青軸・茶軸・銀軸をメーカー別に比べる",
+      "category": "PC周辺機器",
+      "categorySlug": "pc",
+      "profile": "durable",
+      "brandCandidates": [
+        "Cherry",
+        "Gateron",
+        "Kailh",
+        "TTC",
+        "Akko",
+        "Outemu"
+      ],
+      "relatedCandidates": [
+        "スイッチ引き抜き工具",
+        "キーボード用潤滑剤"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "ホットスワップ機で入れ替え需要あり",
+        "priceBand": "1,500〜8,000円（スイッチ単体）",
+        "splitPoint": "リニア／タクタイル／クリッキーの分類、押下圧、静音仕様の有無。色の呼称がメーカーで統一されていない点が最大の論点"
+      },
+      "type": "comparison",
+      "state": "blocked",
+      "specFile": "content/pipeline/specs/mechanical-keyboard-switch-comparison.json",
+      "productsFile": "content/pipeline/products/mechanical-keyboard-switch-comparison.json",
+      "articleFile": "src/pages/articles/mechanical-keyboard-switch-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-09",
+          "state": "idea",
+          "note": "依頼により登録"
+        },
+        {
+          "date": "2026-08-08",
+          "state": "spec_research",
+          "note": "公式仕様調査を開始"
+        }
+      ],
+      "blockedReason": "依頼により保留。再開する場合は topicSelection.profiles.durable の条件で進める。"
+    },
+    {
+      "slug": "dog-pet-sheet-comparison",
+      "title": "犬用ペットシーツの比較",
+      "category": "ペット用品",
+      "categorySlug": "pet",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/dog-pet-sheet-comparison.json",
+      "productsFile": "content/pipeline/products/dog-pet-sheet-comparison.json",
+      "articleFile": "src/pages/articles/dog-pet-sheet-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "新規登録"
+        }
+      ],
+      "profile": "consumable",
+      "brandCandidates": [
+        "ユニ・チャーム",
+        "アイリスオーヤマ",
+        "第一衛材",
+        "マルカン",
+        "PEPPY(ペピイ)",
+        "花王"
+      ],
+      "relatedCandidates": [
+        "ペット用消臭スプレー",
+        "マナーベルト",
+        "ゴミ袋(処理用)"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "2週間〜1か月（消耗品）",
+        "priceBand": "未確認（100枚パックで1,600〜5,500円程度を確認）",
+        "splitPoint": "吸収量とサイズ規格(レギュラー/ワイド/スーパーワイド)の対応表示、消臭成分の有無、飛び散り防止構造"
+      }
+    },
+    {
+      "slug": "monitor-arm-comparison",
+      "title": "モニターアームの比較",
+      "category": "PC周辺機器",
+      "categorySlug": "pc",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/monitor-arm-comparison.json",
+      "productsFile": "content/pipeline/products/monitor-arm-comparison.json",
+      "articleFile": "src/pages/articles/monitor-arm-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "新規登録"
+        }
+      ],
+      "profile": "durable",
+      "brandCandidates": [
+        "エルゴトロン",
+        "エレコム",
+        "サンワサプライ",
+        "グリーンハウス",
+        "HUANUO",
+        "Loctek",
+        "Amazonベーシック"
+      ],
+      "relatedCandidates": [
+        "デスクマット",
+        "ケーブルオーガナイザー"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "数年（耐久財）",
+        "priceBand": "約4,000〜21,000円を確認",
+        "splitPoint": "耐荷重・対応画面サイズ、可動域(ガス式/アーム式)、クランプ/グロメット取付方式の対応机厚"
+      }
+    },
+    {
+      "slug": "pruning-shears-comparison",
+      "title": "剪定バサミの比較",
+      "category": "園芸用品",
+      "categorySlug": "garden",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/pruning-shears-comparison.json",
+      "productsFile": "content/pipeline/products/pruning-shears-comparison.json",
+      "articleFile": "src/pages/articles/pruning-shears-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "新規登録"
+        }
+      ],
+      "profile": "durable",
+      "brandCandidates": [
+        "岡恒",
+        "アルスコーポレーション",
+        "千吉(角利産業)",
+        "高儀",
+        "フェルコ(Felco)"
+      ],
+      "relatedCandidates": [
+        "園芸用手袋",
+        "刃物用オイル・研ぎ器"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "数年（耐久財、消耗は主に替刃・メンテナンス用品）",
+        "priceBand": "未確認（メーカーで幅があり数千円台が中心の見込み）",
+        "splitPoint": "切断できる枝の太さの公式表示、刃の材質・コーティング、左利き対応やパーツ交換可否"
+      }
+    },
+    {
+      "slug": "paper-shredder-comparison",
+      "title": "家庭用シュレッダーの比較",
+      "category": "文房具・オフィス用品",
+      "categorySlug": "stationery",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/paper-shredder-comparison.json",
+      "productsFile": "content/pipeline/products/paper-shredder-comparison.json",
+      "articleFile": "src/pages/articles/paper-shredder-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "新規登録"
+        }
+      ],
+      "profile": "durable",
+      "brandCandidates": [
+        "アイリスオーヤマ",
+        "ナカバヤシ",
+        "アコ・ブランズ(GBC)",
+        "サンワサプライ",
+        "コクヨ"
+      ],
+      "relatedCandidates": [
+        "シュレッダー用ゴミ袋",
+        "シュレッダー用潤滑オイル"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "数年（耐久財）",
+        "priceBand": "約5,000〜20,000円を確認",
+        "splitPoint": "カット方式(ストレート/クロスカット)とセキュリティレベル、投入枚数と連続使用時間、対応品目(CD・カード等)"
+      }
+    },
+    {
+      "slug": "clothes-storage-case-comparison",
+      "title": "引き出し式衣装収納ケースの比較",
+      "category": "収納用品",
+      "categorySlug": "storage",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/clothes-storage-case-comparison.json",
+      "productsFile": "content/pipeline/products/clothes-storage-case-comparison.json",
+      "articleFile": "src/pages/articles/clothes-storage-case-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "新規登録"
+        }
+      ],
+      "profile": "durable",
+      "brandCandidates": [
+        "天馬(Fits)",
+        "アイリスオーヤマ",
+        "ニトリ",
+        "無印良品",
+        "山善"
+      ],
+      "relatedCandidates": [
+        "防虫剤・除湿剤",
+        "キャスター(別売りオプション)"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "数年（耐久財）",
+        "priceBand": "約2,800〜31,000円を確認(段数・サイズで幅)",
+        "splitPoint": "内寸(奥行き・段数)の互換性、引き出しレールの静音・耐荷重仕様、前板の着脱可否"
+      }
+    },
+    {
+      "slug": "usb-hub-comparison",
+      "title": "USB Type-Cハブの比較",
+      "category": "PC周辺機器",
+      "categorySlug": "pc",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/usb-hub-comparison.json",
+      "productsFile": "content/pipeline/products/usb-hub-comparison.json",
+      "articleFile": "src/pages/articles/usb-hub-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-08",
+          "state": "idea",
+          "note": "新規登録"
+        }
+      ],
+      "profile": "durable",
+      "brandCandidates": [
+        "Anker",
+        "エレコム",
+        "サンワサプライ",
+        "UGREEN",
+        "Baseus"
+      ],
+      "relatedCandidates": [
+        "USB-C充電器(PD対応)",
+        "ノートPCスタンド"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "数年（耐久財）",
+        "priceBand": "未確認（ハブとドッキングステーションで価格帯が分かれる見込み）",
+        "splitPoint": "ポート構成(HDMI解像度・SD/microSD・LAN有無)、給電方式(パススルーPDのワット数)、対応機種(Mac/Windows)の注記"
+      }
     }
   ]
 }

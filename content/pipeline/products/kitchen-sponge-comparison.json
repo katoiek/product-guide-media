@@ -2,7 +2,7 @@
   "slug": "kitchen-sponge-comparison",
   "source": "manual-asin",
   "associateTag": "erabinote-22",
-  "verifiedAt": "2026-08-08",
+  "verifiedAt": "2026-08-09",
   "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
   "products": [
     {
@@ -12,16 +12,16 @@
       "url": "https://www.amazon.co.jp/dp/B0087ZGOVY?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71ugr8gVUpL._AC_SL1232_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0H7FTD3ZP",
-      "title": "泡キュット ソフト 2個袋入 2色",
+      "title": "泡キュット ソフトスポンジ",
       "brand": "オーエ",
       "url": "https://www.amazon.co.jp/dp/B0H7FTD3ZP?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/81FxogG6GWL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0FTDX93ZH",
@@ -30,7 +30,7 @@
       "url": "https://www.amazon.co.jp/dp/B0FTDX93ZH?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/41xwa5YkcbL._AC_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B08V91C9DG",
@@ -39,16 +39,16 @@
       "url": "https://www.amazon.co.jp/dp/B08V91C9DG?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/616TevQUT2L._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B005QUQR5G",
-      "title": "キクロンA 抗菌 キッチンスポンジ ピンク・イエロー・グリーン 3個入 研磨粒子入り 日本製",
+      "title": "キクロンA",
       "brand": "キクロン",
       "url": "https://www.amazon.co.jp/dp/B005QUQR5G?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/616URHs8KpL._AC_SL1000_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0DMS3SY9F",
@@ -57,7 +57,7 @@
       "url": "https://www.amazon.co.jp/dp/B0DMS3SY9F?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71lZbEAKrxL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     }
   ],
   "related": [
@@ -65,13 +65,13 @@
       "title": "食器用洗剤",
       "url": "https://link.amazon/B03mJk3de",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "title": "スポンジホルダー",
       "url": "https://link.amazon/B08ITNrcd",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     }
   ]
 }

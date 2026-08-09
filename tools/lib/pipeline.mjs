@@ -165,6 +165,14 @@ export function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
+/** 仕様の再確認までの日数。耐久財はモデルチェンジが早いので profile ごとに変える。 */
+export function specMaxAge(policy, profile) {
+  return (
+    policy.topicSelection?.profiles?.[profile]?.maxSpecAgeDays ??
+    policy.sources.maxSpecAgeDays
+  );
+}
+
 export function daysSince(dateStr) {
   const t = Date.parse(dateStr);
   if (Number.isNaN(t)) return Infinity;

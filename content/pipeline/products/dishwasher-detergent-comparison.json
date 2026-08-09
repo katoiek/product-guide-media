@@ -2,17 +2,17 @@
   "slug": "dishwasher-detergent-comparison",
   "source": "manual-asin",
   "associateTag": "erabinote-22",
-  "verifiedAt": "2026-08-08",
+  "verifiedAt": "2026-08-09",
   "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
   "products": [
     {
       "asin": "B0H99LYFDF",
-      "title": "食洗機用キュキュットウルトラクリーン 食器も庫内もまるごと一発洗浄 無香性 本体 (× 2)",
+      "title": "食器洗い乾燥機専用キュキュット ウルトラクリーン 無香性 本体",
       "brand": "花王",
       "url": "https://www.amazon.co.jp/dp/B0H99LYFDF?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71BEpuax2QL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0GKN7Y7SL",
@@ -21,16 +21,16 @@
       "url": "https://www.amazon.co.jp/dp/B0GKN7Y7SL?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/711UyERCYhL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B001DCEI1Q",
-      "title": "ジョイ P&G 食洗機用 ジョイ（粉末）",
+      "title": "食洗機用 ジョイ",
       "brand": "P&G",
       "url": "https://www.amazon.co.jp/dp/B001DCEI1Q?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/81T7+sA7EqL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0FZ43R2SL",
@@ -39,7 +39,7 @@
       "url": "https://www.amazon.co.jp/dp/B0FZ43R2SL?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/51-vWuAZmCL._AC_SX679_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0CMT6ZJ2T",
@@ -48,7 +48,7 @@
       "url": "https://www.amazon.co.jp/dp/B0CMT6ZJ2T?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/61JZZt0IwsL._SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0FL1X9JLD",
@@ -57,7 +57,7 @@
       "url": "https://www.amazon.co.jp/dp/B0FL1X9JLD?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71Ri3ehbCiL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     }
   ],
   "related": [
@@ -65,13 +65,13 @@
       "title": "食洗機用庫内クリーナー",
       "url": "https://link.amazon/B0fXN245e",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "title": "食洗機用乾燥仕上げ剤（リンス）",
       "url": "https://link.amazon/B0cPfNEiP",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "slug": "laundry-liquid-detergent-comparison",
   "source": "manual-asin",
   "associateTag": "erabinote-22",
-  "verifiedAt": "2026-08-08",
+  "verifiedAt": "2026-08-09",
   "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
   "products": [
     {
@@ -12,7 +12,7 @@
       "url": "https://www.amazon.co.jp/dp/B0GM6K3VC1?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/61KTIu5PN2L._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0FHW4FVRX",
@@ -21,7 +21,7 @@
       "url": "https://www.amazon.co.jp/dp/B0FHW4FVRX?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/51xPCBnKh4L._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B0DV5GMNBP",
@@ -30,7 +30,7 @@
       "url": "https://www.amazon.co.jp/dp/B0DV5GMNBP?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/719DuYcbzwL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B08XC3LTCY",
@@ -39,16 +39,16 @@
       "url": "https://www.amazon.co.jp/dp/B08XC3LTCY?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71AeOJgdrML._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B07LGG9XTQ",
-      "title": "無添加 お肌のための洗濯用せっけん 1.1L",
+      "title": "お肌のための洗濯用せっけん",
       "brand": "ミヨシ石鹸",
       "url": "https://www.amazon.co.jp/dp/B07LGG9XTQ?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/51ys+fTtk8L._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "asin": "B008RTS8DW",
@@ -57,7 +57,7 @@
       "url": "https://www.amazon.co.jp/dp/B008RTS8DW?tag=erabinote-22",
       "imageUrl": "",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     }
   ],
   "related": [
@@ -65,19 +65,19 @@
       "title": "柔軟剤",
       "url": "https://link.amazon/B0cOZHLjE",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "title": "洗濯槽クリーナー",
       "url": "https://link.amazon/B0b3JAu7E",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     },
     {
       "title": "衣類用漂白剤",
       "url": "https://link.amazon/B08CsNJC8",
       "linkType": "short",
-      "verifiedAt": "2026-08-08"
+      "verifiedAt": "2026-08-09"
     }
   ]
 }

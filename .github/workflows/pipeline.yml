@@ -40,20 +40,37 @@ permissions:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    if: ${{ secrets.ANTHROPIC_API_KEY != '' }}
     steps:
+      # secrets コンテキストはジョブレベルの if では使えないため、
+      # ステップの中で判定して以降をスキップする。
+      - name: APIキーの有無を確認
+        id: key
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "$ANTHROPIC_API_KEY" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo '::notice::ANTHROPIC_API_KEY が未設定のため、パイプラインの実行をスキップします。'
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.key.outputs.present == 'true'
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
+        if: steps.key.outputs.present == 'true'
         with:
           node-version: '22'
           cache: npm
       - run: npm ci
+        if: steps.key.outputs.present == 'true'
 
       # 金曜の定期実行と mode=refresh は既存記事の再確認、それ以外は新規1本。
       - name: 実行モードを決める
         id: mode
+        if: steps.key.outputs.present == 'true'
         run: |
           mode="${{ github.event.inputs.mode || 'auto' }}"
           if [ "$mode" = "auto" ]; then
@@ -63,12 +80,14 @@ jobs:
           echo "実行モード: $mode"
 
       - name: 開始前のキュー状態
+        if: steps.key.outputs.present == 'true'
         run: |
           node tools/queue.mjs status
           echo '--- 再確認が必要な記事 ---'
           node tools/queue.mjs stale
 
       - name: パイプラインを1周回す
+        if: steps.key.outputs.present == 'true'
         uses: anthropics/claude-code-action@v1
         env:
           AMAZON_ACCESS_KEY: ${{ secrets.AMAZON_ACCESS_KEY }}
@@ -97,10 +116,12 @@ jobs:
             - 同じ state で2回進まなければ止めて報告する
             - **1回の実行で2本以上の新規記事を進めない**（検証が形骸化するため）
 
+      # パイプラインが失敗しても状態を残したいので always() を使うが、
+      # APIキーが無くチェックアウトもしていない場合は実行しない。
       - name: 終了後のキュー状態
-        if: always()
+        if: always() && steps.key.outputs.present == 'true'
         run: node tools/queue.mjs status
 
       - name: 公開ゲート再検証
-        if: always()
+        if: always() && steps.key.outputs.present == 'true'
         run: node tools/gate.mjs

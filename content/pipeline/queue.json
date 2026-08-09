@@ -626,7 +626,7 @@
       "title": "犬用ペットシーツの比較",
       "category": "ペット用品",
       "categorySlug": "pet",
-      "state": "drafting",
+      "state": "published",
       "specFile": "content/pipeline/specs/dog-pet-sheet-comparison.json",
       "productsFile": "content/pipeline/products/dog-pet-sheet-comparison.json",
       "articleFile": "src/pages/articles/dog-pet-sheet-comparison.astro",
@@ -660,6 +660,16 @@
           "date": "2026-08-09",
           "state": "drafting",
           "note": "ASIN取得済み"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "gate",
+          "note": "購入導線・商品画像を追加"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "published",
+          "note": "購入導線5製品・関連4件"
         }
       ],
       "profile": "consumable",

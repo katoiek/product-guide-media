@@ -102,15 +102,32 @@ npm run validate:products
 
 **リンクは比較表より後ろにしか置けません**（冒頭リンクは公開ゲートが機械的に落とします）。
 
-## CSVを作り直す
+## CSVの行は自動で作られます
 
-記事を追加したあとなど、CSVを再生成する場合:
+**新しい記事のためにシートを作る操作は、基本的に不要です。**
 
-```bash
-node tools/make-asin-sheet.mjs
+仕様データが揃って `assets_pending` に進んだ時点で、記入シートが自動的に作り直され、
+その記事の行が並びます。
+
+```
+$ node tools/queue.mjs set <slug> assets_pending "公式仕様を確認"
+
+── ASINの記入が必要な記事 3 件（残り 20 行）──
+  floor-dry-sheet-comparison                 残り  8 行（0/8）
+  cat-litter-deodorizing-sheet-comparison    残り  9 行（0/9）
+  laundry-bleach-comparison                  残り  3 行（7/10）
 ```
 
-**記入済みのASINは引き継がれます**（既存CSVと商品データの両方から復元します）。上書きを恐れず実行できます。
+`npm run gate` でも、購入導線が無い記事の一覧が出ます。
+
+手動で作り直したいときは次を実行してください。
+
+```bash
+npm run asin:sheet
+```
+
+**記入済みのASINは引き継がれます**（既存CSVと商品データの両方から復元します）。
+製品名をAmazonの表記に書き換えていても引き継がれるので、上書きを恐れず実行できます。
 
 ## アソシエイト審査の期限
 

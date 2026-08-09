@@ -5,7 +5,8 @@
 //   node tools/gate.mjs --no-build ビルドを省略
 import { readdirSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { loadPolicy, PATHS, ROOT, listSlugs, productsPath, pinterestPath } from './lib/pipeline.mjs';
+import { join } from 'node:path';
+import { loadPolicy, loadQueue, PATHS, ROOT, listSlugs, productsPath, pinterestPath } from './lib/pipeline.mjs';
 import { validateProductsFor } from './validate-products.mjs';
 import { validateArticle } from './validate-article.mjs';
 import { validatePins } from './validate-pins.mjs';
@@ -49,6 +50,20 @@ if (!noBuild && policy.publish.requireBuildPass) {
     console.log('[FAIL] astro build');
     failed++;
   }
+}
+
+// 商品データが無い記事があれば、ASIN記入が次の作業だと知らせる。
+// 記事があるものだけでなく、仕様データだけ揃っているものも対象にする。
+const queue = loadQueue();
+const specDir = join(ROOT, 'content', 'pipeline', 'specs');
+const needAsin = queue.items
+  .filter((i) => i.type === 'comparison' && i.state !== 'blocked')
+  .map((i) => i.slug)
+  .filter((s) => existsSync(join(specDir, `${s}.json`)) && !existsSync(productsPath(s)));
+if (needAsin.length) {
+  console.log(`\n── 購入導線が無い記事 ${needAsin.length} 件 ──`);
+  for (const s of needAsin) console.log(`  ${s}`);
+  console.log('  ASINを記入すると購入リンクを掲載できます: npm run asin:sheet');
 }
 
 console.log(`\n${failed ? `公開ゲート不合格: ${failed} 件` : '公開ゲート合格。main へ push 可能。'}`);

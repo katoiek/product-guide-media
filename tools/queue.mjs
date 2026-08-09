@@ -6,8 +6,10 @@
 //   node tools/queue.mjs set <slug> <state> "備考"
 //   node tools/queue.mjs add <slug> "<タイトル>" "<カテゴリ>" <categorySlug>
 import { existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { join } from 'node:path';
 import {
-  loadQueue, saveQueue, loadPolicy, loadSpec, loadProducts,
+  loadQueue, saveQueue, loadPolicy, loadSpec, loadProducts, ROOT,
   specPath, productsPath, pinterestPath, articlePath, today, daysSince,
 } from './lib/pipeline.mjs';
 
@@ -98,12 +100,26 @@ if (cmd === 'status') {
   queue.updated = today();
   saveQueue(queue);
   console.log(`${slug}: -> ${state}`);
+
+  // ASINが必要になる工程へ入ったら、記入シートを自動で作り直す。
+  // 人が「シートを作る」コマンドを覚えていなくても、行が並んだ状態になる。
+  if (state === 'assets_pending' && existsSync(specPath(slug))) {
+    console.log('');
+    try {
+      execFileSync(process.execPath, [join(ROOT, 'tools', 'make-asin-sheet.mjs')], { stdio: 'inherit' });
+    } catch {
+      console.log('（記入シートの生成に失敗しました。npm run asin:sheet を手動で実行してください）');
+    }
+  }
 } else if (cmd === 'add') {
   const [, , , slug, title, category, categorySlug] = process.argv;
   if (!slug || !title) { console.error('用法: queue.mjs add <slug> "<タイトル>" "<カテゴリ>" <categorySlug>'); process.exit(2); }
   if (queue.items.some((i) => i.slug === slug)) { console.error(`既に存在: ${slug}`); process.exit(2); }
   queue.items.push({
     slug, title, category: category ?? '', categorySlug: categorySlug ?? '',
+    // type が無いと検証と集計の対象から漏れる。既定は比較記事。
+    type: 'comparison',
+    profile: queue.profileDefault ?? 'consumable',
     state: 'idea',
     specFile: `content/pipeline/specs/${slug}.json`,
     productsFile: `content/pipeline/products/${slug}.json`,

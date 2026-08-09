@@ -175,7 +175,33 @@ for (const slug of targets) {
 if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true });
 writeFileSync(OUT_PATH, out.join('\n') + '\n', 'utf8');
 
+// 記事ごとの未記入行を数える。どこを埋めればよいかが一目で分かるようにする。
+const pending = new Map();
+for (const line of out) {
+  if (!line || line.startsWith('#') || line.startsWith('slug,')) continue;
+  const [slug, , , , asin = ''] = parseCsvLine(line);
+  if (!slug) continue;
+  const cur = pending.get(slug) ?? { total: 0, filled: 0 };
+  cur.total++;
+  if (asin) cur.filled++;
+  pending.set(slug, cur);
+}
+
 console.log(`${OUT_PATH} を作成しました。`);
 console.log(`  記事 ${targets.length} 件 / 比較対象 ${productCount} 行 / 関連消耗品 ${relatedCount} 行`);
 if (carried) console.log(`  記入済みの ${carried} 行を引き継ぎました。`);
-console.log(`\n記入後: npm run asin:ingest`);
+
+const todo = [...pending.entries()].filter(([, v]) => v.filled < v.total);
+if (!todo.length) {
+  console.log('\n全行が記入済みです。次: npm run asin:ingest');
+} else {
+  const rest = todo.reduce((s, [, v]) => s + (v.total - v.filled), 0);
+  console.log(`\n── ASINの記入が必要な記事 ${todo.length} 件（残り ${rest} 行）──`);
+  for (const [slug, v] of todo) {
+    console.log(`  ${slug.padEnd(42)} 残り ${String(v.total - v.filled).padStart(2)} 行（${v.filled}/${v.total}）`);
+  }
+  console.log('\n  ファイル: content/pipeline/asin-input/asins.csv');
+  console.log('  ASIN列に、商品ページURLの /dp/ の直後にある10桁を記入してください。');
+  console.log('  手順: docs/ASIN-INPUT.md');
+  console.log('\n記入後: npm run asin:ingest');
+}

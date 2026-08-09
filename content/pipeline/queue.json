@@ -381,6 +381,11 @@
           "date": "2026-08-09",
           "state": "assets_pending",
           "note": "公式仕様5製品・関連3件を確認"
+        },
+        {
+          "date": "2026-08-09",
+          "state": "assets_pending",
+          "note": "テスト"
         }
       ],
       "profile": "consumable"
@@ -640,7 +645,8 @@
         "repurchaseCycle": "2週間〜1か月（消耗品）",
         "priceBand": "未確認（100枚パックで1,600〜5,500円程度を確認）",
         "splitPoint": "吸収量とサイズ規格(レギュラー/ワイド/スーパーワイド)の対応表示、消臭成分の有無、飛び散り防止構造"
-      }
+      },
+      "type": "comparison"
     },
     {
       "slug": "monitor-arm-comparison",
@@ -676,7 +682,8 @@
         "repurchaseCycle": "数年（耐久財）",
         "priceBand": "約4,000〜21,000円を確認",
         "splitPoint": "耐荷重・対応画面サイズ、可動域(ガス式/アーム式)、クランプ/グロメット取付方式の対応机厚"
-      }
+      },
+      "type": "comparison"
     },
     {
       "slug": "pruning-shears-comparison",
@@ -710,7 +717,8 @@
         "repurchaseCycle": "数年（耐久財、消耗は主に替刃・メンテナンス用品）",
         "priceBand": "未確認（メーカーで幅があり数千円台が中心の見込み）",
         "splitPoint": "切断できる枝の太さの公式表示、刃の材質・コーティング、左利き対応やパーツ交換可否"
-      }
+      },
+      "type": "comparison"
     },
     {
       "slug": "paper-shredder-comparison",
@@ -744,7 +752,8 @@
         "repurchaseCycle": "数年（耐久財）",
         "priceBand": "約5,000〜20,000円を確認",
         "splitPoint": "カット方式(ストレート/クロスカット)とセキュリティレベル、投入枚数と連続使用時間、対応品目(CD・カード等)"
-      }
+      },
+      "type": "comparison"
     },
     {
       "slug": "clothes-storage-case-comparison",
@@ -778,7 +787,8 @@
         "repurchaseCycle": "数年（耐久財）",
         "priceBand": "約2,800〜31,000円を確認(段数・サイズで幅)",
         "splitPoint": "内寸(奥行き・段数)の互換性、引き出しレールの静音・耐荷重仕様、前板の着脱可否"
-      }
+      },
+      "type": "comparison"
     },
     {
       "slug": "usb-hub-comparison",
@@ -812,7 +822,8 @@
         "repurchaseCycle": "数年（耐久財）",
         "priceBand": "未確認（ハブとドッキングステーションで価格帯が分かれる見込み）",
         "splitPoint": "ポート構成(HDMI解像度・SD/microSD・LAN有無)、給電方式(パススルーPDのワット数)、対応機種(Mac/Windows)の注記"
-      }
+      },
+      "type": "comparison"
     }
   ]
 }

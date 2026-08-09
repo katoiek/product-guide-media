@@ -108,12 +108,16 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
     process.exit(2);
   }
 
-  // 画像は Amazon プログラム配信元のみ。それ以外は掲載できないので落とす。
-  // 商品リンク自体は有効なので、画像なしで通す。
+  // 画像は Amazon プログラム配信元か、運営者が用意してリポジトリに置いた画像のみ。
+  // それ以外は掲載できないので落とす。商品リンク自体は有効なので画像なしで通す。
   let image = imageUrl;
+  let license = 'amazon_program_content';
   if (shortLink.test(image)) {
     issues.push({ line: lineNo, name, kind: 'short-link-image', value: image });
     image = '';
+  } else if (image.startsWith('/')) {
+    // サイト内パス = 運営者が用意した画像
+    license = 'owner_supplied';
   } else if (image && !/^https:\/\/(m\.media-amazon\.com|images-na\.ssl-images-amazon\.com|images-fe\.ssl-images-amazon\.com)\//.test(image)) {
     issues.push({ line: lineNo, name, kind: 'foreign-image', value: image });
     image = '';
@@ -129,7 +133,7 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
     brand: sep > 0 ? name.slice(0, sep).trim() : '',
     url: `https://www.amazon.co.jp/dp/${asin}?tag=${tag}`,
     imageUrl: image,
-    imageLicense: 'amazon_program_content',
+    imageLicense: license,
     verifiedAt: today(),
   });
 }

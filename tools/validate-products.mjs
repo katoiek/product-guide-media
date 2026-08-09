@@ -2,8 +2,9 @@
 // Amazon商品アセット（ASIN・直接リンク・画像許諾）を公開ポリシーに照らして検証する。
 // 使い方: node tools/validate-products.mjs [slug ...]   引数なしで全件
 import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import {
-  loadPolicy, loadProducts, productsPath, listSlugs, PATHS,
+  loadPolicy, loadProducts, productsPath, listSlugs, PATHS, ROOT,
   Report, associateTag, validateAmazonUrl, daysSince,
 } from './lib/pipeline.mjs';
 
@@ -66,11 +67,20 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
       report.error('products/image-license', `${at}: 画像許諾種別 "${p.imageLicense}" は許可されていない`);
     }
     if (p.imageUrl) {
-      let host = null;
-      try { host = new URL(p.imageUrl).host; } catch { /* 後段でエラーにする */ }
-      if (!host) report.error('products/image-url', `${at}: imageUrl がURLとして不正`);
-      else if (!IMAGE_HOSTS.includes(host)) {
-        report.error('products/image-host', `${at}: 画像ホスト ${host} はAmazonプログラム配信元ではない（メーカーサイト画像の転載は不可）`);
+      if (p.imageLicense === 'owner_supplied') {
+        // 運営者が用意した画像。public/ に実在するサイト内パスであることだけを確かめる。
+        if (!p.imageUrl.startsWith('/')) {
+          report.error('products/image-owner-path', `${at}: owner_supplied の画像はサイト内パス（/images/... ）で指定する`);
+        } else if (!existsSync(join(ROOT, 'public', p.imageUrl.replace(/^\//, '')))) {
+          report.error('products/image-missing', `${at}: public${p.imageUrl} が存在しない`);
+        }
+      } else {
+        let host = null;
+        try { host = new URL(p.imageUrl).host; } catch { /* 後段でエラーにする */ }
+        if (!host) report.error('products/image-url', `${at}: imageUrl がURLとして不正`);
+        else if (!IMAGE_HOSTS.includes(host)) {
+          report.error('products/image-host', `${at}: 画像ホスト ${host} はAmazonプログラム配信元ではない（メーカーサイト画像を使う場合は imageLicense を owner_supplied にする）`);
+        }
       }
     }
     if (p.verifiedAt && daysSince(p.verifiedAt) > policy.sources.maxSpecAgeDays) {

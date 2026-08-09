@@ -85,7 +85,11 @@
       "allowedHosts": ["www.amazon.co.jp", "link.amazon", "amzn.to", "amzn.asia"],
       "requireAsin": false
     },
-    "allowedImageLicenses": ["amazon_program_content"],
+    "allowedImageLicenses": ["amazon_program_content", "owner_supplied"],
+    "imageLicenseNotes": {
+      "amazon_program_content": "Amazonアソシエイト・プログラムが配信する商品画像。m.media-amazon.com などのAmazon配信元に限る。既定はこちら。",
+      "owner_supplied": "サイト運営者が用意し、掲載する権利を持つと判断した画像。public/ に置いたサイト内パス（/images/products/... ）で指定する。メーカー・小売サイトから取得した画像をこの区分にする場合、掲載許諾の確認は運営者の責任範囲。エージェントが自分の判断でこの区分を付けてはならない。"
+    },
     "requiredProductFields": ["asin", "title", "brand", "url", "verifiedAt"],
     "optionalProductFields": ["imageUrl", "imageLicense"],
     "imageNote": "画像は任意。無い製品は購入リンクのみを掲載する。ただし掲載する場合はAmazonプログラム配信元に限る。",

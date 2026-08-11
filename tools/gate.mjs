@@ -6,7 +6,7 @@
 import { readdirSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
-import { loadPolicy, loadQueue, PATHS, ROOT, listSlugs, productsPath, pinterestPath } from './lib/pipeline.mjs';
+import { loadPolicy, loadQueue, PATHS, ROOT, listSlugs, productsPath, pinterestPath, articlePath } from './lib/pipeline.mjs';
 import { validateProductsFor } from './validate-products.mjs';
 import { validateArticle } from './validate-article.mjs';
 import { validatePins } from './validate-pins.mjs';
@@ -23,7 +23,12 @@ const slugs = targets.length
 let failed = 0;
 
 console.log('=== 商品アセット検証 ===');
-const productSlugs = targets.length ? targets.filter((s) => existsSync(productsPath(s))) : listSlugs(PATHS.products);
+// 記事化されていない（.astroがまだ無い）slugのproducts.jsonは、公開対象ではないため
+// 全体チェックの対象に含めない。assets_pending/blockedの途中経過データでCI全体を
+// 落とさないようにする（個別slug指定時は引き続き対象にする）。
+const productSlugs = targets.length
+  ? targets.filter((s) => existsSync(productsPath(s)))
+  : listSlugs(PATHS.products).filter((s) => existsSync(articlePath(s)));
 if (!productSlugs.length) console.log('（商品データなし）');
 for (const slug of productSlugs) {
   if (!validateProductsFor(slug, policy).print().ok) failed++;

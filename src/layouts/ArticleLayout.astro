@@ -218,6 +218,12 @@ const jsonLd = {
   .buy::after { content: "↗"; font-size: 15px; line-height: 0; }
   td .buy { padding: 8px 14px; font-size: 13px; }
 
+  /* Amazon・楽天を併記するときのボタン群。楽天は赤系にして誤クリックしないよう見分けをつける。 */
+  .buy-group { display: inline-flex; flex-direction: column; gap: 7px; }
+  .buy.rakuten { background: #bf0000; }
+  .buy.rakuten:hover { background: #8f0000; }
+  td .buy-group { gap: 5px; }
+
   /* 一緒に見ておきたい消耗品。比較対象より軽く見せる。 */
   .related { display: grid; gap: 10px; margin: 1.2rem 0; }
   .related-item {
@@ -262,7 +268,9 @@ const jsonLd = {
     .cell-product img { display: none; }
     .product { grid-template-columns: 92px 1fr; gap: 14px; padding: 15px 16px; }
     .product img { width: 92px; height: 92px; }
-    .product .buy { grid-column: 1 / -1; justify-content: center; }
+    .product .buy-group, .product .buy { grid-column: 1 / -1; }
+    .product .buy { justify-content: center; }
+    .product .buy-group { align-items: center; }
     .footer-inner { flex-direction: column; }
   }
 </style>

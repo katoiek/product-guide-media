@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   loadPolicy, loadProducts, productsPath, listSlugs, PATHS, ROOT,
-  Report, associateTag, validateAmazonUrl, daysSince,
+  Report, associateTag, validateAmazonUrl, validateRakutenUrl, daysSince,
 } from './lib/pipeline.mjs';
 
 const IMAGE_HOSTS = ['m.media-amazon.com', 'images-na.ssl-images-amazon.com', 'images-fe.ssl-images-amazon.com'];
@@ -86,6 +86,11 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
     if (p.verifiedAt && daysSince(p.verifiedAt) > policy.sources.maxSpecAgeDays) {
       report.warn('products/stale', `${at}: 確認日 ${p.verifiedAt} が ${policy.sources.maxSpecAgeDays} 日より古い`);
     }
+
+    if (p.rakuten?.url) {
+      const rv = validateRakutenUrl(policy, p.rakuten.url);
+      if (!rv.ok) report.error('products/rakuten-url', `${at}: 楽天リンク: ${rv.reason}`);
+    }
   };
 
   // 関連消耗品は一般名のカテゴリなので、検索結果リンク・短縮リンクを許可する
@@ -103,6 +108,10 @@ export function validateProductsFor(slug, policy = loadPolicy()) {
     }
     if (p.imageUrl) {
       report.warn('products/related-image', `${at}: 検索結果リンクに商品画像は付けられない（無視される）`);
+    }
+    if (p.rakutenUrl) {
+      const rv = validateRakutenUrl(policy, p.rakutenUrl);
+      if (!rv.ok) report.error('products/related-rakuten-url', `${at}: 楽天リンク: ${rv.reason}`);
     }
   };
 

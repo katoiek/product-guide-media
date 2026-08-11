@@ -53,6 +53,22 @@ function parseLine(line) {
   return cols.map((c) => c.trim());
 }
 
+// 変換前の商品ページURL（アフィリエイトタグなし）を誤って貼るミスを防ぐ。
+// hb.afl.rakuten.co.jp（通常のリンク変換結果）、a.r10.to（短縮リンク）等は許可する。
+const RAKUTEN_RAW_HOSTS = ['item.rakuten.co.jp', 'www.rakuten.co.jp', 'search.rakuten.co.jp', 'product.rakuten.co.jp'];
+function validateRakutenUrl(url) {
+  if (!url) return { ok: true };
+  let host;
+  try { host = new URL(url).host; } catch { return { ok: false, reason: 'URLとして不正' }; }
+  if (RAKUTEN_RAW_HOSTS.includes(host)) {
+    return { ok: false, reason: '変換前の商品ページURL（アフィリエイトリンクに変換してから貼ってください）' };
+  }
+  if (!/rakuten|r10\.to/.test(host)) {
+    return { ok: false, reason: '楽天のドメインではない' };
+  }
+  return { ok: true };
+}
+
 const bySlug = new Map();
 const skipped = [];
 const issues = [];
@@ -66,6 +82,7 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
   const [slug, , kind, name] = cols;
   let asin = (cols[4] ?? '').trim();
   const imageUrl = (cols[5] ?? '').trim();
+  const rakutenUrlRaw = (cols[6] ?? '').trim();
   // Excel で開くと "Column1,Column2,..." の行やカンマ列が付く。見出し行はすべて読み飛ばす。
   if (!slug || slug === 'slug' || /^Column\d+$/.test(slug)) continue;
   if (only.length && !only.includes(slug)) continue;
@@ -81,6 +98,13 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
   const searchLink = /amazon\.co\.jp\/s\?/;
   const isRelated = kind === 'related';
 
+  // 楽天URL（任意列）。変換前の商品ページURLは誤りなので落とす。
+  const rakutenCheck = validateRakutenUrl(rakutenUrlRaw);
+  if (!rakutenCheck.ok) {
+    issues.push({ line: lineNo, name, kind: 'rakuten-url', value: `${rakutenUrlRaw}（${rakutenCheck.reason}）` });
+  }
+  const rakutenUrl = rakutenCheck.ok ? rakutenUrlRaw : '';
+
   // 関連消耗品は一般名のカテゴリなので、検索結果リンク・短縮リンクをそのまま使う。
   // 比較対象は記事が製品名を名指しするため /dp/<ASIN> に限る。
   if (isRelated && policy.amazon.relatedLinks?.allowSearchLinks) {
@@ -91,6 +115,7 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
         url: link,
         linkType: shortLink.test(link) ? 'short' : 'search',
         verifiedAt: today(),
+        ...(rakutenUrl ? { rakutenUrl } : {}),
       });
       continue;
     }
@@ -135,6 +160,7 @@ for (const raw of readFileSync(csvPath, 'utf8').split(/\r?\n/)) {
     imageUrl: image,
     imageLicense: license,
     verifiedAt: today(),
+    ...(rakutenUrl ? { rakuten: { url: rakutenUrl, verifiedAt: today() } } : {}),
   });
 }
 
@@ -171,6 +197,7 @@ const LABEL = {
   'short-link': '短縮リンクはASINとして使えない',
   'short-link-image': '画像URL列に短縮リンク（画像として使えないため無視）',
   'foreign-image': '画像がAmazon配信元でない（掲載できないため無視）',
+  'rakuten-url': '楽天URL列が不正（無視）',
   'no-brand-separator': '製品名に「｜」が無くブランドを判別できない',
 };
 if (issues.length) {

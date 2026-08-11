@@ -8,4 +8,5 @@ dist/
 .claude/settings.local.json
 tmp/
 content/pipeline/asin-input/*.csv
+content/pipeline/rakuten-input/
 content/pipeline/revenue/

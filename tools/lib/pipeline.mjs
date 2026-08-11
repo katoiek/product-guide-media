@@ -161,6 +161,21 @@ export function validateAmazonUrl(policy, url, expectedAsin) {
   return { ok: true, asin };
 }
 
+/** 楽天アフィリエイトリンクとして妥当かを判定する。変換前の商品ページURLは弾く。 */
+export function validateRakutenUrl(policy, url) {
+  const cfg = policy.rakuten ?? {};
+  let host;
+  try { host = new URL(url).host; } catch { return { ok: false, reason: 'URLとして不正' }; }
+  if ((cfg.rejectHosts ?? []).includes(host)) {
+    return { ok: false, reason: cfg.rejectReason ?? '変換前の商品ページURLは使えない' };
+  }
+  const allowed = cfg.allowedHosts ?? [];
+  if (allowed.length && !allowed.includes(host)) {
+    return { ok: false, reason: `ホスト ${host} は許可された楽天アフィリエイトドメインではない` };
+  }
+  return { ok: true };
+}
+
 export function today() {
   return new Date().toISOString().slice(0, 10);
 }

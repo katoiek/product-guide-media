@@ -58,10 +58,10 @@ function existingEntries() {
   for (const line of readFileSync(OUT_PATH, 'utf8').split(/\r?\n/)) {
     if (!line || line.startsWith('#')) continue;
     const cols = parseCsvLine(line);
-    const [slug, , kind, name, asin = '', imageUrl = ''] = cols;
+    const [slug, , kind, name, asin = '', imageUrl = '', rakutenUrl = ''] = cols;
     if (!slug || slug === 'slug' || /^Column\d+$/.test(slug)) continue;
-    if (!asin && !imageUrl) continue;
-    const entry = { asin, imageUrl, name };
+    if (!asin && !imageUrl && !rakutenUrl) continue;
+    const entry = { asin, imageUrl, rakutenUrl, name };
     byName.set(`${slug}\t${name}`, entry);
     const brand = brandOf(name);
     if (kind === 'product' && brand) {
@@ -109,7 +109,11 @@ out.push('#');
 out.push('# slug列と種別列は編集しないでください。行の並べ替え・削除も不要です。');
 out.push('# 製品名は実際のAmazonの表記に書き換えて構いません（次回の再生成でも引き継がれます）。');
 out.push('#');
-out.push(row(['slug', '記事', '種別', '製品名', 'ASIN', '画像URL']));
+out.push('# 楽天URL列（任意）: 楽天アフィリエイトの「リンク作成」機能で変換済みのアフィリエイトリンクを貼ってください。');
+out.push('# 通常の商品ページURL（item.rakuten.co.jp/...）のままでは成果が発生しないため使えません。');
+out.push('# 空欄でも構いません（その場合、その製品は楽天の購入ボタンなしで公開されます）。');
+out.push('#');
+out.push(row(['slug', '記事', '種別', '製品名', 'ASIN', '画像URL', '楽天URL']));
 
 let productCount = 0;
 let relatedCount = 0;
@@ -146,15 +150,20 @@ for (const slug of targets) {
       (brandUsable ? prev.byBrand.get(`${slug}\t${brand}`) : undefined);
     if (fromCsv) {
       carried++;
-      return { asin: fromCsv.asin, imageUrl: fromCsv.imageUrl, name: fromCsv.name || specName };
+      return { asin: fromCsv.asin, imageUrl: fromCsv.imageUrl, rakutenUrl: fromCsv.rakutenUrl ?? '', name: fromCsv.name || specName };
     }
     const bare = specName.includes('｜') ? specName.slice(specName.indexOf('｜') + 1) : specName;
     const fromJson = jsonByTitle.get(bare) ?? (brandUsable ? jsonByBrand.get(brand) : undefined);
     if (fromJson) {
       carried++;
-      return { asin: fromJson.asin ?? fromJson.url ?? '', imageUrl: fromJson.imageUrl ?? '', name: specName };
+      return {
+        asin: fromJson.asin ?? fromJson.url ?? '',
+        imageUrl: fromJson.imageUrl ?? '',
+        rakutenUrl: fromJson.rakuten?.url ?? fromJson.rakutenUrl ?? '',
+        name: specName,
+      };
     }
-    return { asin: '', imageUrl: '', name: specName };
+    return { asin: '', imageUrl: '', rakutenUrl: '', name: specName };
   };
 
   out.push('#');
@@ -162,12 +171,12 @@ for (const slug of targets) {
   for (const p of spec.products ?? []) {
     const specName = `${p.brand}｜${p.name}`;
     const v = pick(specName, 'product');
-    out.push(row([slug, spec.category ?? '', 'product', v.name, v.asin, v.imageUrl]));
+    out.push(row([slug, spec.category ?? '', 'product', v.name, v.asin, v.imageUrl, v.rakutenUrl]));
     productCount++;
   }
   for (const r of spec.relatedProducts ?? []) {
     const v = pick(r.name, 'related');
-    out.push(row([slug, spec.category ?? '', 'related', v.name, v.asin, v.imageUrl]));
+    out.push(row([slug, spec.category ?? '', 'related', v.name, v.asin, v.imageUrl, v.rakutenUrl]));
     relatedCount++;
   }
 }

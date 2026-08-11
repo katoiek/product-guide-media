@@ -103,6 +103,14 @@
       "note": "アソシエイト申請から180日以内に適格販売3件を満たさないとアカウントが取り消される。PA-API の利用資格も同じ条件に連動するため、記事を数本公開してから申請する。"
     }
   },
+  "rakuten": {
+    "note": "各製品にAmazonと併記する任意の購入リンク。Amazonのように必須ではなく、無い製品はAmazonボタンのみで公開する。",
+    "allowedHosts": ["hb.afl.rakuten.co.jp", "a.r10.to", "af.rakuten.co.jp"],
+    "rejectHosts": ["item.rakuten.co.jp", "www.rakuten.co.jp", "search.rakuten.co.jp", "product.rakuten.co.jp"],
+    "rejectReason": "変換前の商品ページURLはアフィリエイトタグが付いておらず成果が発生しないため使えない。楽天アフィリエイトの「リンク作成」機能で変換したリンクのみを使う。",
+    "requireHuman": true,
+    "requireHumanNote": "API検索は同一ブランド内のライン・ライフステージ違い（成犬用/8+、ドッグ/キャット等）を機械的に区別できないことが実証されているため、自動選定した1件をそのまま採用してはならない。必ず人が商品ページを確認してリンクを作成する。"
+  },
   "distribution": {
     "pinterest": {
       "pinsPerArticle": 10,

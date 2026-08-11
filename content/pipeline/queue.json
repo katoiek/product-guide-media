@@ -324,32 +324,61 @@
     },
     {
       "slug": "water-filter-cartridge-comparison",
-      "title": "浄水器の交換カートリッジの比較",
+      "title": "蛇口直結型浄水器の交換カートリッジの比較",
       "category": "キッチン",
       "categorySlug": "kitchen",
       "relatedCandidates": [
-        "浄水器本体",
-        "蛇口用アダプター"
+        "蛇口用アダプター",
+        "浄水ポット用カートリッジ",
+        "浄水器フィルターケース洗浄剤"
       ],
       "selectionNotes": {
         "repurchaseCycle": "2〜4か月（消耗品）",
-        "priceBand": "未確認",
+        "priceBand": "実売1,970〜7,370円（価格.com調べ、中心帯は2,000〜7,000円）",
         "splitPoint": "除去対象物質の表示範囲、総ろ過水量、対応する本体型番の指定"
       },
       "type": "comparison",
-      "state": "idea",
+      "state": "blocked",
       "specFile": "content/pipeline/specs/water-filter-cartridge-comparison.json",
       "productsFile": "content/pipeline/products/water-filter-cartridge-comparison.json",
       "articleFile": "src/pages/articles/water-filter-cartridge-comparison.astro",
-      "note": "トップページの「準備中の記事」に掲載済み。ブランド候補の洗い出しから開始する。",
+      "note": "蛇口直結型（据置型・ビルトイン型・ポット型は対象外）に限定。仕様調査もこの型に絞って進める。",
       "history": [
         {
           "date": "2026-08-08",
           "state": "idea",
           "note": "公開済み3ジャンルの隣接カテゴリとして登録"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "spec_research",
+          "note": "ブランド候補5社確認済み(東レトレビーノ/三菱ケミカル・クリンスイ/パナソニック/タカギ/ブリタ) / 買い替え頻度2〜4か月"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "assets_pending",
+          "note": "公式仕様5製品(東レ/クリンスイ/パナソニック/タカギ/クリタック)を確認。ブリタは終売のためクリタックに差替。関連消耗品3件を確認"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "blocked",
+          "note": "ASIN記入待ち（docs/ASIN-INPUT.md、content/pipeline/asin-input/asins.csv の water-filter-cartridge-comparison 8行が未記入: 製品5件+関連消耗品3件）"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "blocked",
+          "note": "依頼により保留（2026-08-11）。カートリッジ単体の比較設計について確認し、一旦停止。再開する場合は方針を再検討してから。"
         }
       ],
-      "profile": "consumable"
+      "profile": "consumable",
+      "brandCandidates": [
+        "東レ（トレビーノ）",
+        "三菱ケミカル・クリンスイ",
+        "パナソニック",
+        "タカギ",
+        "ブリタ（オンタップ）"
+      ],
+      "blockedReason": "依頼により保留（2026-08-11）。カートリッジ単体の比較設計について確認し、一旦停止。再開する場合は方針を再検討してから。"
     },
     {
       "slug": "floor-dry-sheet-comparison",
@@ -877,7 +906,7 @@
       "categorySlug": "pet",
       "type": "comparison",
       "profile": "consumable",
-      "state": "distribution",
+      "state": "published",
       "specFile": "content/pipeline/specs/dry-dog-food-comparison.json",
       "productsFile": "content/pipeline/products/dry-dog-food-comparison.json",
       "articleFile": "src/pages/articles/dry-dog-food-comparison.astro",
@@ -916,6 +945,11 @@
           "date": "2026-08-11",
           "state": "distribution",
           "note": "公開ゲート合格・push 済み"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "published",
+          "note": "Pinterest導線は未着手（他8記事と同様）。運用実態に合わせpublishedへ直接進行。"
         }
       ],
       "brandCandidates": [
@@ -936,6 +970,42 @@
         "repurchaseCycle": "1〜2か月（消耗品。中型犬の目安）",
         "priceBand": "実売2,398〜5,929円を確認（ロイヤルカナン/ヒルズ/ピュリナワン、1〜3kg帯）",
         "splitPoint": "原材料表示、対応ライフステージ・犬種サイズ区分、グレインフリー等の対応表示、給与量の公式案内"
+      }
+    },
+    {
+      "slug": "dry-cat-food-comparison",
+      "title": "ドライキャットフードの比較",
+      "category": "ペット用品",
+      "categorySlug": "pet",
+      "type": "comparison",
+      "profile": "consumable",
+      "state": "idea",
+      "specFile": "content/pipeline/specs/dry-cat-food-comparison.json",
+      "productsFile": "content/pipeline/products/dry-cat-food-comparison.json",
+      "articleFile": "src/pages/articles/dry-cat-food-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-11",
+          "state": "idea",
+          "note": "新規登録"
+        }
+      ],
+      "brandCandidates": [
+        "ロイヤルカナン(マースジャパン)",
+        "ヒルズ(サイエンス・ダイエット)",
+        "ピュリナワン(ネスレピュリナ)",
+        "ペットライン(メディファス等)",
+        "マルカン(サンライズ・AIM30)"
+      ],
+      "relatedCandidates": [
+        "猫用おやつ",
+        "食事用フードボウル",
+        "システムトイレ用猫砂"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "1〜2か月（消耗品。成猫の目安）",
+        "priceBand": "未確認（ロイヤルカナン2kg帯で実売5,000円台、ピュリナワン550g×4で実売2,000円台を部分確認。1〜3kg帯で1,500〜8,000円に収まる見込み）",
+        "splitPoint": "原材料表示（グレインフリー等の対応表示）、対応ライフステージ・室内飼い/避妊去勢後などの区分、尿路の健康配慮等の公式表示、給与量の公式案内"
       }
     }
   ]

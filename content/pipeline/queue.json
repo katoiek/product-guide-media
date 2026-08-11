@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09",
+  "updated": "2026-08-11",
   "states": [
     "idea",
     "spec_research",
@@ -869,6 +869,74 @@
         "splitPoint": "ポート構成(HDMI解像度・SD/microSD・LAN有無)、給電方式(パススルーPDのワット数)、対応機種(Mac/Windows)の注記"
       },
       "type": "comparison"
+    },
+    {
+      "slug": "dry-dog-food-comparison",
+      "title": "ドライドッグフードの比較",
+      "category": "ペット用品",
+      "categorySlug": "pet",
+      "type": "comparison",
+      "profile": "consumable",
+      "state": "distribution",
+      "specFile": "content/pipeline/specs/dry-dog-food-comparison.json",
+      "productsFile": "content/pipeline/products/dry-dog-food-comparison.json",
+      "articleFile": "src/pages/articles/dry-dog-food-comparison.astro",
+      "history": [
+        {
+          "date": "2026-08-11",
+          "state": "idea",
+          "note": "新規登録"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "spec_research",
+          "note": "ブランド候補7社 / 買い替え頻度1〜2か月"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "assets_pending",
+          "note": "公式仕様5社（ロイヤルカナン/ヒルズ/ピュリナワン/ペットライン/マルカン(サンライズ)）、関連消耗品3件を確認。日清ペットフードとドギーマンハヤシは公式仕様が確認/分類できず対象外"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "blocked",
+          "note": "ASIN記入待ち（docs/ASIN-INPUT.md）。PA-API未接続のため経路Bへ切替。asins.csvのdry-dog-food-comparison行(比較5件+関連3件=8行)は全て未記入。"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "drafting",
+          "note": "ASIN記入完了。validate-products PASS（製品5件/関連消耗品3件/ブランド5社）"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "gate",
+          "note": "記事・導線を作成"
+        },
+        {
+          "date": "2026-08-11",
+          "state": "distribution",
+          "note": "公開ゲート合格・push 済み"
+        }
+      ],
+      "brandCandidates": [
+        "ロイヤルカナン(マースジャパン)",
+        "ヒルズ(サイエンス・ダイエット)",
+        "ピュリナワン(ネスレピュリナ)",
+        "ペットライン(メディコート)",
+        "日清ペットフード",
+        "マルカン(サンライズ)",
+        "ドギーマンハヤシ"
+      ],
+      "relatedCandidates": [
+        "犬用おやつ",
+        "食事用フードボウル",
+        "ペット用消臭スプレー"
+      ],
+      "selectionNotes": {
+        "repurchaseCycle": "1〜2か月（消耗品。中型犬の目安）",
+        "priceBand": "実売2,398〜5,929円を確認（ロイヤルカナン/ヒルズ/ピュリナワン、1〜3kg帯）",
+        "splitPoint": "原材料表示、対応ライフステージ・犬種サイズ区分、グレインフリー等の対応表示、給与量の公式案内"
+      }
     }
   ]
 }

@@ -1,0 +1,74 @@
+{
+  "slug": "dry-dog-food-comparison",
+  "source": "manual-asin",
+  "associateTag": "erabinote-22",
+  "verifiedAt": "2026-08-11",
+  "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
+  "products": [
+    {
+      "asin": "B0GXHT7Q8H",
+      "title": "ミニ アダルト（小型犬専用フード 成犬用）",
+      "brand": "ロイヤルカナン",
+      "url": "https://www.amazon.co.jp/dp/B0GXHT7Q8H?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/61cqAiiAAnL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-11"
+    },
+    {
+      "asin": "B06XC1WH9C",
+      "title": "アダルト 1〜6歳 小粒 成犬用 チキン",
+      "brand": "ヒルズ（サイエンス・ダイエット）",
+      "url": "https://www.amazon.co.jp/dp/B06XC1WH9C?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71BQ5oiXUCL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-11"
+    },
+    {
+      "asin": "B00IIJG8TW",
+      "title": "ピュリナ ワン ドッグ ほぐし粒入り 成犬用 1〜6歳 チキン",
+      "brand": "ピュリナ／ネスレ日本",
+      "url": "https://www.amazon.co.jp/dp/B00IIJG8TW?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/71sMTJDYPEL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-11"
+    },
+    {
+      "asin": "B0BY954JJR",
+      "title": "メディコートアドバンス グレインフリー 1歳から チキン味",
+      "brand": "ペットライン",
+      "url": "https://www.amazon.co.jp/dp/B0BY954JJR?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/81coS+jo1HL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-11"
+    },
+    {
+      "asin": "B0BSLJ7BQS",
+      "title": "ナチュラハ グレインフリー サーモン＆野菜入り 成犬用 小粒",
+      "brand": "マルカン（サンライズ）",
+      "url": "https://www.amazon.co.jp/dp/B0BSLJ7BQS?tag=erabinote-22",
+      "imageUrl": "https://m.media-amazon.com/images/I/81JVD0Z7cnL._AC_SL1500_.jpg",
+      "imageLicense": "amazon_program_content",
+      "verifiedAt": "2026-08-11"
+    }
+  ],
+  "related": [
+    {
+      "title": "犬用おやつ",
+      "url": "https://link.amazon/B08nzgSFU",
+      "linkType": "short",
+      "verifiedAt": "2026-08-11"
+    },
+    {
+      "title": "食事用フードボウル",
+      "url": "https://link.amazon/B00s3vmSw",
+      "linkType": "short",
+      "verifiedAt": "2026-08-11"
+    },
+    {
+      "title": "ペット用消臭スプレー",
+      "url": "https://link.amazon/B0fOcFBtN",
+      "linkType": "short",
+      "verifiedAt": "2026-08-11"
+    }
+  ]
+}

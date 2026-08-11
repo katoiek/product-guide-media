@@ -2,7 +2,7 @@
   "slug": "dog-pet-sheet-comparison",
   "source": "manual-asin",
   "associateTag": "erabinote-22",
-  "verifiedAt": "2026-08-09",
+  "verifiedAt": "2026-08-11",
   "note": "人が商品ページで確認したASIN。PA-API接続後は amazon-fetch.mjs で再取得して上書きする。",
   "products": [
     {
@@ -12,7 +12,11 @@
       "url": "https://www.amazon.co.jp/dp/B07H732KD4?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/61DnCTbOTsL._AC_SL1200_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakuten": {
+        "url": "https://a.r10.to/hRrhKM",
+        "verifiedAt": "2026-08-11"
+      }
     },
     {
       "asin": "B00CZCF7WM",
@@ -21,7 +25,11 @@
       "url": "https://www.amazon.co.jp/dp/B00CZCF7WM?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/51l8hlF5nSL._AC_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakuten": {
+        "url": "https://a.r10.to/hg0bIh",
+        "verifiedAt": "2026-08-11"
+      }
     },
     {
       "asin": "B00I5H3GL0",
@@ -30,7 +38,11 @@
       "url": "https://www.amazon.co.jp/dp/B00I5H3GL0?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/31ynNqUhK0L._AC_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakuten": {
+        "url": "https://a.r10.to/h5rwhV",
+        "verifiedAt": "2026-08-11"
+      }
     },
     {
       "asin": "B0DDC8J942",
@@ -39,7 +51,11 @@
       "url": "https://www.amazon.co.jp/dp/B0DDC8J942?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71Q9takpRoL._AC_SL1500_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakuten": {
+        "url": "https://a.r10.to/TLNVWq",
+        "verifiedAt": "2026-08-11"
+      }
     },
     {
       "asin": "B0D3TF5KD3",
@@ -48,7 +64,11 @@
       "url": "https://www.amazon.co.jp/dp/B0D3TF5KD3?tag=erabinote-22",
       "imageUrl": "https://m.media-amazon.com/images/I/71NeG-4aIeL._AC_SL1449_.jpg",
       "imageLicense": "amazon_program_content",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakuten": {
+        "url": "https://a.r10.to/h5ldBI",
+        "verifiedAt": "2026-08-11"
+      }
     }
   ],
   "related": [
@@ -56,25 +76,29 @@
       "title": "犬用トイレトレー",
       "url": "https://link.amazon/B0hNTaN5h",
       "linkType": "short",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakutenUrl": "https://a.r10.to/hPIXcM"
     },
     {
       "title": "ペット用消臭スプレー",
       "url": "https://link.amazon/B017MmD8G",
       "linkType": "short",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakutenUrl": "https://a.r10.to/h5kslD"
     },
     {
       "title": "マナーベルト（男の子犬用）",
       "url": "https://link.amazon/B0bJwZiKK",
       "linkType": "short",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakutenUrl": "https://a.r10.to/h5SEkP"
     },
     {
       "title": "うんち処理用の袋（マナー袋）",
       "url": "https://link.amazon/B04SELPbt",
       "linkType": "short",
-      "verifiedAt": "2026-08-09"
+      "verifiedAt": "2026-08-11",
+      "rakutenUrl": "https://a.r10.to/hRaltH"
     }
   ]
 }

@@ -1,0 +1,86 @@
+{
+  "note": "各記事のPinterest画像で使う背景写真の出典記録。Openverse (https://openverse.org) 経由でCC0/商用利用可のものだけを採用する。",
+  "items": [
+    {
+      "slug": "cat-litter-clumping-comparison",
+      "file": "cat-litter-clumping-comparison.jpg",
+      "title": "A fluffy, light orange cat with bright blue eyes sits on a wooden floor",
+      "license": "cc0",
+      "source": "https://pd.w.org/2025/10/2268ee7ff4e73735.80789168-1536x2048.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "dishwasher-detergent-comparison",
+      "file": "dishwasher-detergent-comparison.jpg",
+      "title": "Clean and empty yellow kitchen, stove, dishwasher, counters, cupboards",
+      "license": "cc0",
+      "source": "https://live.staticflickr.com/5014/5490155810_838973aa2f_b.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "laundry-liquid-detergent-comparison",
+      "file": "laundry-liquid-detergent-comparison.jpg",
+      "title": "Washing machines laundry room, Haier brand",
+      "license": "cc0",
+      "source": "https://upload.wikimedia.org/wikipedia/commons/7/7e/GD_%E5%BB%A3%E6%9D%B1%E7%9C%81_Guangdong_DG_%E6%9D%B1%E8%8E%9E%E5%B8%82_DongGuan_%E7%B2%B5%E9%BE%8D%E9%85%92%E5%BA%97_Yue_Long_Hotel_%E8%87%AA%E5%8A%A9%E6%B4%97%E8%A1%A3%E6%88%BF_Washing_machines_laundry_room_Haier_brand_December_2025_N13P_02.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "kitchen-sponge-comparison",
+      "file": "kitchen-sponge-comparison.jpg",
+      "title": "Wooden bucket, brush, other cleaning tools",
+      "license": "cc0",
+      "source": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdXB3azYxNzU5NjI3LXdpa2ltZWRpYS1pbWFnZS1rb3dsOGFzYS5qcGc.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "floor-dry-sheet-comparison",
+      "file": "floor-dry-sheet-comparison.jpg",
+      "title": "Mop Sweeping",
+      "license": "cc0",
+      "source": "https://cdn.stocksnap.io/img-thumbs/960w/J4C1WJDMMU.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "cat-litter-deodorizing-sheet-comparison",
+      "file": "cat-litter-deodorizing-sheet-comparison.jpg",
+      "title": "Bentonite bianca uso lettiera per gatti",
+      "license": "cc0",
+      "source": "https://upload.wikimedia.org/wikipedia/commons/8/81/Bentonite_bianca_uso_lettiera_per_gatti.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "laundry-bleach-comparison",
+      "file": "laundry-bleach-comparison.jpg",
+      "title": "Minimalist shot of woven laundry basket",
+      "license": "cc0",
+      "source": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MTgwNzMwMC13aWtpbWVkaWEtaW1hZ2Uta293YXhlMTUuanBn.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "dog-pet-sheet-comparison",
+      "file": "dog-pet-sheet-comparison.jpg",
+      "title": "A small light-brown puppy sitting on a white marble floor indoors",
+      "license": "cc0",
+      "source": "https://pd.w.org/2025/12/6576946418a010a76.86215475-1536x2048.jpeg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "slug": "dry-dog-food-comparison",
+      "file": "dry-dog-food-comparison.jpg",
+      "title": "We Both Like Kibbles",
+      "license": "cc0",
+      "source": "https://live.staticflickr.com/65535/52831289399_bcc9071b7d_b.jpg",
+      "foundVia": "https://openverse.org",
+      "verifiedAt": "2026-08-15"
+    }
+  ]
+}
